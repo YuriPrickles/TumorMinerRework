@@ -1,0 +1,195 @@
+[gd_scene format=3 uid="uid://cct5jp0ltelmq"]
+
+[ext_resource type="Texture2D" uid="uid://qdspkqsuyc2n" path="res://Assets/Graphics/Gameplay/Items/bat_leg.png" id="1_b5j2a"]
+[ext_resource type="Script" uid="uid://c78wi8wweaxm6" path="res://Source/held_item.gd" id="2_b5j2a"]
+
+[sub_resource type="Animation" id="Animation_h6ae0"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:offset")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(32, -32)]
+}
+
+[sub_resource type="Animation" id="Animation_olsrj"]
+resource_name = "eat"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, -0.7853981633974483]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:offset")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(32, -32), Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_afm8r"]
+resource_name = "idle"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:offset")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(32, -32)]
+}
+
+[sub_resource type="Animation" id="Animation_dx03v"]
+resource_name = "pick_swing"
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [-2.356194490192345, 0.7853981633974483]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:offset")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(32, -32)]
+}
+
+[sub_resource type="Animation" id="Animation_yo7go"]
+resource_name = "pick_swing_return"
+length = 0.15
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.15),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.7853981633974483, 0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:offset")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.15),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(32, -32)]
+}
+
+[sub_resource type="Animation" id="Animation_b5j2a"]
+resource_name = "melee_swing"
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(0.24148409, 1),
+"update": 0,
+"values": [-0.7853981633974483, 2.356194490192345]
+}
+
+[sub_resource type="Animation" id="Animation_ksj8m"]
+resource_name = "melee_swing_return"
+length = 0.2
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [2.356194490192345, 0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_2dja2"]
+_data = {
+&"RESET": SubResource("Animation_h6ae0"),
+&"eat": SubResource("Animation_olsrj"),
+&"idle": SubResource("Animation_afm8r"),
+&"pick_swing": SubResource("Animation_dx03v"),
+&"pick_swing_return": SubResource("Animation_yo7go"),
+&"sword_swing": SubResource("Animation_b5j2a"),
+&"sword_swing_return": SubResource("Animation_ksj8m")
+}
+
+[node name="HeldItem" type="Sprite2D" unique_id=2100677762 node_paths=PackedStringArray("animation_player")]
+texture = ExtResource("1_b5j2a")
+offset = Vector2(32, -32)
+script = ExtResource("2_b5j2a")
+animation_player = NodePath("AnimationPlayer")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1370197027]
+libraries/ = SubResource("AnimationLibrary_2dja2")

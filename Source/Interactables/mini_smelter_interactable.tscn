@@ -1,0 +1,200 @@
+[gd_scene format=3 uid="uid://bqjbxhujjwuka"]
+
+[ext_resource type="PackedScene" uid="uid://cr5c3wmtrsm7q" path="res://Source/interactable.tscn" id="1_q5wnq"]
+[ext_resource type="Script" uid="uid://dbca3w8noalar" path="res://Source/Interactables/mini_smelter_interactable.gd" id="2_uj41n"]
+[ext_resource type="Texture2D" uid="uid://cwu60ietb6x7d" path="res://Assets/Temporary/mini_smelter_placeable.png" id="3_uj41n"]
+[ext_resource type="Texture2D" uid="uid://dtdu0p3vsisvx" path="res://Assets/Graphics/Gameplay/Items/iron_ore.png" id="4_tellt"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_q5wnq"]
+resource_local_to_scene = true
+atlas = ExtResource("3_uj41n")
+region = Rect2(0, 0, 64, 128)
+
+[sub_resource type="Animation" id="Animation_uj41n"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Sprite2D:texture:region")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Rect2(0, 0, 64, 128)]
+}
+
+[sub_resource type="Animation" id="Animation_sehn5"]
+resource_name = "awake"
+length = 1.3333367362055928
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.26666668, 0.53333336, 0.8, 1.0666667),
+"transitions": PackedFloat32Array(2.0000005, 2, 2, 2, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1.1, 0.9), Vector2(0.9, 1.1), Vector2(0.9, 1.1), Vector2(1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.16666667, 0.33333334, 0.53333336, 0.6, 0.6666667, 0.73333335, 0.8000001, 0.8666667, 0.9333333),
+"transitions": PackedFloat32Array(0.45062524, 0.57434916, 0.40612614, 1, 0.3077861, 0.3077861, 0.3077861, 0.3077861, 0.3077861, 0.3077861),
+"update": 0,
+"values": [0.0, -0.08726646259971647, 0.08726646259971647, 0.0, -0.03490658503988659, 0.03490658503988659, -0.06981317007977318, 0.06981317007977318, -0.03490658503988659, 0.03490658503988659]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Sprite2D:texture:region")
+tracks/3/interp = 0
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.4, 0.8, 1.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Rect2(64, 0, 64, 128), Rect2(128, 0, 64, 128), Rect2(64, 0, 64, 128), Rect2(128, 0, 64, 128)]
+}
+
+[sub_resource type="Animation" id="Animation_tellt"]
+resource_name = "sleep"
+length = 2.4000034585032615
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.2),
+"transitions": PackedFloat32Array(6.25, 6.250826),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1.1, 0.9)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:texture:region")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Rect2(0, 0, 64, 128)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_sehn5"]
+_data = {
+&"RESET": SubResource("Animation_uj41n"),
+&"awake": SubResource("Animation_sehn5"),
+&"sleep": SubResource("Animation_tellt")
+}
+
+[node name="Interactable" unique_id=1300855250 node_paths=PackedStringArray("animation_player", "texture_rect", "progress_bar") instance=ExtResource("1_q5wnq")]
+script = ExtResource("2_uj41n")
+animation_player = NodePath("AnimationPlayer")
+texture_rect = NodePath("ProgressBar/TextureRect")
+progress_bar = NodePath("ProgressBar")
+
+[node name="Sprite2D" parent="." index="1" unique_id=1306761943]
+texture = SubResource("AtlasTexture_q5wnq")
+offset = Vector2(0, -64)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="3" unique_id=440302820]
+libraries/ = SubResource("AnimationLibrary_sehn5")
+
+[node name="ProgressBar" type="ProgressBar" parent="." index="4" unique_id=234320254]
+z_index = 2
+custom_minimum_size = Vector2(64, 64)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -32.0
+offset_top = -167.0
+offset_right = 32.0
+offset_bottom = -103.0
+grow_horizontal = 2
+grow_vertical = 2
+step = 1.0
+value = 50.0
+fill_mode = 3
+show_percentage = false
+
+[node name="TextureRect" type="TextureRect" parent="ProgressBar" index="0" unique_id=933680412]
+z_index = -1
+custom_maximum_size = Vector2(64, 64)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -32.0
+offset_top = -32.0
+offset_right = 32.0
+offset_bottom = 32.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("4_tellt")

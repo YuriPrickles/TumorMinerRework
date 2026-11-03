@@ -1,0 +1,61 @@
+[gd_scene format=3 uid="uid://b7q8apajncdte"]
+
+[ext_resource type="Script" uid="uid://bgqk240h5mbnb" path="res://Source/inventory_ui.gd" id="1_x3b4g"]
+[ext_resource type="PackedScene" uid="uid://bkd2qlc0w3jyt" path="res://Source/inventory_item_slot.tscn" id="2_2uvxi"]
+
+[node name="InventoryUI" type="Control" unique_id=2022789841 node_paths=PackedStringArray("grid_container")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_x3b4g")
+grid_container = NodePath("MarginContainer/GridContainer")
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=1761190301]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 320
+theme_override_constants/margin_top = 1000
+theme_override_constants/margin_right = 320
+theme_override_constants/margin_bottom = 16
+
+[node name="GridContainer" type="GridContainer" parent="MarginContainer" unique_id=1545068275]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/h_separation = 8
+columns = 9
+
+[node name="Slot1" parent="MarginContainer/GridContainer" unique_id=1581804889 instance=ExtResource("2_2uvxi")]
+layout_mode = 2
+
+[node name="Slot2" parent="MarginContainer/GridContainer" unique_id=2086154095 instance=ExtResource("2_2uvxi")]
+layout_mode = 2
+
+[node name="Slot3" parent="MarginContainer/GridContainer" unique_id=1625355689 instance=ExtResource("2_2uvxi")]
+layout_mode = 2
+
+[node name="Slot4" parent="MarginContainer/GridContainer" unique_id=1042528685 instance=ExtResource("2_2uvxi")]
+layout_mode = 2
+
+[node name="Slot5" parent="MarginContainer/GridContainer" unique_id=307155268 instance=ExtResource("2_2uvxi")]
+layout_mode = 2
+
+[node name="Slot6" parent="MarginContainer/GridContainer" unique_id=1871312954 instance=ExtResource("2_2uvxi")]
+layout_mode = 2
+
+[node name="Slot7" parent="MarginContainer/GridContainer" unique_id=1449797774 instance=ExtResource("2_2uvxi")]
+layout_mode = 2
+
+[node name="Slot8" parent="MarginContainer/GridContainer" unique_id=1191890891 instance=ExtResource("2_2uvxi")]
+layout_mode = 2
+
+[node name="Slot9" parent="MarginContainer/GridContainer" unique_id=487113686 instance=ExtResource("2_2uvxi")]
+layout_mode = 2

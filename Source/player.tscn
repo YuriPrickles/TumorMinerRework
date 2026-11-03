@@ -1,0 +1,62 @@
+[gd_scene format=3 uid="uid://3gt6ndfquqay"]
+
+[ext_resource type="Script" uid="uid://dbusw1jo6ta0d" path="res://Source/player.gd" id="1_tfb11"]
+[ext_resource type="Texture2D" uid="uid://t5grmyhb65kk" path="res://Assets/Temporary/tumor.png" id="1_uedky"]
+[ext_resource type="PackedScene" uid="uid://cct5jp0ltelmq" path="res://Source/held_item.tscn" id="2_yo7go"]
+
+[sub_resource type="Gradient" id="Gradient_yo7go"]
+offsets = PackedFloat32Array(0.23111111, 0.7022222)
+colors = PackedColorArray(1, 1, 1, 1, 0.043137256, 0.043137256, 0.043137256, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_coxhp"]
+gradient = SubResource("Gradient_yo7go")
+width = 1024
+height = 1024
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_coxhp"]
+radius = 108.01852
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_v3b0y"]
+size = Vector2(32, 20)
+
+[node name="Player" type="CharacterBody2D" unique_id=1289355168 node_paths=PackedStringArray("interact_range", "held_item", "hand_spot", "player_sprite")]
+collision_mask = 126
+script = ExtResource("1_tfb11")
+interact_range = NodePath("InteractRange")
+held_item = NodePath("PlayerSprite/HandSpot/HeldItem")
+hand_spot = NodePath("PlayerSprite/HandSpot")
+player_sprite = NodePath("PlayerSprite")
+
+[node name="PointLight2D" type="PointLight2D" parent="." unique_id=1717827764]
+shadow_enabled = true
+shadow_color = Color(0, 0, 0, 1)
+texture = SubResource("GradientTexture2D_coxhp")
+
+[node name="InteractRange" type="Area2D" parent="." unique_id=650649343]
+collision_mask = 127
+
+[node name="InteractColliderShape" type="CollisionShape2D" parent="InteractRange" unique_id=1586819783]
+shape = SubResource("CircleShape2D_coxhp")
+debug_color = Color(0.9882353, 0.7607843, 0, 0.07450981)
+
+[node name="PlayerSprite" type="Sprite2D" parent="." unique_id=1477567852]
+texture = ExtResource("1_uedky")
+offset = Vector2(0, -64)
+
+[node name="HandSpot" type="Marker2D" parent="PlayerSprite" unique_id=1461154043]
+position = Vector2(31, -11)
+gizmo_extents = 16.8
+
+[node name="HeldItem" parent="PlayerSprite/HandSpot" unique_id=2100677762 instance=ExtResource("2_yo7go")]
+texture = null
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=830059859]
+position = Vector2(0, -10)
+shape = SubResource("RectangleShape2D_v3b0y")
+debug_color = Color(0.9607843, 0, 0.5254902, 0.41960785)
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=922847751]
+zoom = Vector2(1.5, 1.5)
+position_smoothing_enabled = true

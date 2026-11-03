@@ -1,0 +1,24 @@
+# this is a comment that the language loader will not read
+
+ITEM_BONESABER=Bonesaber
+ITEM_DESC_BONESABER=A sword.
+
+ITEM_PICKAXE=Flimsy Pickaxe
+ITEM_DESC_PICKAXE=For mining.
+
+ITEM_ROCK=Rock
+ITEM_DESC_ROCK=For throwing and crafting.
+
+ITEM_COPPERORE=Rock
+ITEM_DESC_COPPERORE=Smelt into Copper.
+
+ITEM_IRONORE=Iron Ore
+ITEM_DESC_IRONORE=Smelt into Iron.
+
+ITEM_MINISMELTER=Mini Smelter
+ITEM_DESC_MINISMELTER=Smelts ores.
+
+ITEM_BATLEG=Bat Leg
+ITEM_DESC_BATLEG=Heals 20. +5% speed.
+
+END_OF_DIALOG_FILE

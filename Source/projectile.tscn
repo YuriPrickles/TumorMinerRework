@@ -1,0 +1,15 @@
+[gd_scene format=3 uid="uid://dk5vfxuia7wfi"]
+
+[ext_resource type="Script" uid="uid://bij6p84pbpjvu" path="res://Source/projectile.gd" id="1_lcewq"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_coxhp"]
+resource_local_to_scene = true
+
+[node name="Projectile" type="Area2D" unique_id=921495114 node_paths=PackedStringArray("collision_shape")]
+collision_layer = 16
+collision_mask = 15
+script = ExtResource("1_lcewq")
+collision_shape = NodePath("CollisionShape")
+
+[node name="CollisionShape" type="CollisionShape2D" parent="." unique_id=1151676331]
+shape = SubResource("CircleShape2D_coxhp")

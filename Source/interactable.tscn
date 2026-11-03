@@ -1,0 +1,32 @@
+[gd_scene format=3 uid="uid://cr5c3wmtrsm7q"]
+
+[ext_resource type="Script" uid="uid://da4dixws2owex" path="res://Source/interactable.gd" id="1_t5488"]
+[ext_resource type="Texture2D" uid="uid://dcm6rqed667mt" path="res://Assets/Temporary/ladder_down.png" id="2_t5488"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_v3b0y"]
+size = Vector2(64, 64)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_coxhp"]
+size = Vector2(64, 50)
+
+[node name="Interactable" type="StaticBody2D" unique_id=1300855250 node_paths=PackedStringArray("click_area")]
+y_sort_enabled = true
+collision_layer = 64
+collision_mask = 9
+script = ExtResource("1_t5488")
+click_area = NodePath("ClickArea")
+
+[node name="ClickArea" type="Area2D" parent="." unique_id=331627381]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ClickArea" unique_id=729982914]
+position = Vector2(0, -32)
+shape = SubResource("RectangleShape2D_v3b0y")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1306761943]
+texture = ExtResource("2_t5488")
+offset = Vector2(0, -32)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1266669074]
+position = Vector2(0, -25)
+shape = SubResource("RectangleShape2D_coxhp")
+debug_color = Color(0.9590973, 1.540184e-06, 0.52618134, 0.41960785)

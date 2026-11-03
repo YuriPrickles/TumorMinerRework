@@ -1,0 +1,20 @@
+[gd_scene format=3 uid="uid://bbbeex4nskput"]
+
+[ext_resource type="Script" uid="uid://dq7wunwtmmbse" path="res://Source/pickup.gd" id="1_5x616"]
+[ext_resource type="Texture2D" uid="uid://yqvrv4mwldyt" path="res://Assets/Graphics/Gameplay/Items/rock.png" id="2_5x616"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_coxhp"]
+size = Vector2(64, 64)
+
+[node name="Pickup" type="Area2D" unique_id=899297871 node_paths=PackedStringArray("sprite")]
+collision_mask = 33
+script = ExtResource("1_5x616")
+sprite = NodePath("Sprite2D")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=325027600]
+position = Vector2(0, -32)
+texture = ExtResource("2_5x616")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=635061430]
+position = Vector2(0, -32)
+shape = SubResource("RectangleShape2D_coxhp")

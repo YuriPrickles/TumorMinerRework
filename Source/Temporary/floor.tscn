@@ -1,0 +1,37 @@
+[gd_scene format=3 uid="uid://dc0xl5lw86f5c"]
+
+[ext_resource type="Script" uid="uid://cctenaidiwaci" path="res://Source/Temporary/floor.gd" id="1_gl3tf"]
+[ext_resource type="Resource" uid="uid://dlecevi0rrqc8" path="res://Resources/LayoutPools/cave_layouts.tres" id="2_h30fj"]
+[ext_resource type="PackedScene" uid="uid://bokb41tlveis0" path="res://Source/Interactables/ladder.tscn" id="2_mvrx8"]
+
+[node name="Floor" type="Node2D" unique_id=1371881429 node_paths=PackedStringArray("enemies", "interactables", "pickups", "projectiles", "rock_nodes", "environment")]
+process_mode = 1
+y_sort_enabled = true
+script = ExtResource("1_gl3tf")
+enemies = NodePath("Enemies")
+interactables = NodePath("Interactables")
+pickups = NodePath("Pickups")
+projectiles = NodePath("Projectiles")
+rock_nodes = NodePath("Environment/RockNodes")
+environment = NodePath("Environment")
+ladder_scene = ExtResource("2_mvrx8")
+layout_pool = ExtResource("2_h30fj")
+
+[node name="Environment" type="Node2D" parent="." unique_id=556961827]
+y_sort_enabled = true
+
+[node name="RockNodes" type="Node2D" parent="Environment" unique_id=493807903]
+y_sort_enabled = true
+
+[node name="Projectiles" type="Node2D" parent="." unique_id=2050513681]
+
+[node name="Interactables" type="Node2D" parent="." unique_id=22883633]
+y_sort_enabled = true
+
+[node name="Enemies" type="Node2D" parent="." unique_id=196122495]
+y_sort_enabled = true
+
+[node name="Pickups" type="Node2D" parent="." unique_id=1363732786]
+
+[node name="CanvasModulate" type="CanvasModulate" parent="." unique_id=1090311654]
+color = Color(0.1425848, 0.13248259, 0.17608419, 1)

@@ -1,0 +1,44 @@
+[gd_scene format=3 uid="uid://bkd2qlc0w3jyt"]
+
+[ext_resource type="Texture2D" uid="uid://bpardmxmg1fad" path="res://Assets/Graphics/Gameplay/Items/pickaxe.png" id="1_jxrwr"]
+[ext_resource type="Script" uid="uid://daomip0e4xccx" path="res://Source/inventory_item_slot.gd" id="2_53bxo"]
+
+[node name="Slot1" type="TextureRect" unique_id=1581804889 node_paths=PackedStringArray("stack_number", "color_rect")]
+custom_minimum_size = Vector2(64, 64)
+custom_maximum_size = Vector2(64, 64)
+offset_right = 64.0
+offset_bottom = 64.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("1_jxrwr")
+script = ExtResource("2_53bxo")
+stack_number = NodePath("StackNumber")
+color_rect = NodePath("ColorRect")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=69201015]
+z_index = -1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.45100003)
+
+[node name="StackNumber" type="RichTextLabel" parent="." unique_id=191903640]
+clip_contents = false
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 5
+bbcode_enabled = true
+text = "[right]99"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0

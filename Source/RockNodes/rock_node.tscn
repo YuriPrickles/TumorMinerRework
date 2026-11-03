@@ -1,0 +1,107 @@
+[gd_scene format=3 uid="uid://822x75d388b5"]
+
+[ext_resource type="Script" uid="uid://ufrdwcn036v6" path="res://Source/RockNodes/rock_node.gd" id="1_vkfgj"]
+[ext_resource type="Texture2D" uid="uid://dhyrep8xsm1y2" path="res://Assets/Temporary/rock.png" id="2_vfq5b"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_v3b0y"]
+size = Vector2(64, 64)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_coxhp"]
+size = Vector2(64, 64)
+
+[sub_resource type="Animation" id="Animation_27601"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_jxldm"]
+resource_name = "hit"
+length = 0.3
+step = 0.025
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.3),
+"transitions": PackedFloat32Array(1, 0.43527532, 1),
+"update": 0,
+"values": [Vector2(1.2, 0.8), Vector2(1.2, 0.8), Vector2(1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.3),
+"transitions": PackedFloat32Array(0.39229208, 0.36602148, 0.28717467, 1),
+"update": 0,
+"values": [-0.2617993877991494, -0.13962634015954636, -0.2617993877991494, 0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_03rym"]
+_data = {
+&"RESET": SubResource("Animation_27601"),
+&"hit": SubResource("Animation_jxldm")
+}
+
+[node name="Rock" type="StaticBody2D" unique_id=1300855250 node_paths=PackedStringArray("animation_player", "navigation_obstacle", "click_area")]
+y_sort_enabled = true
+collision_layer = 2
+collision_mask = 9
+input_pickable = true
+script = ExtResource("1_vkfgj")
+animation_player = NodePath("AnimationPlayer")
+navigation_obstacle = NodePath("NavigationObstacle2D")
+click_area = NodePath("ClickArea")
+
+[node name="ClickArea" type="Area2D" parent="." unique_id=331627381]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ClickArea" unique_id=729982914]
+position = Vector2(0, -32)
+shape = SubResource("RectangleShape2D_v3b0y")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1306761943]
+texture = ExtResource("2_vfq5b")
+offset = Vector2(0, -32)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1266669074]
+position = Vector2(0, -32)
+shape = SubResource("RectangleShape2D_coxhp")
+debug_color = Color(0.9590973, 1.540184e-06, 0.52618134, 0.41960785)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=380808983]
+libraries/ = SubResource("AnimationLibrary_03rym")
+
+[node name="NavigationObstacle2D" type="NavigationObstacle2D" parent="." unique_id=1443461854]
+visible = false
+position = Vector2(0, -32)
+vertices = PackedVector2Array(0, -18, 32, -18, 32, 0, 32, 32, 0, 32, -32, 32, -32, 0, -32, -18)
+affect_navigation_mesh = true
+carve_navigation_mesh = true

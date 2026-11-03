@@ -1,0 +1,118 @@
+[gd_scene format=3 uid="uid://cvum5b21xj4gy"]
+
+[ext_resource type="Script" uid="uid://cyisyfxsr2l1b" path="res://Source/crafting_ui.gd" id="1_dp3h8"]
+[ext_resource type="PackedScene" uid="uid://07uje68f7bo5" path="res://Source/crafting_recipe_button.tscn" id="2_xlqjp"]
+[ext_resource type="Texture2D" uid="uid://r42jjc0srpn1" path="res://Assets/Graphics/Gameplay/Items/bonesaber.png" id="3_t0yqm"]
+
+[node name="CraftingUI" type="Control" unique_id=338385566 node_paths=PackedStringArray("grid_container", "item_name", "item_texture", "item_description", "craft_button")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+script = ExtResource("1_dp3h8")
+grid_container = NodePath("MarginContainer/HBoxContainer/RecipeContainer/Panel/GridContainer")
+crafting_recipe_button = ExtResource("2_xlqjp")
+item_name = NodePath("MarginContainer/HBoxContainer/ResultContainer/Panel2/MarginContainer/VBoxContainer/Name")
+item_texture = NodePath("MarginContainer/HBoxContainer/ResultContainer/Panel2/MarginContainer/VBoxContainer/ItemTexture")
+item_description = NodePath("MarginContainer/HBoxContainer/ResultContainer/Panel2/MarginContainer/VBoxContainer/Description")
+craft_button = NodePath("MarginContainer/HBoxContainer/ResultContainer/Panel2/MarginContainer/VBoxContainer/CraftButton")
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=488423981]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 64
+theme_override_constants/margin_top = 64
+theme_override_constants/margin_right = 64
+theme_override_constants/margin_bottom = 64
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer" unique_id=1846228738]
+layout_mode = 2
+
+[node name="RecipeContainer" type="MarginContainer" parent="MarginContainer/HBoxContainer" unique_id=499895143]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 2.0
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="Panel" type="Panel" parent="MarginContainer/HBoxContainer/RecipeContainer" unique_id=178952832]
+layout_mode = 2
+mouse_filter = 1
+
+[node name="GridContainer" type="GridContainer" parent="MarginContainer/HBoxContainer/RecipeContainer/Panel" unique_id=609134743]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+columns = 8
+
+[node name="ResultContainer" type="MarginContainer" parent="MarginContainer/HBoxContainer" unique_id=1692203581]
+process_mode = 3
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="Panel2" type="Panel" parent="MarginContainer/HBoxContainer/ResultContainer" unique_id=669803218]
+layout_mode = 2
+mouse_filter = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/HBoxContainer/ResultContainer/Panel2" unique_id=1267030378]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer/ResultContainer/Panel2/MarginContainer" unique_id=1415627775]
+layout_mode = 2
+
+[node name="Name" type="RichTextLabel" parent="MarginContainer/HBoxContainer/ResultContainer/Panel2/MarginContainer/VBoxContainer" unique_id=542784068]
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 48
+bbcode_enabled = true
+text = "[center]bwuhhhh"
+fit_content = true
+scroll_active = false
+autowrap_mode = 2
+
+[node name="ItemTexture" type="TextureRect" parent="MarginContainer/HBoxContainer/ResultContainer/Panel2/MarginContainer/VBoxContainer" unique_id=825142137]
+custom_minimum_size = Vector2(256, 256)
+layout_mode = 2
+size_flags_horizontal = 4
+texture = ExtResource("3_t0yqm")
+
+[node name="Description" type="RichTextLabel" parent="MarginContainer/HBoxContainer/ResultContainer/Panel2/MarginContainer/VBoxContainer" unique_id=1762222992]
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 48
+bbcode_enabled = true
+text = "[center]guhhh"
+fit_content = true
+scroll_active = false
+autowrap_mode = 1
+
+[node name="CraftButton" type="Button" parent="MarginContainer/HBoxContainer/ResultContainer/Panel2/MarginContainer/VBoxContainer" unique_id=884911330]
+custom_minimum_size = Vector2(240, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 10
+theme_override_font_sizes/font_size = 64
+text = "Craft"

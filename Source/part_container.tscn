@@ -1,0 +1,85 @@
+[gd_scene format=3 uid="uid://c55ffyrdrt1b7"]
+
+[ext_resource type="Script" uid="uid://v0de8os3gnok" path="res://Source/part_container.gd" id="1_6mcjb"]
+[ext_resource type="Texture2D" uid="uid://qdspkqsuyc2n" path="res://Assets/Graphics/Gameplay/Items/bat_leg.png" id="1_h85go"]
+
+[node name="PartContainer" type="Control" unique_id=861394738 node_paths=PackedStringArray("part_name", "points_label", "icon", "button")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_filter = 2
+script = ExtResource("1_6mcjb")
+part_name = NodePath("Container/Panel/MarginContainer/PartName")
+points_label = NodePath("Container/Panel2/MarginContainer/PointsLabel")
+icon = NodePath("Container/Icon")
+button = NodePath("Button")
+
+[node name="Container" type="HBoxContainer" parent="." unique_id=2050148517]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 128.0
+grow_horizontal = 2
+
+[node name="Icon" type="TextureRect" parent="Container" unique_id=1123017739]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+texture = ExtResource("1_h85go")
+
+[node name="Panel" type="Panel" parent="Container" unique_id=349971373]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="Container/Panel" unique_id=1558305079]
+custom_minimum_size = Vector2(0, 128)
+layout_mode = 0
+offset_left = 4.0
+offset_right = 698.0
+offset_bottom = 128.0
+size_flags_horizontal = 3
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="PartName" type="RichTextLabel" parent="Container/Panel/MarginContainer" unique_id=232293527]
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 64
+bbcode_enabled = true
+text = "Bat Wings"
+scroll_active = false
+
+[node name="Panel2" type="Panel" parent="Container" unique_id=1976770017]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="Container/Panel2" unique_id=91384867]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PointsLabel" type="RichTextLabel" parent="Container/Panel2/MarginContainer" unique_id=730467579]
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 64
+bbcode_enabled = true
+text = "[center]3"
+scroll_active = false
+
+[node name="Button" type="Button" parent="." unique_id=843738113]
+z_index = -1
+custom_minimum_size = Vector2(0, 128)
+custom_maximum_size = Vector2(-1, 128)
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 8.0
+grow_horizontal = 2
+size_flags_horizontal = 3

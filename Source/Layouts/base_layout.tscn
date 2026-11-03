@@ -1,0 +1,31 @@
+[gd_scene format=3 uid="uid://bht1u8g8p1vbq"]
+
+[ext_resource type="TileSet" uid="uid://caha28elmpiwl" path="res://Resources/Tilesets/cave.tres" id="1_1hrp4"]
+[ext_resource type="Script" uid="uid://bj1e07yyxtkya" path="res://Source/Layouts/base_layout.gd" id="1_efew0"]
+
+[node name="BaseLayout" type="Node2D" unique_id=2101204380 node_paths=PackedStringArray("layout_tiles", "event_tiles", "top_left", "bottom_right")]
+z_index = -1
+y_sort_enabled = true
+script = ExtResource("1_efew0")
+layout_tiles = NodePath("LayoutTiles")
+event_tiles = NodePath("EventTiles")
+top_left = NodePath("TopLeft")
+bottom_right = NodePath("BottomRight")
+
+[node name="LayoutTiles" type="TileMapLayer" parent="." unique_id=2135636854]
+tile_set = ExtResource("1_1hrp4")
+
+[node name="EventTiles" type="TileMapLayer" parent="." unique_id=1233129027]
+tile_set = ExtResource("1_1hrp4")
+
+[node name="TopLeft" type="Marker2D" parent="." unique_id=723770778]
+modulate = Color(6.9815493, 8.1111145, 0, 1)
+z_index = 1
+position = Vector2(-384, -1024)
+gizmo_extents = 30000.0
+
+[node name="BottomRight" type="Marker2D" parent="." unique_id=328952114]
+modulate = Color(6.9815493, 8.1111145, 0, 1)
+z_index = 1
+position = Vector2(2176, 256)
+gizmo_extents = 30000.0

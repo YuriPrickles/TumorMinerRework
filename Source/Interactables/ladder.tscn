@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://bokb41tlveis0"]
+
+[ext_resource type="PackedScene" uid="uid://cr5c3wmtrsm7q" path="res://Source/interactable.tscn" id="1_2xfvy"]
+[ext_resource type="Script" uid="uid://cqlhnnopl4hlk" path="res://Source/Interactables/ladder.gd" id="2_lcc81"]
+
+[node name="Ladder" unique_id=1300855250 instance=ExtResource("1_2xfvy")]
+script = ExtResource("2_lcc81")

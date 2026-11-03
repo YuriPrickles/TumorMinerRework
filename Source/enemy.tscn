@@ -1,0 +1,20 @@
+[gd_scene format=3 uid="uid://ddqn8m1w1gwt1"]
+
+[ext_resource type="Script" uid="uid://duf5ne71862jy" path="res://Source/enemy.gd" id="1_ayy6r"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_coxhp"]
+size = Vector2(64, 20)
+
+[node name="Enemy" type="CharacterBody2D" unique_id=1878560834 node_paths=PackedStringArray("line_2d")]
+collision_layer = 8
+collision_mask = 7
+script = ExtResource("1_ayy6r")
+line_2d = NodePath("Line2D")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=483514922]
+position = Vector2(0, -12)
+shape = SubResource("RectangleShape2D_coxhp")
+
+[node name="Line2D" type="Line2D" parent="." unique_id=1395953506]
+visible = false
+default_color = Color(1, 0.5397215, 0.47513407, 1)

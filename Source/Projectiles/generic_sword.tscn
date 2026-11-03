@@ -1,0 +1,23 @@
+[gd_scene format=3 uid="uid://cpvy8jb7q3iy0"]
+
+[ext_resource type="PackedScene" uid="uid://dk5vfxuia7wfi" path="res://Source/projectile.tscn" id="1_5pf6j"]
+[ext_resource type="Script" uid="uid://odu6qjlk54j0" path="res://Source/Projectiles/generic_sword.gd" id="2_3qpe0"]
+[ext_resource type="Texture2D" uid="uid://r42jjc0srpn1" path="res://Assets/Graphics/Gameplay/Items/bonesaber.png" id="3_ydk33"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1tsfy"]
+size = Vector2(24, 90)
+
+[node name="Sword" unique_id=921495114 node_paths=PackedStringArray("sprite") instance=ExtResource("1_5pf6j")]
+script = ExtResource("2_3qpe0")
+sword_texture = ExtResource("3_ydk33")
+sprite = NodePath("Sprite")
+knockback = 200.0
+
+[node name="CollisionShape" parent="." index="0" unique_id=1151676331]
+position = Vector2(0, -45)
+shape = SubResource("RectangleShape2D_1tsfy")
+
+[node name="Sprite" type="Sprite2D" parent="." index="1" unique_id=1636887573]
+rotation = -0.7853982
+texture = ExtResource("3_ydk33")
+offset = Vector2(32, -32)

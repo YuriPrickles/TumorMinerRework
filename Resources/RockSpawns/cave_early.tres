@@ -1,0 +1,24 @@
+[gd_resource type="Resource" script_class="RockSpawn" format=3 uid="uid://rlq57i0mir1f"]
+
+[ext_resource type="Script" uid="uid://bcjxt6jjg1htp" path="res://Resources/RockSpawns/BaseScripts/rock_weight.gd" id="1_erio4"]
+[ext_resource type="PackedScene" uid="uid://822x75d388b5" path="res://Source/RockNodes/rock_node.tscn" id="2_r3anl"]
+[ext_resource type="PackedScene" uid="uid://lxutle20rbii" path="res://Source/RockNodes/copper_node.tscn" id="3_lqqt8"]
+[ext_resource type="Script" uid="uid://bv6mgv53f5afu" path="res://Resources/RockSpawns/BaseScripts/rock_spawn.gd" id="4_4x3xj"]
+
+[sub_resource type="Resource" id="Resource_bper2"]
+script = ExtResource("1_erio4")
+rock_type = ExtResource("2_r3anl")
+weight = 1.0
+metadata/_custom_type_script = "uid://bcjxt6jjg1htp"
+
+[sub_resource type="Resource" id="Resource_uep2w"]
+script = ExtResource("1_erio4")
+rock_type = ExtResource("3_lqqt8")
+weight = 0.1
+metadata/_custom_type_script = "uid://bcjxt6jjg1htp"
+
+[resource]
+script = ExtResource("4_4x3xj")
+rock_weights = Array[ExtResource("1_erio4")]([SubResource("Resource_bper2"), SubResource("Resource_uep2w")])
+rock_spawn_chance = 0.4
+metadata/_custom_type_script = "uid://bv6mgv53f5afu"

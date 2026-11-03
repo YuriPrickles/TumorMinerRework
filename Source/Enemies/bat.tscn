@@ -1,0 +1,43 @@
+[gd_scene format=3 uid="uid://hyk575rjw36g"]
+
+[ext_resource type="PackedScene" uid="uid://ddqn8m1w1gwt1" path="res://Source/enemy.tscn" id="1_gv7c5"]
+[ext_resource type="PackedScene" uid="uid://dyr22ngy6rc2w" path="res://Source/EnemySprites/bat_sprite.tscn" id="2_0tius"]
+[ext_resource type="Script" uid="uid://d07pqtxlsioyi" path="res://Source/Enemies/bat.gd" id="2_d6ajj"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_coxhp"]
+radius = 384.1302
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_d6ajj"]
+radius = 120.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_d6ajj"]
+size = Vector2(60, 20)
+
+[node name="Bat" unique_id=1878560834 node_paths=PackedStringArray("detection_range", "bite_range", "enemy_sprite") instance=ExtResource("1_gv7c5")]
+z_index = 1
+script = ExtResource("2_d6ajj")
+detection_range = NodePath("DetectionRange")
+bite_range = NodePath("BiteRange")
+enemy_sprite = NodePath("BatSprite")
+health = 15
+kb_res = 0.5
+
+[node name="DetectionRange" type="Area2D" parent="." index="0" unique_id=1993365856]
+position = Vector2(0, -10)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionRange" index="0" unique_id=296312709]
+shape = SubResource("CircleShape2D_coxhp")
+debug_color = Color(0.9882353, 0, 0.3137255, 0.039215688)
+
+[node name="BiteRange" type="Area2D" parent="." index="1" unique_id=1922163399]
+position = Vector2(0, -10)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BiteRange" index="0" unique_id=26208073]
+shape = SubResource("CircleShape2D_d6ajj")
+debug_color = Color(0.9882353, 0, 0.3137255, 0.039215688)
+
+[node name="CollisionShape2D" parent="." index="2" unique_id=483514922]
+position = Vector2(0, -10)
+shape = SubResource("RectangleShape2D_d6ajj")
+
+[node name="BatSprite" parent="." index="3" unique_id=872872831 instance=ExtResource("2_0tius")]
