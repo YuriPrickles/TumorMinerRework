@@ -6,7 +6,7 @@
 
 [node name="IronNode" unique_id=1300855250 instance=ExtResource("1_4vmuo")]
 script = ExtResource("2_ca5tl")
-health = 6
+health = 5
 
 [node name="Sprite2D" parent="." index="1" unique_id=1306761943]
 texture = ExtResource("2_2hjkc")

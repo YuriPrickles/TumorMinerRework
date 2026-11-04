@@ -12,8 +12,7 @@ const sword = preload("res://Source/Projectiles/generic_sword.tscn")
 func use_item(plr:Player) -> bool:
 	var proj:GenericSwordProjectile = Projectile.new_projectile(sword,plr.position,plr.aim_to_mouse(),damage)
 	proj.swing_time = use_delay
-	super(plr)
-	await plr.held_item.animation_hit
+	await super(plr)
 	return true
 
 func add_recipes():

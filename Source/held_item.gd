@@ -33,7 +33,7 @@ func do_animation(item:Item):
 			animation_hit.emit()
 		Item.AnimationType.INVISIBLE:
 			hide()
-			animation_hit.emit()
 			await get_tree().create_timer(item.use_delay).timeout
+			animation_hit.emit()
 			show()
 	animating = false

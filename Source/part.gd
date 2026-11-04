@@ -20,8 +20,7 @@ func reset_effect(plr:Player):
 	pass
 
 func use_item(plr:Player) -> bool:
-	super(plr)
-	await plr.held_item.animation_hit
+	await super(plr)
 	plr.heal(heal_amount)
 	part_effects(plr)
 	Global.run_info.build.parts.append(self)

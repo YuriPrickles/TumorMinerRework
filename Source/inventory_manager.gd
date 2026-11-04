@@ -8,12 +8,23 @@ func _init() -> void:
 	inventory[0] = Pickaxe.new()
 	inventory[1] = Bonesaber.new()
 	inventory[2] = MiniSmelter.new(4)
-	inventory[3] = CopperOre.new(18)
+	inventory[3] = CopperOre.new(19)
 	inventory[4] = BatLeg.new()
 
 func validate_item_slot(item:Item) -> void:
 	if item.stack <= 0 and inventory.has(item):
 		inventory[inventory.find(item)] = null
+
+func find_stackable(item:Script) -> Item:
+	var filtered_inv:Array[Item] = inventory.filter(
+		func(i:Item):
+			if not i: return false
+			return i.get_item_class_name() == item.get_global_name()
+	)
+	for thing in filtered_inv:
+		if thing.stack < thing.max_stack:
+			return thing
+	return null
 
 func get_item_count(item:Script) -> int:
 	var filtered_inv:Array[Item] = inventory.filter(
@@ -46,18 +57,28 @@ func consume_item(item:Script, amount) -> void:
 
 func attempt_acquire(pickup:Pickup,item:Item):
 	for i in range(inventory.size()):
-		if inventory[i] and item.get_item_class_name() == inventory[i].get_item_class_name() and inventory[i].stack != inventory[i].max_stack:
+		if inventory[i] and item.get_item_class_name() == inventory[i].get_item_class_name() and inventory[i].stack < inventory[i].max_stack:
 			if inventory[i].stack + item.stack <= inventory[i].max_stack:
 				inventory[i].stack += item.stack
 				pickup.queue_free()
 				break
 			else:
-				pickup.item_stored.stack = inventory[i].stack + item.stack - inventory[i].max_stack
+				item.stack = inventory[i].stack + item.stack - inventory[i].max_stack
 				inventory[i].stack = inventory[i].max_stack
-				attempt_acquire(pickup,pickup.item_stored)
+				attempt_acquire(pickup,item)
 				break
 		elif not inventory[i]:
-			if get_item_count(item.get_script()) > 0: continue
+			var stackable_searched:Item = find_stackable(item.get_script())
+			if stackable_searched:
+				if stackable_searched.stack + item.stack <= stackable_searched.max_stack:
+					stackable_searched.stack += item.stack
+					pickup.queue_free()
+				else:
+					pickup.item_stored.stack = stackable_searched.stack + item.stack - stackable_searched.max_stack
+					stackable_searched.stack = stackable_searched.max_stack
+					attempt_acquire(pickup,pickup.item_stored)
+					break
+				break
 			inventory[i] = item
 			if item.stack > item.max_stack:
 				inventory[i].stack = inventory[i].max_stack

@@ -3,7 +3,10 @@
 [ext_resource type="Script" uid="uid://bcjxt6jjg1htp" path="res://Resources/RockSpawns/BaseScripts/rock_weight.gd" id="1_erio4"]
 [ext_resource type="PackedScene" uid="uid://822x75d388b5" path="res://Source/RockNodes/rock_node.tscn" id="2_r3anl"]
 [ext_resource type="PackedScene" uid="uid://lxutle20rbii" path="res://Source/RockNodes/copper_node.tscn" id="3_lqqt8"]
+[ext_resource type="PackedScene" uid="uid://c3kckna5fmsic" path="res://Source/RockNodes/clay_node.tscn" id="4_0mdk1"]
 [ext_resource type="Script" uid="uid://bv6mgv53f5afu" path="res://Resources/RockSpawns/BaseScripts/rock_spawn.gd" id="4_4x3xj"]
+[ext_resource type="PackedScene" uid="uid://byf0fpifdpm7o" path="res://Source/RockNodes/iron_node.tscn" id="5_rxh7i"]
+[ext_resource type="PackedScene" uid="uid://cbfnnemqoqm6h" path="res://Source/RockNodes/sulfur_node.tscn" id="6_oco56"]
 
 [sub_resource type="Resource" id="Resource_bper2"]
 script = ExtResource("1_erio4")
@@ -17,8 +20,26 @@ rock_type = ExtResource("3_lqqt8")
 weight = 0.1
 metadata/_custom_type_script = "uid://bcjxt6jjg1htp"
 
+[sub_resource type="Resource" id="Resource_chkau"]
+script = ExtResource("1_erio4")
+rock_type = ExtResource("4_0mdk1")
+weight = 0.2
+metadata/_custom_type_script = "uid://bcjxt6jjg1htp"
+
+[sub_resource type="Resource" id="Resource_xqos5"]
+script = ExtResource("1_erio4")
+rock_type = ExtResource("5_rxh7i")
+weight = 0.05
+metadata/_custom_type_script = "uid://bcjxt6jjg1htp"
+
+[sub_resource type="Resource" id="Resource_roopn"]
+script = ExtResource("1_erio4")
+rock_type = ExtResource("6_oco56")
+weight = 0.04
+metadata/_custom_type_script = "uid://bcjxt6jjg1htp"
+
 [resource]
 script = ExtResource("4_4x3xj")
-rock_weights = Array[ExtResource("1_erio4")]([SubResource("Resource_bper2"), SubResource("Resource_uep2w")])
+rock_weights = Array[ExtResource("1_erio4")]([SubResource("Resource_bper2"), SubResource("Resource_uep2w"), SubResource("Resource_chkau"), SubResource("Resource_xqos5"), SubResource("Resource_roopn")])
 rock_spawn_chance = 0.4
 metadata/_custom_type_script = "uid://bv6mgv53f5afu"

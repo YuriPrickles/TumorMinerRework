@@ -21,4 +21,16 @@ ITEM_DESC_MINISMELTER=Smelts ores.
 ITEM_BATLEG=Bat Leg
 ITEM_DESC_BATLEG=Heals 20. +5% speed.
 
+ITEM_COPPERPICKAXE=Copper Pickaxe
+ITEM_DESC_COPPERPICKAXE=For mining.
+
+ITEM_SULFUR=Sulfur
+ITEM_DESC_SULFUR=Smells like something bad.
+
+ITEM_CLAY=Clay
+ITEM_DESC_CLAY=Soft. Heat to harden.
+
+ITEM_DYNAMITEWEAK=Weak Dynamite
+ITEM_DESC_DYNAMITEWEAK=Blows up a small area.
+
 END_OF_DIALOG_FILE

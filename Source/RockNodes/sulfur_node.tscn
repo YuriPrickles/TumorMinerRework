@@ -1,0 +1,12 @@
+[gd_scene format=3 uid="uid://cbfnnemqoqm6h"]
+
+[ext_resource type="PackedScene" uid="uid://822x75d388b5" path="res://Source/RockNodes/rock_node.tscn" id="1_vqht6"]
+[ext_resource type="Script" uid="uid://s1ifcf6i2qr7" path="res://Source/RockNodes/sulfur_node.gd" id="2_vqht6"]
+[ext_resource type="Texture2D" uid="uid://cimqa7q3qsr84" path="res://Assets/Temporary/sulfur_node.png" id="3_vqht6"]
+
+[node name="SulfurNode" unique_id=1300855250 instance=ExtResource("1_vqht6")]
+script = ExtResource("2_vqht6")
+health = 5
+
+[node name="Sprite2D" parent="." index="1" unique_id=1306761943]
+texture = ExtResource("3_vqht6")

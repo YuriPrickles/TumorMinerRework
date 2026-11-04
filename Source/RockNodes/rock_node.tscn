@@ -71,14 +71,13 @@ _data = {
 &"hit": SubResource("Animation_jxldm")
 }
 
-[node name="Rock" type="StaticBody2D" unique_id=1300855250 node_paths=PackedStringArray("animation_player", "navigation_obstacle", "click_area")]
+[node name="Rock" type="StaticBody2D" unique_id=1300855250 node_paths=PackedStringArray("animation_player", "click_area")]
 y_sort_enabled = true
 collision_layer = 2
 collision_mask = 9
 input_pickable = true
 script = ExtResource("1_vkfgj")
 animation_player = NodePath("AnimationPlayer")
-navigation_obstacle = NodePath("NavigationObstacle2D")
 click_area = NodePath("ClickArea")
 
 [node name="ClickArea" type="Area2D" parent="." unique_id=331627381]
@@ -98,10 +97,3 @@ debug_color = Color(0.9590973, 1.540184e-06, 0.52618134, 0.41960785)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=380808983]
 libraries/ = SubResource("AnimationLibrary_03rym")
-
-[node name="NavigationObstacle2D" type="NavigationObstacle2D" parent="." unique_id=1443461854]
-visible = false
-position = Vector2(0, -32)
-vertices = PackedVector2Array(0, -18, 32, -18, 32, 0, 32, 32, 0, 32, -32, 32, -32, 0, -32, -18)
-affect_navigation_mesh = true
-carve_navigation_mesh = true

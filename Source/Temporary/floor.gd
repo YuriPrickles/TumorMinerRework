@@ -13,6 +13,9 @@ extends Node2D
 
 var current_layout:Layout
 var already_spawned_ladder:bool = false
+var ladder_spawn_chance: float = 0.05
+var ldr_ch_incr_min: float = 0.02
+var ldr_ch_incr_max: float = 0.04
 
 func _ready() -> void:
 	current_layout = layout_pool.layout_pool.pick_random().instantiate()
@@ -37,6 +40,9 @@ func _draw() -> void:
 		#else:
 			#draw_circle(current_layout.layout_tiles.map_to_local(tile),8,Color.GREEN)
 	pass
+
+func increase_ladder_chance():
+	ladder_spawn_chance += randf_range(ldr_ch_incr_min,ldr_ch_incr_max)
 
 func spawn_ladder(pos: Vector2):
 	if already_spawned_ladder: return

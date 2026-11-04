@@ -4,7 +4,7 @@ extends Node
 var current_item_index:int
 var run_info:RunInfo
 var health_drain_timer:float = 0
-var base_health_drain_delay:float = 1.75
+var base_health_drain_delay:float = 2.4
 
 @export_dir var items_texture_path: String
 

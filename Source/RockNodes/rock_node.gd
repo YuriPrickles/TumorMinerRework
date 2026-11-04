@@ -3,7 +3,6 @@ extends StaticBody2D
 
 const rock_placement_offset = Vector2(0,32)
 @export var animation_player: AnimationPlayer
-@export var navigation_obstacle: NavigationObstacle2D
 
 @export var click_area: Area2D
 @export var health:int = 2
@@ -35,8 +34,11 @@ func break_rock():
 	queue_free()
 	
 func on_break():
-	if randf_range(0,1) < 0.05:
-		Main.instance.current_floor.spawn_ladder(position)
+	var flr = Main.instance.current_floor
+	if randf_range(0,1) < flr.ladder_spawn_chance:
+		flr.spawn_ladder(position)
+	else:
+		flr.increase_ladder_chance()
 	drop_loot()
 
 func drop_loot():

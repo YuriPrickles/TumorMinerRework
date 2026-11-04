@@ -1,6 +1,9 @@
 class_name Item
 extends Resource
 
+const subclasses:Array[String]=[
+	"Item", "Pickaxe", "Part"
+]
 static var items:Array[Script]
 static func register_item(script:Script):
 	if items.has(script): return
@@ -44,6 +47,8 @@ var stack: int = 1:
 			return
 		stack = value
 
+var fail_use:bool
+
 func _init(stk:int = 1) -> void:
 	texture = load("%s/%s.png" % [
 		Global.items_texture_path,
@@ -58,12 +63,15 @@ func on_switch_away(plr:Player):
 	pass
 
 func use_item(plr:Player) -> bool:
-	plr.held_item.do_animation(self)
-	if consumable: on_consume(plr)
+	if consumable:
+		on_consume(plr)
+		await plr.held_item.do_animation(self)
+	else:
+		await plr.held_item.do_animation(self)
 	return true
 
 func on_consume(plr:Player):
-	await plr.held_item.animation_hit
+	if fail_use: return
 	stack -= 1
 	Global.inv_manager.validate_item_slot(self)
 

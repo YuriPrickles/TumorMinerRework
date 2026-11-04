@@ -16,8 +16,9 @@ func _init() -> void:
 	main_lang = Language.from_txt("res://Dialog/English.txt")
 	#region Load All Recipes
 	for cl:Dictionary in ProjectSettings.get_global_class_list():
-		if cl.get("base") == "Item":
-			Item.register_item(load(cl.get("path")))
+		if Item.subclasses.has(cl.base):
+			var scr := load(cl.path)
+			Item.register_item(scr)
 	for item in Item.items:
 		var temp_item:Item = item.new()
 		temp_item.add_recipes()
