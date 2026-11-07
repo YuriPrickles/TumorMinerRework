@@ -2,10 +2,18 @@ class_name Floor
 extends Node2D
 
 @export var enemies: Node2D
+func get_enemies() -> Array[Enemy]:
+	return (enemies.get_children() as Array[Enemy])
 @export var interactables: Node2D
+func get_interactables() -> Array[Interactable]:
+	return (interactables.get_children() as Array[Interactable])
 @export var pickups: Node2D
 @export var projectiles: Node2D
+func get_projectiles() -> Array[Projectile]:
+	return (projectiles.get_children() as Array[Projectile])
 @export var rock_nodes: Node2D
+func get_rock_nodes() -> Array[RockNode]:
+	return (rock_nodes.get_children() as Array[RockNode])
 @export var environment: Node2D
 
 @export var ladder_scene:PackedScene
@@ -35,6 +43,7 @@ func _draw() -> void:
 		#for j in range(-16,16):
 			#draw_rect(Rect2(i * 64, j * 64, 64, 64), Color.GREEN,false)
 	#for tile in current_layout.layout_tiles.get_used_cells():
+		#draw_string(ThemeDB.fallback_font,current_layout.layout_tiles.map_to_local(tile),str(tile),HORIZONTAL_ALIGNMENT_CENTER)
 		#if current_layout.astar_grid.is_point_solid(tile):
 			#draw_circle(current_layout.layout_tiles.map_to_local(tile),8,Color.RED)
 		#else:

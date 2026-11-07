@@ -9,11 +9,17 @@ ITEM_DESC_PICKAXE=For mining.
 ITEM_ROCK=Rock
 ITEM_DESC_ROCK=For throwing and crafting.
 
-ITEM_COPPERORE=Rock
+ITEM_COPPERORE=Copper Ore
 ITEM_DESC_COPPERORE=Smelt into Copper.
+
+ITEM_COPPERBAR=Copper Bar
+ITEM_DESC_COPPERBAR=Handles liquids and electricity well.
 
 ITEM_IRONORE=Iron Ore
 ITEM_DESC_IRONORE=Smelt into Iron.
+
+ITEM_IRONBAR=Iron Bar
+ITEM_DESC_IRONBAR=A helpful metal.
 
 ITEM_MINISMELTER=Mini Smelter
 ITEM_DESC_MINISMELTER=Smelts ores.

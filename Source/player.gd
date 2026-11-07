@@ -19,6 +19,10 @@ var knockback_velocity: Vector2
 
 var speed_mult = 1
 
+##For the purposes of using player position in local_to_map functions.
+var small_position_offset: Vector2 = Vector2(0,1)
+var snapped_facing_dir:Vector2
+
 func _ready() -> void:
 	interact_range.body_entered.connect(detect_thing)
 	interact_range.body_exited.connect(undetect_thing)
@@ -26,6 +30,21 @@ func _ready() -> void:
 	interact_range.area_exited.connect(undetect_thing)
 
 func _physics_process(delta: float) -> void:
+	var mouse_vector:Vector2 = position.direction_to(get_global_mouse_position()).normalized()
+	snapped_facing_dir = mouse_vector.snapped(Vector2.ONE)
+	#print(snapped_facing_dir)
+	var current_item = Global.get_current_item()
+	
+	if current_item and current_item.can_use_item():
+		if current_item.auto_use and Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
+			if not held_item.animating:
+				Global.get_current_item().use_item(self)
+		elif Input.is_action_pressed("use"):
+			if not held_item.animating:
+				Global.get_current_item().use_item(self)
+	if Input.is_action_just_pressed("interact"):
+		if get_targeted_interactable():
+			get_targeted_interactable().interact(self)
 	if not held_item.animating:
 		player_sprite.flip_h = aim_to_mouse().x < 0
 		hand_spot.position.x = 31 * (-1 if aim_to_mouse().x < 0 else 1)
@@ -67,27 +86,29 @@ func undetect_thing(body:Node2D):
 		body.on_undetect()
 		pickups.erase(body)
 
+func get_targeted_interactable() -> Interactable:
+	var c_floor :Floor = Main.instance.current_floor
+	var tiles :TileMapLayer = c_floor.current_layout.layout_tiles
+	for interactable in c_floor.get_interactables():
+		var interactable_tilepos : Vector2i = tiles.local_to_map(interactable.position - interactable.placement_offset)
+		if get_targeted_tile() == interactable_tilepos or get_current_tile() == interactable_tilepos:
+			return interactable
+	return null
+
 func _input(event: InputEvent) -> void:
-	if not held_item.animating:
-		if event.is_action_pressed("use") and Global.get_current_item() and Global.get_current_item().can_use_item():
-			Global.get_current_item().use_item(self)
-		if event.is_action_pressed("interact"):
-			for thing in interactables:
-				if thing.in_range and thing.hovered:
-					thing.interact(self)
-		#region Inventory Control
-		var old_item = Global.get_current_item()
-		Global.current_item_index += roundi(Input.get_axis("inv_back","inv_forward"))
-		if Global.current_item_index < 0:
-			Global.current_item_index = 8
-		if Global.current_item_index > 8:
-			Global.current_item_index = 0
-		if old_item != Global.get_current_item():
-			if old_item:
-				old_item.on_switch_away(self)
-			if Global.get_current_item():
-				Global.get_current_item().on_switch_to(self)
-		#endregion
+	#region Inventory Control
+	var old_item = Global.get_current_item()
+	Global.current_item_index += roundi(Input.get_axis("inv_back","inv_forward"))
+	if Global.current_item_index < 0:
+		Global.current_item_index = 8
+	if Global.current_item_index > 8:
+		Global.current_item_index = 0
+	if old_item != Global.get_current_item():
+		if old_item:
+			old_item.on_switch_away(self)
+		if Global.get_current_item():
+			Global.get_current_item().on_switch_to(self)
+	#endregion
 
 func request_mine_action(rock, strength):
 	if Global.get_current_item().type == Item.Type.PICKAXE:
@@ -95,6 +116,7 @@ func request_mine_action(rock, strength):
 
 func aim_to_mouse() -> Vector2:
 	return position.direction_to(get_global_mouse_position())
+
 
 func hurt(damage, source_position):
 	if stagger: return
@@ -105,3 +127,15 @@ func hurt(damage, source_position):
 
 func heal(value):
 	Global.run_info.health += value
+
+##Returns a Vector2i position on the tilemap. Use map_to_local to actually do things with it.
+func get_current_tile() -> Vector2i:
+	var c_floor :Floor = Main.instance.current_floor
+	var tiles :TileMapLayer = c_floor.current_layout.layout_tiles
+	var current_tile := tiles.local_to_map(position - small_position_offset)
+	return current_tile
+
+##Returns a Vector2i position on the tilemap. Use map_to_local to actually do things with it.
+func get_targeted_tile() -> Vector2i:
+	var target_tile = get_current_tile() + Vector2i(snapped_facing_dir)
+	return target_tile

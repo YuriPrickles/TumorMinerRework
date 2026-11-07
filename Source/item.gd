@@ -37,6 +37,7 @@ enum AnimationType {
 @export var anim_type: AnimationType = AnimationType.NONE
 @export var use_delay: float = 1
 @export var consumable: bool = false
+@export var auto_use:bool = false
 
 @export var damage: int = 0
 

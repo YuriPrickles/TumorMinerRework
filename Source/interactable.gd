@@ -20,6 +20,12 @@ func on_detect():
 	in_range = true
 func on_undetect():
 	in_range = false
-
+##Returns a Vector2i position on the tilemap. Use map_to_local to actually do things with it.
+func get_current_tile() -> Vector2i:
+	var floor :Floor = Main.instance.current_floor
+	var tiles :TileMapLayer = floor.current_layout.layout_tiles
+	var current_tile := tiles.local_to_map(position)
+	return current_tile
+	
 func on_mine(value, plr:Player):
 	pass

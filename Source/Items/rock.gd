@@ -5,6 +5,7 @@ func _init(stk:int=1) -> void:
 	anim_type = AnimationType.INVISIBLE
 	max_stack = 50
 	use_delay = 0.3
+	auto_use = true
 	consumable = true
 	damage = 3
 	super(stk)

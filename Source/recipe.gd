@@ -31,7 +31,9 @@ func craft_item() -> bool:
 	if not check_craftable(): return false
 	for ingredient:Script in ingredient_list.keys():
 		Global.inv_manager.consume_item(ingredient, ingredient_list.get(ingredient))
-	var pickup = Pickup.new_pickup(result_item.duplicate(),Main.instance.get_player().position)
+	var result = result_item.duplicate()
+	result.stack = result_item.stack
+	var pickup = Pickup.new_pickup(result,Main.instance.get_player().position)
 	Global.inv_manager.attempt_acquire(pickup, pickup.item_stored)
 	Global.run_info.health -= health_requirement
 	return true
