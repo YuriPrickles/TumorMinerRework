@@ -24,21 +24,26 @@ var already_spawned_ladder:bool = false
 var ladder_spawn_chance: float = 0.05
 var ldr_ch_incr_min: float = 0.02
 var ldr_ch_incr_max: float = 0.04
-
+var tile_size: int = 64
 func _ready() -> void:
 	current_layout = layout_pool.layout_pool.pick_random().instantiate()
 	environment.add_child(current_layout)
+	tile_size = current_layout.layout_tiles.tile_set.tile_size.x
 	queue_redraw()
 	pass # Replace with function body.
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
+	queue_redraw()
 	#if Engine.get_frames_drawn() % 30 == 0:
 		#queue_redraw()
 	pass
 
 func _draw() -> void:
+	var plr = Main.instance.get_player()
+	var tile_size_vector = Vector2(tile_size,tile_size)
+	draw_rect(Rect2(to_local_position(plr.get_targeted_tile()) - tile_size_vector / 2,tile_size_vector),Color.RED,false,4)
 	#for i in range(-16,16):
 		#for j in range(-16,16):
 			#draw_rect(Rect2(i * 64, j * 64, 64, 64), Color.GREEN,false)
@@ -58,11 +63,15 @@ func spawn_ladder(pos: Vector2):
 	var ladder:Ladder = ladder_scene.instantiate()
 	ladder.position = pos
 	interactables.add_child(ladder)
+	already_spawned_ladder = true
 
 func place_interactable(interactable:Interactable,pos:Vector2):
 	current_layout.astar_grid.set_point_solid(to_tile_grid(pos))
 	interactable.position = pos + Vector2(0,32)
 	interactables.add_child(interactable)
 
-func to_tile_grid(pos:Vector2):
+func to_tile_grid(pos:Vector2) -> Vector2i:
 	return current_layout.layout_tiles.local_to_map(pos)
+
+func to_local_position(tilepos:Vector2i) -> Vector2:
+	return current_layout.layout_tiles.map_to_local(tilepos)

@@ -71,6 +71,14 @@ func use_item(plr:Player) -> bool:
 		await plr.held_item.do_animation(self)
 	return true
 
+func shift_use_item(plr:Player) -> bool:
+	if consumable:
+		on_consume(plr)
+		await plr.held_item.do_animation(self)
+	else:
+		await plr.held_item.do_animation(self)
+	return true
+
 func on_consume(plr:Player):
 	if fail_use: return
 	stack -= 1
@@ -80,6 +88,9 @@ func can_use_item() -> bool:
 	if anim_type == AnimationType.NONE:
 		return false
 	return true
+
+func can_use_shift() -> bool:
+	return false
 
 func get_item_class_name() -> String:
 	return(get_script() as Script).get_global_name()

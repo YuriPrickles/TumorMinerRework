@@ -1,0 +1,23 @@
+[gd_scene format=3 uid="uid://ojmtwqr2nev6"]
+
+[ext_resource type="PackedScene" uid="uid://dk5vfxuia7wfi" path="res://Source/projectile.tscn" id="1_lxnnm"]
+[ext_resource type="Script" uid="uid://dkxisdj3cdl8b" path="res://Source/Projectiles/generic_bomb.gd" id="2_lxnnm"]
+[ext_resource type="Texture2D" uid="uid://difaeoewerh6i" path="res://Assets/Graphics/Gameplay/Items/dynamite_weak.png" id="3_lxnnm"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_21tc1"]
+radius = 32.0
+
+[node name="BombProj" unique_id=921495114 node_paths=PackedStringArray("texture") instance=ExtResource("1_lxnnm")]
+script = ExtResource("2_lxnnm")
+boom_radius = 2
+boom_strength = 4
+fuse_duration = 2.0
+destroys_things = true
+texture = NodePath("Texture")
+damage = 3
+
+[node name="Texture" type="Sprite2D" parent="." index="0" unique_id=103154065]
+texture = ExtResource("3_lxnnm")
+
+[node name="CollisionShape" parent="." index="1" unique_id=1151676331]
+shape = SubResource("CircleShape2D_21tc1")

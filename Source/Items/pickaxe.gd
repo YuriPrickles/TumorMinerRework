@@ -15,8 +15,6 @@ func use_item(plr:Player) -> bool:
 	var c_floor :Floor = Main.instance.current_floor
 	var current_tile := plr.get_current_tile()
 	var target_tile  := plr.get_targeted_tile()
-	print(current_tile)
-	print(target_tile)
 	for rck in c_floor.get_rock_nodes():
 		if target_tile == rck.get_current_tile() or current_tile == rck.get_current_tile():
 			plr.request_mine_action(rck, strength)
