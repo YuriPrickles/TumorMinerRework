@@ -2,6 +2,7 @@ class_name Bat
 extends Enemy
 @export var detection_range: Area2D
 @export var bite_range: Area2D
+@export var bite_hitbox: Area2D
 
 var chasing:bool = false
 var doing_bite_attack = false
@@ -27,11 +28,6 @@ func _ready() -> void:
 				if not doing_bite_attack and bite_cooldown_timer <= 0:
 					start_bite()
 	)
-	bite_range.body_exited.connect(
-		func(body):
-			if body is Player:
-				plr_in_bite_range = false
-	)
 
 func _process(delta: float) -> void:
 	if bite_cooldown_timer > 0:
@@ -46,14 +42,15 @@ func _physics_process(delta: float) -> void:
 var override_velocity:Vector2
 func start_bite():
 	var plr : Player = Main.instance.get_player()
-	plr_in_bite_range = true
 	doing_bite_attack = true
 	enemy_sprite.animate("pre_bite")
 	override_velocity = position.direction_to(plr.position) * (3 * movement_speed)
 	await enemy_sprite.animation_player.animation_finished
 	enemy_sprite.animate("bite")
 	override_velocity = Vector2.ZERO
+	bite_hitbox.rotation = deg_to_rad(90) + plr.position.direction_to(position).angle()
 	await enemy_sprite.hit
+	plr_in_bite_range = bite_hitbox.get_overlapping_bodies().has(plr)
 	if plr_in_bite_range:
 		plr.hurt(19, position)
 	await enemy_sprite.animation_player.animation_finished

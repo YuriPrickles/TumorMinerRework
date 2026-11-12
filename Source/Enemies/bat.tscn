@@ -8,16 +8,17 @@
 radius = 384.1302
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_d6ajj"]
-radius = 120.0
+radius = 179.01117
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_d6ajj"]
 size = Vector2(60, 20)
 
-[node name="Bat" unique_id=1878560834 node_paths=PackedStringArray("detection_range", "bite_range", "enemy_sprite") instance=ExtResource("1_gv7c5")]
+[node name="Bat" unique_id=1878560834 node_paths=PackedStringArray("detection_range", "bite_range", "bite_hitbox", "enemy_sprite") instance=ExtResource("1_gv7c5")]
 z_index = 1
 script = ExtResource("2_d6ajj")
 detection_range = NodePath("DetectionRange")
 bite_range = NodePath("BiteRange")
+bite_hitbox = NodePath("BiteHitbox")
 enemy_sprite = NodePath("BatSprite")
 health = 15
 kb_res = 0.5
@@ -41,3 +42,9 @@ position = Vector2(0, -10)
 shape = SubResource("RectangleShape2D_d6ajj")
 
 [node name="BatSprite" parent="." index="3" unique_id=872872831 instance=ExtResource("2_0tius")]
+
+[node name="BiteHitbox" type="Area2D" parent="." index="5" unique_id=154330651]
+position = Vector2(0, -10)
+
+[node name="CollisionShape2D" type="CollisionPolygon2D" parent="BiteHitbox" index="0" unique_id=242026475]
+polygon = PackedVector2Array(-7, 0, 7, 0, 48, 90, -48, 90)
