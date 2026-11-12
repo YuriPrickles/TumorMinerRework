@@ -37,6 +37,6 @@ ITEM_CLAY=Clay
 ITEM_DESC_CLAY=Soft. Heat to harden.
 
 ITEM_DYNAMITEWEAK=Weak Dynamite
-ITEM_DESC_DYNAMITEWEAK=Blows up a small area.
+ITEM_DESC_DYNAMITEWEAK=Blows up a small area. LMB to place, Shift + LMB to throw.
 
 END_OF_DIALOG_FILE

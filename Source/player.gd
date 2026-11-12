@@ -5,7 +5,7 @@ extends CharacterBody2D
 @export var hand_spot: Marker2D
 @export var player_sprite: Sprite2D
 
-const SPEED = 400.0
+const SPEED = 300.0
 var rocks:Array[RockNode]
 var interactables:Array[Interactable]
 var pickups:Array[Pickup]
@@ -53,16 +53,14 @@ func _physics_process(delta: float) -> void:
 	snapped_facing_dir = mouse_vector.snapped(Vector2.ONE)
 	#print(snapped_facing_dir)
 	var current_item = Global.get_current_item()
-	
 	if current_item and current_item.can_use_item():
+		var use_item_method : Callable = Global.get_current_item().use_item.bind(self) if not current_item.can_use_shift() and not Input.is_action_pressed("use_modifier") else Global.get_current_item().shift_use_item.bind(self)
 		if current_item.auto_use and Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
 			if not held_item.animating:
-				Global.get_current_item().use_item(self)
-				use_arm()
+				use_item_method.call()
 		elif Input.is_action_pressed("use"):
 			if not held_item.animating:
-				Global.get_current_item().use_item(self)
-				use_arm()
+				use_item_method.call()
 	if Input.is_action_just_pressed("interact"):
 		if get_targeted_interactable():
 			get_targeted_interactable().interact(self)
@@ -170,8 +168,7 @@ func _input(event: InputEvent) -> void:
 	#endregion
 
 func request_mine_action(rock, strength):
-	if Global.get_current_item().type == Item.Type.PICKAXE:
-		rock.on_mine(strength, self)
+	rock.on_mine(strength, self)
 
 func aim_to_mouse() -> Vector2:
 	return position.direction_to(get_global_mouse_position())

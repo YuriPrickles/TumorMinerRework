@@ -69,7 +69,7 @@ func hurt(damage:int, source):
 
 func on_hurt(damage:int, source):
 	enemy_sprite.animate("hurt")
-	if kb_res < 1:
+	if source and kb_res < 1:
 		flinch(source)
 
 func on_collide_player(plr:Player):

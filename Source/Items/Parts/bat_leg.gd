@@ -6,7 +6,7 @@ func _init(stk:int = 1) -> void:
 	heal_amount = 20
 	points = 2
 
-func part_effects(plr:Player):
+func apply_effects(plr:Player):
 	plr.speed_mult += 1.05
 
 func reset_effect(plr:Player):

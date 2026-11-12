@@ -13,7 +13,7 @@ func _init(stk:int = 1) -> void:
 	consumable = true
 	stack = 1
 
-func part_effects(plr:Player):
+func apply_effects(plr:Player):
 	pass
 
 func reset_effect(plr:Player):
@@ -22,9 +22,12 @@ func reset_effect(plr:Player):
 func use_item(plr:Player) -> bool:
 	await super(plr)
 	plr.heal(heal_amount)
-	part_effects(plr)
+	apply_effects(plr)
 	Global.run_info.build.parts.append(self)
 	return true
+
+func can_use_shift() -> bool:
+	return false
 
 func can_use_item() -> bool:
 	if not Global.run_info.build.can_fit_capacity(points):
