@@ -23,6 +23,25 @@ var speed_mult = 1
 var small_position_offset: Vector2 = Vector2(0,1)
 var snapped_facing_dir:Vector2
 
+#LIMBS
+@export_group("Limbs")
+
+@export_subgroup("Arms")
+@export var ArmLeft:Node
+@export var ArmRight:Node
+## Default Arm Length While Aiming
+@export var arm_length:float = 70
+## Default Arm Length When Using an Item
+@export var arm_length_interact:float = 100
+@onready var active_arm_length:float = arm_length
+
+@export_subgroup("Legs")
+@export var LegLeft:Node
+@export var StepMarkerLeft:Node
+@export var LegRight:Node
+@export var StepMarkerRight:Node
+
+
 func _ready() -> void:
 	interact_range.body_entered.connect(detect_thing)
 	interact_range.body_exited.connect(undetect_thing)
@@ -39,26 +58,66 @@ func _physics_process(delta: float) -> void:
 		if current_item.auto_use and Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
 			if not held_item.animating:
 				Global.get_current_item().use_item(self)
+				use_arm()
 		elif Input.is_action_pressed("use"):
 			if not held_item.animating:
 				Global.get_current_item().use_item(self)
+				use_arm()
 	if Input.is_action_just_pressed("interact"):
 		if get_targeted_interactable():
 			get_targeted_interactable().interact(self)
 	if not held_item.animating:
-		player_sprite.flip_h = aim_to_mouse().x < 0
-		hand_spot.position.x = 31 * (-1 if aim_to_mouse().x < 0 else 1)
+		#player_sprite.flip_h = aim_to_mouse().x < 0
+		"""
+		Note: Hi it's Adam!
+		I'm commenting out the above code because
+		I would like to replace the sprite flipping
+		with just switching hands.
+		Let me know what you think!
+		It would also be better for when adding
+		visuals of equipped body parts,
+		so that they aren't constantly swapping.
+		"""
+		#hand_spot.position.x = 31 * (-1 if aim_to_mouse().x < 0 else 1)
 		hand_spot.scale.x = (-1 if aim_to_mouse().x < 0 else 1)
+	
+	#Limb Logic
+	
+	#Arms
+	var arms = [ArmLeft, ArmRight]
+	var aim_direction = int(aim_to_mouse().x >= 0)
+	for arm in arms:
+		var side = arms.find(arm)
+		if side == aim_direction:
+			arm.apex_destination = aim_to_mouse() * active_arm_length
+			hand_spot.global_position = arm.ApexDisplay.global_position
+		else:
+			arm.apex_destination = Vector2(
+				# X * 2 - 1 converts <0,1> to <-1,1>
+				40 * (side * 2 - 1),
+				50
+			)
+	
+	#Legs
+	var legs = [LegLeft, LegRight]
+	var steps = [StepMarkerLeft, StepMarkerRight]
+	for i in 2:
+		var dest = legs[i].get_local_destination(steps[i].global_position)
+		legs[i].apex_destination = dest
 	
 	if stagger_timer > 0:
 		stagger_timer -= delta
 	
 	var direction := Input.get_vector("left", "right","up","down")
 	if not stagger:
+		rotation += (-PI / 12 * sign(direction.x) - rotation) * delta * 5
+		rotation = clamp(rotation, -PI / 12, PI / 12)
 		if direction:
 			velocity = direction * SPEED * speed_mult
+			$PlayerAnim.play("walk")
 		else:
 			velocity = velocity.move_toward(Vector2.ZERO, SPEED / 3)
+			$PlayerAnim.play("idle")
 	else:
 		velocity = knockback_velocity
 	move_and_slide()
@@ -139,3 +198,10 @@ func get_current_tile() -> Vector2i:
 func get_targeted_tile() -> Vector2i:
 	var target_tile = get_current_tile() + Vector2i(snapped_facing_dir)
 	return target_tile
+
+#Let me know if you want me to move this somewhere else in the script
+## Pulse the arm for juicy effect
+func use_arm(time:float = 0.1):
+	active_arm_length = arm_length_interact
+	await get_tree().create_timer(time).timeout
+	active_arm_length = arm_length

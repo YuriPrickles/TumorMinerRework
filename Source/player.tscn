@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://dbusw1jo6ta0d" path="res://Source/player.gd" id="1_tfb11"]
 [ext_resource type="Texture2D" uid="uid://t5grmyhb65kk" path="res://Assets/Temporary/tumor.png" id="1_uedky"]
 [ext_resource type="PackedScene" uid="uid://cct5jp0ltelmq" path="res://Source/held_item.tscn" id="2_yo7go"]
+[ext_resource type="PackedScene" uid="uid://bln2464v45iy5" path="res://Source/Visuals/modular_limb.tscn" id="4_h6ae0"]
 
 [sub_resource type="Gradient" id="Gradient_yo7go"]
 offsets = PackedFloat32Array(0.23111111, 0.7022222)
@@ -21,13 +22,148 @@ radius = 108.01852
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_v3b0y"]
 size = Vector2(32, 20)
 
-[node name="Player" type="CharacterBody2D" unique_id=1289355168 node_paths=PackedStringArray("interact_range", "held_item", "hand_spot", "player_sprite")]
+[sub_resource type="Animation" id="Animation_afm8r"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PlayerSprite:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("PlayerSprite/LimbOrigins/StepLeft:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-40, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("PlayerSprite/LimbOrigins/StepRight:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(40, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_h6ae0"]
+resource_name = "idle"
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PlayerSprite:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(2, 0.5),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1, 0.9)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("PlayerSprite/LimbOrigins/StepLeft:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-40, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("PlayerSprite/LimbOrigins/StepRight:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(40, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_dx03v"]
+resource_name = "walk"
+length = 0.39999999999999997
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PlayerSprite:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(0.5, 0.5),
+"update": 0,
+"values": [Vector2(0.9, 1.05), Vector2(1.1, 0.9)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("PlayerSprite/LimbOrigins/StepRight:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(40, -15), Vector2(40, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("PlayerSprite/LimbOrigins/StepLeft:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(-40, 0), Vector2(-40, -15)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_afm8r"]
+_data = {
+&"RESET": SubResource("Animation_afm8r"),
+&"idle": SubResource("Animation_h6ae0"),
+&"walk": SubResource("Animation_dx03v")
+}
+
+[node name="Player" type="CharacterBody2D" unique_id=1289355168 node_paths=PackedStringArray("interact_range", "held_item", "hand_spot", "player_sprite", "ArmLeft", "ArmRight", "LegLeft", "StepMarkerLeft", "LegRight", "StepMarkerRight")]
 collision_mask = 126
 script = ExtResource("1_tfb11")
 interact_range = NodePath("InteractRange")
-held_item = NodePath("PlayerSprite/HandSpot/HeldItem")
-hand_spot = NodePath("PlayerSprite/HandSpot")
+held_item = NodePath("HandSpot/HeldItem")
+hand_spot = NodePath("HandSpot")
 player_sprite = NodePath("PlayerSprite")
+ArmLeft = NodePath("ModularLimbs/ModularArmLeft")
+ArmRight = NodePath("ModularLimbs/ModularArmRight")
+LegLeft = NodePath("ModularLimbs/ModularLegLeft")
+StepMarkerLeft = NodePath("PlayerSprite/LimbOrigins/StepLeft")
+LegRight = NodePath("ModularLimbs/ModularLegRight")
+StepMarkerRight = NodePath("PlayerSprite/LimbOrigins/StepRight")
 
 [node name="PointLight2D" type="PointLight2D" parent="." unique_id=1717827764]
 shadow_enabled = true
@@ -45,11 +181,49 @@ debug_color = Color(0.9882353, 0.7607843, 0, 0.07450981)
 texture = ExtResource("1_uedky")
 offset = Vector2(0, -64)
 
-[node name="HandSpot" type="Marker2D" parent="PlayerSprite" unique_id=1461154043]
+[node name="LimbOrigins" type="Node2D" parent="PlayerSprite" unique_id=589665626]
+
+[node name="ShoulderLeft" type="Marker2D" parent="PlayerSprite/LimbOrigins" unique_id=415972737]
+position = Vector2(-16, -29)
+
+[node name="ShoulderRight" type="Marker2D" parent="PlayerSprite/LimbOrigins" unique_id=1503687361]
+position = Vector2(16, -29)
+
+[node name="HipLeft" type="Marker2D" parent="PlayerSprite/LimbOrigins" unique_id=1725652731]
+position = Vector2(-8, -14)
+
+[node name="HipRight" type="Marker2D" parent="PlayerSprite/LimbOrigins" unique_id=1222786012]
+position = Vector2(8, -14)
+
+[node name="StepLeft" type="Marker2D" parent="PlayerSprite/LimbOrigins" unique_id=1578899124]
+position = Vector2(-40, 0)
+
+[node name="StepRight" type="Marker2D" parent="PlayerSprite/LimbOrigins" unique_id=1794503586]
+position = Vector2(40, 0)
+
+[node name="ModularLimbs" type="Node2D" parent="." unique_id=1872184911]
+
+[node name="ModularArmLeft" parent="ModularLimbs" unique_id=597320145 node_paths=PackedStringArray("Origin") instance=ExtResource("4_h6ae0")]
+position = Vector2(-16, -29)
+Origin = NodePath("../../PlayerSprite/LimbOrigins/ShoulderLeft")
+
+[node name="ModularArmRight" parent="ModularLimbs" unique_id=2084398380 node_paths=PackedStringArray("Origin") instance=ExtResource("4_h6ae0")]
+position = Vector2(16, -29)
+Origin = NodePath("../../PlayerSprite/LimbOrigins/ShoulderRight")
+
+[node name="ModularLegLeft" parent="ModularLimbs" unique_id=1095512394 node_paths=PackedStringArray("Origin") instance=ExtResource("4_h6ae0")]
+position = Vector2(-16, -29)
+Origin = NodePath("../../PlayerSprite/LimbOrigins/HipLeft")
+
+[node name="ModularLegRight" parent="ModularLimbs" unique_id=963711220 node_paths=PackedStringArray("Origin") instance=ExtResource("4_h6ae0")]
+position = Vector2(16, -29)
+Origin = NodePath("../../PlayerSprite/LimbOrigins/HipRight")
+
+[node name="HandSpot" type="Marker2D" parent="." unique_id=1461154043]
 position = Vector2(31, -11)
 gizmo_extents = 16.8
 
-[node name="HeldItem" parent="PlayerSprite/HandSpot" unique_id=2100677762 instance=ExtResource("2_yo7go")]
+[node name="HeldItem" parent="HandSpot" unique_id=2100677762 instance=ExtResource("2_yo7go")]
 texture = null
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=830059859]
@@ -59,4 +233,8 @@ debug_color = Color(0.9607843, 0, 0.5254902, 0.41960785)
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=922847751]
 zoom = Vector2(1.5, 1.5)
+process_callback = 0
 position_smoothing_enabled = true
+
+[node name="PlayerAnim" type="AnimationPlayer" parent="." unique_id=81506802]
+libraries/ = SubResource("AnimationLibrary_afm8r")
