@@ -1,3 +1,4 @@
+class_name ModularLimb
 extends Node2D
 
 #Internal Meta
@@ -30,7 +31,7 @@ func _process(delta):
 	apex_velocity += force
 	ApexDisplay.position += force
 	
-	LimbDisplay.set_point_position(1, -(global_position - ApexDisplay.global_position ) )
+	LimbDisplay.set_point_position(1, -(global_position - ApexDisplay.global_position) )
 	
 	#Set Visuals
 	if source_limb:
