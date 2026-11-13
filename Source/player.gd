@@ -58,9 +58,11 @@ func _physics_process(delta: float) -> void:
 		if current_item.auto_use and Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
 			if not held_item.animating:
 				use_item_method.call()
-		elif Input.is_action_pressed("use"):
+				use_arm()
+		elif Input.is_action_just_pressed("use"):
 			if not held_item.animating:
 				use_item_method.call()
+				use_arm()
 	if Input.is_action_just_pressed("interact"):
 		if get_targeted_interactable():
 			get_targeted_interactable().interact(self)
