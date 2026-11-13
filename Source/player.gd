@@ -41,7 +41,6 @@ var snapped_facing_dir:Vector2
 @export var LegRight:Node
 @export var StepMarkerRight:Node
 
-var current_holding_arm:ModularLimb
 
 func _ready() -> void:
 	interact_range.body_entered.connect(detect_thing)
@@ -59,7 +58,7 @@ func _physics_process(delta: float) -> void:
 		if current_item.auto_use and Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
 			if not held_item.animating:
 				use_item_method.call()
-		elif Input.is_action_just_pressed("use"):
+		elif Input.is_action_pressed("use"):
 			if not held_item.animating:
 				use_item_method.call()
 	if Input.is_action_just_pressed("interact"):
@@ -77,25 +76,26 @@ func _physics_process(delta: float) -> void:
 		visuals of equipped body parts,
 		so that they aren't constantly swapping.
 		"""
-		"""yeah bro this is cool as fuck -Luci"""
 		#hand_spot.position.x = 31 * (-1 if aim_to_mouse().x < 0 else 1)
 		hand_spot.scale.x = (-1 if aim_to_mouse().x < 0 else 1)
+	
 	#Limb Logic
-		#Arms
-		var arms:Array[ModularLimb] = [ArmLeft, ArmRight]
-		var aim_direction = int(aim_to_mouse().x >= 0)
-		for arm : ModularLimb in arms:
-			var side = arms.find(arm)
-			if side == aim_direction:
-				current_holding_arm = arm
-				arm.apex_destination = aim_to_mouse() * active_arm_length
-				hand_spot.global_position = arm.ApexDisplay.global_position
-			else:
-				arm.apex_destination = Vector2(
-					# X * 2 - 1 converts <0,1> to <-1,1>
-					40 * (side * 2 - 1),
-					50
-				)
+	
+	#Arms
+	var arms = [ArmLeft, ArmRight]
+	var aim_direction = int(aim_to_mouse().x >= 0)
+	for arm in arms:
+		var side = arms.find(arm)
+		if side == aim_direction:
+			arm.apex_destination = aim_to_mouse() * active_arm_length
+			hand_spot.global_position = arm.ApexDisplay.global_position
+		else:
+			arm.apex_destination = Vector2(
+				# X * 2 - 1 converts <0,1> to <-1,1>
+				40 * (side * 2 - 1),
+				50
+			)
+	
 	#Legs
 	var legs = [LegLeft, LegRight]
 	var steps = [StepMarkerLeft, StepMarkerRight]
