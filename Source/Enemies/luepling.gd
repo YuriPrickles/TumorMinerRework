@@ -12,6 +12,9 @@ const BITE_COOLDOWN:float = 3
 var vomiting:bool = false
 var running_away:bool = false
 var vomited_egg:bool = false
+var jump_timer: float = 0.0
+var landed:bool = true
+var doing_fuck_all_timer : float = 0
 func _ready() -> void:
 	super()
 	detection_range.body_entered.connect(
@@ -75,8 +78,6 @@ func _physics_process(delta: float) -> void:
 	if chasing and not doing_bite_attack and not vomiting:
 		basic_movement(delta)
 
-var jump_timer: float = 0.0
-var landed:bool = true
 func basic_movement(delta):
 	while move_points.size() <= 1 or move_points[-1] == Vector2.ZERO or (runaway_target_cell and runaway_target_cell == Vector2i.ZERO):
 		modulate = Color.BLUE
@@ -116,7 +117,11 @@ func basic_movement(delta):
 					update_path()
 				)
 		return
-	
+	if doing_fuck_all_timer < 0.5:
+		doing_fuck_all_timer += delta
+	else:
+		landed = true
+		doing_fuck_all_timer = 0
 	#var collision = move_and_collide(velocity * delta)
 	#if collision and collision.get_collider() is Player:
 		#on_collide_player(collision.get_collider())
