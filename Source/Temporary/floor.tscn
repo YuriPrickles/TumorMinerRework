@@ -24,6 +24,7 @@ y_sort_enabled = true
 y_sort_enabled = true
 
 [node name="Projectiles" type="Node2D" parent="." unique_id=2050513681]
+y_sort_enabled = true
 
 [node name="Interactables" type="Node2D" parent="." unique_id=22883633]
 y_sort_enabled = true
@@ -32,6 +33,7 @@ y_sort_enabled = true
 y_sort_enabled = true
 
 [node name="Pickups" type="Node2D" parent="." unique_id=1363732786]
+y_sort_enabled = true
 
 [node name="CanvasModulate" type="CanvasModulate" parent="." unique_id=1090311654]
 color = Color(0.1425848, 0.13248259, 0.17608419, 1)

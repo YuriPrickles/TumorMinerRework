@@ -1,0 +1,51 @@
+[gd_scene format=3 uid="uid://bka711ty6bc8o"]
+
+[ext_resource type="PackedScene" uid="uid://ddqn8m1w1gwt1" path="res://Source/enemy.tscn" id="1_2kfcb"]
+[ext_resource type="Script" uid="uid://ckuj6vob8xqyb" path="res://Source/Enemies/luepling.gd" id="2_2kfcb"]
+[ext_resource type="PackedScene" uid="uid://l1e53yngr1f7" path="res://Source/EnemySprites/luepling_sprite.tscn" id="3_2kfcb"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_coxhp"]
+radius = 229.21169
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_d6ajj"]
+radius = 73.33485
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_d6ajj"]
+size = Vector2(60, 20)
+
+[node name="Luepling" unique_id=1878560834 node_paths=PackedStringArray("detection_range", "bite_range", "bite_hitbox", "enemy_sprite") instance=ExtResource("1_2kfcb")]
+z_index = 1
+collision_mask = 21
+script = ExtResource("2_2kfcb")
+detection_range = NodePath("DetectionRange")
+bite_range = NodePath("BiteRange")
+bite_hitbox = NodePath("BiteHitbox")
+enemy_sprite = NodePath("LueplingSprite")
+health = 23
+kb_res = 1.0
+
+[node name="DetectionRange" type="Area2D" parent="." index="0" unique_id=1993365856]
+position = Vector2(0, -10)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionRange" index="0" unique_id=296312709]
+shape = SubResource("CircleShape2D_coxhp")
+debug_color = Color(0.9882353, 0, 0.3137255, 0.039215688)
+
+[node name="BiteRange" type="Area2D" parent="." index="1" unique_id=1922163399]
+position = Vector2(0, -10)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BiteRange" index="0" unique_id=26208073]
+shape = SubResource("CircleShape2D_d6ajj")
+debug_color = Color(0.9882353, 0, 0.3137255, 0.039215688)
+
+[node name="CollisionShape2D" parent="." index="2" unique_id=483514922]
+position = Vector2(0, -10)
+shape = SubResource("RectangleShape2D_d6ajj")
+
+[node name="BiteHitbox" type="Area2D" parent="." index="3" unique_id=154330651]
+position = Vector2(0, -10)
+
+[node name="CollisionShape2D" type="CollisionPolygon2D" parent="BiteHitbox" index="0" unique_id=242026475]
+polygon = PackedVector2Array(-7, 0, 7, 0, 48, 75, 0, 90, -48, 75)
+
+[node name="LueplingSprite" parent="." index="4" unique_id=872872831 instance=ExtResource("3_2kfcb")]

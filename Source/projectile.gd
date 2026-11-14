@@ -9,6 +9,8 @@ extends Area2D
 var velocity: Vector2
 var lifetime: float = 3
 
+var hit_enemies_array : Array[Enemy]
+
 static func new_projectile(proj:PackedScene, pos, vel, dmg, h=false) -> Projectile:
 	var projectile:Projectile = proj.instantiate()
 	projectile.position = pos
@@ -55,8 +57,12 @@ func on_body_enter(body:Node2D):
 
 func on_collide_player(plr:Player):
 	pass
-func on_collide_enemy(enemy:Enemy):
-	pass
+func on_collide_enemy(enemy:Enemy) -> bool:
+	if not hit_enemies_array.has(enemy):
+		hit_enemies_array.append(enemy)
+	else:
+		return false
+	return true
 func on_collide_wall():
 	pass
 func on_collide_rock(rock:RockNode):

@@ -15,6 +15,7 @@ size = Vector2(60, 20)
 
 [node name="Bat" unique_id=1878560834 node_paths=PackedStringArray("detection_range", "bite_range", "bite_hitbox", "enemy_sprite") instance=ExtResource("1_gv7c5")]
 z_index = 1
+collision_mask = 87
 script = ExtResource("2_d6ajj")
 detection_range = NodePath("DetectionRange")
 bite_range = NodePath("BiteRange")

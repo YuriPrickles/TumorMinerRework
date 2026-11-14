@@ -22,8 +22,9 @@ func _ready() -> void:
 func astar_setup() -> void:
 	astar_grid = AStarGrid2D.new()
 	astar_grid.diagonal_mode = AStarGrid2D.DIAGONAL_MODE_NEVER
-
 	astar_grid.cell_size = layout_tiles.tile_set.tile_size
+	astar_grid.default_compute_heuristic = AStarGrid2D.HEURISTIC_CHEBYSHEV
+	astar_grid.default_estimate_heuristic = AStarGrid2D.HEURISTIC_CHEBYSHEV
 	astar_grid.region = Rect2(top_left.position,bottom_right.position - top_left.position)
 	astar_grid.update()
 

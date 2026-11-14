@@ -21,6 +21,7 @@ func _process(delta: float) -> void:
 	pass
 
 func on_mine(value, plr:Player):
+	animation_player.stop()
 	animation_player.play("hit")
 	health -= value
 	if health <= 0:

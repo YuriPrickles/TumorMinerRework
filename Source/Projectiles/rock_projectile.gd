@@ -5,3 +5,4 @@ func on_collide_wall():
 func on_collide_enemy(enemy:Enemy):
 	destroy()
 	enemy.hurt(damage,self)
+	return true

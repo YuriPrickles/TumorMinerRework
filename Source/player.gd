@@ -59,7 +59,7 @@ func _physics_process(delta: float) -> void:
 			velocity = direction * SPEED * speed_mult
 		else:
 			velocity = velocity.move_toward(Vector2.ZERO, SPEED / 3)
-	else:
+	elif knockback_velocity != Vector2.ZERO:
 		velocity = knockback_velocity
 	move_and_slide()
 
@@ -117,11 +117,11 @@ func aim_to_mouse() -> Vector2:
 	return position.direction_to(get_global_mouse_position())
 
 
-func hurt(damage, source_position):
+func hurt(damage, source_position, kb_force = 500):
 	if stagger: return
 	stagger_timer = stagger_delay
 	Global.run_info.health -= damage
-	knockback_velocity = position.direction_to(source_position) * -500
+	knockback_velocity = position.direction_to(source_position) * -kb_force
 	print(knockback_velocity)
 
 func heal(value):

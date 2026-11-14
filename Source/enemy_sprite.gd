@@ -8,7 +8,11 @@ extends Node2D
 signal hit
 @export var sprite: Sprite2D
 
-func animate(anim_name):
-	if animation_player.is_playing(): return
+func animate(anim_name:String):
+	if animation_player.is_playing() and animation_player.current_animation != "idle": return
+	animation_player.play(anim_name)
+	await animation_player.animation_finished
+
+func force_animate(anim_name:String):
 	animation_player.play(anim_name)
 	await animation_player.animation_finished

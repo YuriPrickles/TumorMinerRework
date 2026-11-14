@@ -1,0 +1,12 @@
+[gd_scene format=3 uid="uid://bb12kr8ph7f22"]
+
+[ext_resource type="PackedScene" uid="uid://822x75d388b5" path="res://Source/RockNodes/rock_node.tscn" id="1_mqqos"]
+[ext_resource type="Script" uid="uid://d37koo2hl5ig2" path="res://Source/RockNodes/luepus_egg_node.gd" id="2_mqqos"]
+[ext_resource type="Texture2D" uid="uid://cnxam64knl0vp" path="res://Assets/Temporary/luepus_egg_node.png" id="3_mqqos"]
+
+[node name="LuepusEggNode" unique_id=1300855250 instance=ExtResource("1_mqqos")]
+script = ExtResource("2_mqqos")
+health = 8
+
+[node name="Sprite2D" parent="." index="1" unique_id=1306761943]
+texture = ExtResource("3_mqqos")

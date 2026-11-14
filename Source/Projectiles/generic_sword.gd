@@ -33,5 +33,8 @@ func movement():
 func tick_down(delta:float):
 	pass
 
-func on_collide_enemy(enemy:Enemy):
-	enemy.hurt(damage,self)
+func on_collide_enemy(enemy:Enemy) -> bool:
+	if super(enemy):
+		enemy.hurt(damage,self)
+		return true
+	return false

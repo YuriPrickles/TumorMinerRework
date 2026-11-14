@@ -12,6 +12,7 @@ var move_points:PackedVector2Array
 var current_point:int
 var current_cell:Vector2i
 var target_cell:Vector2i
+
 func _ready() -> void:
 	var lambda = func():
 		await get_tree().physics_frame
@@ -19,7 +20,6 @@ func _ready() -> void:
 		grid = Main.instance.current_floor.current_layout.astar_grid
 		current_cell = pos_to_cell(global_position)
 		target_cell = current_cell
-		update_path()
 	lambda.call_deferred()
 
 func _physics_process(delta: float) -> void:
@@ -68,9 +68,13 @@ func hurt(damage:int, source):
 		destroy()
 
 func on_hurt(damage:int, source):
-	enemy_sprite.animate("hurt")
+	on_hurt_animation()
 	if source and kb_res < 1:
 		flinch(source)
+
+func on_hurt_animation():
+	if enemy_sprite.animation_player.has_animation("hurt"):
+		enemy_sprite.animate("hurt")
 
 func on_collide_player(plr:Player):
 	pass
@@ -80,3 +84,10 @@ func flinch(source):
 	if source is Projectile:
 		extra_kb = source.knockback
 	velocity = source.position.direction_to(position) * ((extra_kb + 100) * (1 - kb_res))
+
+##Returns a Vector2i position on the tilemap. Use map_to_local to actually do things with it.
+func get_current_tile() -> Vector2i:
+	var c_floor :Floor = Main.instance.current_floor
+	var tiles :TileMapLayer = c_floor.current_layout.layout_tiles
+	var current_tile := tiles.local_to_map(position)
+	return current_tile
