@@ -14,7 +14,7 @@ boom_strength = 4
 fuse_duration = 2.0
 destroys_things = true
 texture = NodePath("Texture")
-damage = 3
+knockback = 0.0
 
 [node name="Texture" type="Sprite2D" parent="." index="0" unique_id=103154065]
 texture = ExtResource("3_lxnnm")

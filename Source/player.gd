@@ -117,11 +117,11 @@ func aim_to_mouse() -> Vector2:
 	return position.direction_to(get_global_mouse_position())
 
 
-func hurt(damage, source_position, kb_force = 500):
+func hurt(damage:int, source_position:Vector2, kb_force = 500):
 	if stagger: return
 	stagger_timer = stagger_delay
-	Global.run_info.health -= damage
 	knockback_velocity = position.direction_to(source_position) * -kb_force
+	Global.run_info.health -= damage
 	print(knockback_velocity)
 
 func heal(value):
