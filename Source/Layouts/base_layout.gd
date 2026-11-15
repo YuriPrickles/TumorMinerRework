@@ -8,6 +8,7 @@ extends Node2D
 @export var enemy_spawn:EnemySpawn
 const TILE_SIZE = 64
 const WALL = Vector2i(0,0)
+const WATER_TILE = Vector2i(0,3)
 const ROCK_SPAWN = Vector2i(1,0)
 const ENEMY_SPAWN = Vector2i(1,1)
 const PLAYER_SPAWN = Vector2i(1,2)
@@ -65,7 +66,19 @@ func spawn_enemy(coords:Vector2i):
 
 func is_wall(coords:Vector2i) -> bool:
 	return layout_tiles.get_cell_atlas_coords(coords) == WALL
+
+##Check if an Event Tile is of a certain type.
 func check_event_tile(coords:Vector2i, type:Vector2i) -> bool:
 	return event_tiles.get_cell_atlas_coords(coords) == type
+
+##Returns the TileSet coords of a given Event Tile.
 func get_event_tile(coords:Vector2i) -> Vector2i:
 	return event_tiles.get_cell_atlas_coords(coords)
+
+##Check if an Layout Tile is of a certain type.
+func check_layout_tile(coords:Vector2i, type:Vector2i) -> bool:
+	return layout_tiles.get_cell_atlas_coords(coords) == type
+	
+##Returns the TileSet coords of a given Layout Tile.
+func get_layout_tile(coords:Vector2i) -> Vector2:
+	return layout_tiles.get_cell_atlas_coords(coords)

@@ -8,6 +8,7 @@
 radius = 32.0
 
 [node name="BombProj" unique_id=921495114 node_paths=PackedStringArray("texture") instance=ExtResource("1_lxnnm")]
+collision_mask = 6
 script = ExtResource("2_lxnnm")
 boom_radius = 2
 boom_strength = 4

@@ -1,6 +1,7 @@
 class_name Enemy
 extends CharacterBody2D
 @export var enemy_sprite:EnemySprite
+
 @export var line_2d: Line2D
 @export var health: int
 @export var kb_res:float = 0
@@ -68,10 +69,12 @@ func hurt(damage:int, source):
 		destroy()
 
 func on_hurt(damage:int, source):
+	enemy_sprite.hit_flash_player.play("hit_flash")
 	on_hurt_animation()
 	if source and kb_res < 1:
 		flinch(source)
 
+## Override this function to make sure the hurt animation does not override your enemy's animations.
 func on_hurt_animation():
 	if enemy_sprite.animation_player.has_animation("hurt"):
 		enemy_sprite.animate("hurt")

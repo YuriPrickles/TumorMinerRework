@@ -10,7 +10,7 @@ extends Projectile
 var _boom_timer :float = 0.0
 
 func _process(delta: float) -> void:
-	velocity = velocity.move_toward(Vector2.ZERO, delta * 4)
+	velocity = velocity.move_toward(Vector2.ZERO, delta * 8)
 	texture.rotation_degrees += 1.5 * ( abs(velocity.normalized().length()))
 	
 	_boom_timer += delta
@@ -35,3 +35,9 @@ func on_destroy():
 	if flr.to_local_position(plr.get_current_tile()).distance_to(position) <= boom_radius * flr.tile_size:
 		plr.hurt(damage, position)
 	super()
+
+func on_collide_enemy(enemy:Enemy) -> bool:
+	return false
+
+func on_collide_wall():
+	velocity *= -0.6

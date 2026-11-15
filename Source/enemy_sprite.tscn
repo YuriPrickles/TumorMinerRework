@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://c6v8kcfr3mjg7"]
 
 [ext_resource type="Script" uid="uid://c24dg3skkdwgr" path="res://Source/enemy_sprite.gd" id="1_twp3g"]
+[ext_resource type="Material" uid="uid://dmji6gcg7u430" path="res://Resources/hit_flash_shader_material.tres" id="2_twp3g"]
 
 [sub_resource type="Animation" id="Animation_3y0l5"]
 length = 0.001
@@ -10,13 +11,55 @@ _data = {
 &"RESET": SubResource("Animation_3y0l5")
 }
 
-[node name="EnemySprite" type="Node2D" unique_id=872872831 node_paths=PackedStringArray("animation_player", "sprite")]
+[sub_resource type="Animation" id="Animation_twp3g"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:material:shader_parameter/active")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_octtq"]
+resource_name = "hit_flash"
+length = 0.13333334
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:material:shader_parameter/active")
+tracks/0/interp = 0
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.13333334),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_3q8t2"]
+_data = {
+&"RESET": SubResource("Animation_twp3g"),
+&"hit_flash": SubResource("Animation_octtq")
+}
+
+[node name="EnemySprite" type="Node2D" unique_id=872872831 node_paths=PackedStringArray("animation_player", "hit_flash_player", "sprite")]
 script = ExtResource("1_twp3g")
 animation_player = NodePath("AnimationPlayer")
+hit_flash_player = NodePath("HitFlashPlayer")
 sprite = NodePath("Sprite")
 
 [node name="Sprite" type="Sprite2D" parent="." unique_id=1916043660]
+material = ExtResource("2_twp3g")
 position = Vector2(0, -64)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1746438869]
 libraries/ = SubResource("AnimationLibrary_3y0l5")
+
+[node name="HitFlashPlayer" type="AnimationPlayer" parent="." unique_id=244792212]
+libraries/ = SubResource("AnimationLibrary_3q8t2")

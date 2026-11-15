@@ -18,7 +18,11 @@ func on_mine(value, plr:Player):
 		Pickup.new_pickup(item,position)
 
 var smelt_timer: float = 0
-var SMELT_TIMER_MAX: float = 5.0
+var current_smelt_time:float:
+	get():
+		if current_recipe:
+			return current_recipe.smelt_time
+		return 0
 
 func _process(delta: float) -> void:
 	var held_item = Global.get_current_item()
@@ -27,11 +31,11 @@ func _process(delta: float) -> void:
 		modulate = Color.GREEN
 	else:
 		modulate = Color.WHITE
-	progress_bar.value = (smelt_timer / SMELT_TIMER_MAX) * 100
+	progress_bar.value = (smelt_timer / current_smelt_time) * 100
 	if current_recipe and inventory.size() > 0:
 		texture_rect.texture = current_recipe.result_item.texture
 		smelt_timer += delta
-		if smelt_timer >= SMELT_TIMER_MAX:
+		if smelt_timer >= current_smelt_time:
 			inventory.pop_front()
 			Pickup.new_pickup(current_recipe.result_item.duplicate(),position)
 			smelt_timer = 0

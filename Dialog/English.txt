@@ -39,4 +39,10 @@ ITEM_DESC_CLAY=Soft. Heat to harden.
 ITEM_DYNAMITEWEAK=Weak Dynamite
 ITEM_DESC_DYNAMITEWEAK=Blows up a small area. LMB to place, Shift + LMB to throw.
 
+ITEM_CLAYPOTMOLD=Pot Mold
+ITEM_DESC_CLAYPOTMOLD=Heat into a Terracotta Pot.
+
+ITEM_TERRACOTTAPOT=Terracotta Pot
+ITEM_DESC_TERRACOTTAPOT=A versatile material.Holds most normal liquids.
+
 END_OF_DIALOG_FILE
