@@ -13,6 +13,9 @@ var current_point:int
 var current_cell:Vector2i
 var target_cell:Vector2i
 
+var enemy_status = statusEffects.new()
+var effects = statusEffects.EFFECTS
+
 func _ready() -> void:
 	var lambda = func():
 		await get_tree().physics_frame

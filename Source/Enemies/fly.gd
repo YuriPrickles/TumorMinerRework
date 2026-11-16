@@ -29,4 +29,6 @@ func _physics_process(delta: float) -> void:
 
 func on_collide_player(plr:Player):
 	plr.hurt(3, position)
+	#plr.suffer_effect(effects.burned)
+		#NOTE: Testing statement, applies burn to the player on each hit
 	on_hurt(0,plr)

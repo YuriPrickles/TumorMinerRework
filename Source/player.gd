@@ -6,9 +6,15 @@ extends CharacterBody2D
 @export var player_sprite: Sprite2D
 
 const SPEED = 300.0
+var   ACCEL = 1.0 #Multiplier used to adjust player speed with debuffs/buffs
 var rocks:Array[RockNode]
 var interactables:Array[Interactable]
 var pickups:Array[Pickup]
+
+#var plrEffects = {}
+var plrStatus = statusEffects.new() #Unique instance for handling player's statuses
+var effects = statusEffects.EFFECTS #Enumeration set with all effect names
+
 
 var stagger: bool:
 	get:
@@ -61,6 +67,8 @@ func _physics_process(delta: float) -> void:
 			velocity = velocity.move_toward(Vector2.ZERO, SPEED / 3)
 	elif knockback_velocity != Vector2.ZERO:
 		velocity = knockback_velocity
+	
+	plrStatus.process_effect(plrStatus.active_effects, self)
 	move_and_slide()
 
 func detect_thing(body:Node2D):
@@ -122,10 +130,17 @@ func hurt(damage, source_position, kb_force = 500):
 	stagger_timer = stagger_delay
 	Global.run_info.health -= damage
 	knockback_velocity = position.direction_to(source_position) * -kb_force
-	print(knockback_velocity)
+	#print(knockback_velocity)
 
 func heal(value):
 	Global.run_info.health += value
+
+#Call this function from your enemy to give the player a status!
+func suffer_effect(effect:statusEffects.EFFECTS) -> void :
+	print(effect)
+	plrStatus.add_effect(plrStatus.active_effects, effect)
+	print(plrStatus.active_effects.has(effect))
+	print(plrStatus.active_effects.get(effects.burned))
 
 ##Returns a Vector2i position on the tilemap. Use map_to_local to actually do things with it.
 func get_current_tile() -> Vector2i:
