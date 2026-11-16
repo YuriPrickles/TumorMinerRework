@@ -6,7 +6,6 @@
 
 [node name="CrateNode" unique_id=1300855250 instance=ExtResource("1_47q34")]
 script = ExtResource("2_47q34")
-health = 1
 
 [node name="Sprite2D" parent="." index="1" unique_id=1306761943]
 texture = ExtResource("3_47q34")

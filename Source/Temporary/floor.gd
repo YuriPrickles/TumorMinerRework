@@ -62,7 +62,7 @@ func spawn_ladder(pos: Vector2):
 	if already_spawned_ladder: return
 	var ladder:Ladder = ladder_scene.instantiate()
 	ladder.position = pos
-	interactables.add_child(ladder)
+	interactables.add_child.call_deferred(ladder)
 	already_spawned_ladder = true
 
 func place_interactable(interactable:Interactable,pos:Vector2):

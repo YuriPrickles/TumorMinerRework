@@ -56,3 +56,6 @@ func get_current_tile() -> Vector2i:
 	var tiles :TileMapLayer = floor.current_layout.layout_tiles
 	var current_tile := tiles.local_to_map(position - rock_placement_offset)
 	return current_tile
+
+func on_hit_by_projectile(projectile:Projectile):
+	pass

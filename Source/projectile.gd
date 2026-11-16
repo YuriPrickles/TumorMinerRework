@@ -11,6 +11,7 @@ var lifetime: float = 3
 
 var hit_enemies_array : Array[Enemy]
 var hit_players_array : Array[Player]
+var hit_rocks_array : Array[RockNode]
 
 static func new_projectile(proj:PackedScene, pos, vel, dmg=-1, h=null) -> Projectile:
 	var projectile:Projectile = proj.instantiate()
@@ -74,5 +75,10 @@ func on_collide_enemy(enemy:Enemy) -> bool:
 	return true
 func on_collide_wall():
 	pass
-func on_collide_rock(rock:RockNode):
-	pass
+func on_collide_rock(rock:RockNode) -> bool:
+	if not hit_rocks_array.has(rock):
+		hit_rocks_array.append(rock)
+		rock.on_hit_by_projectile(self)
+	else:
+		return false
+	return true
