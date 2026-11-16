@@ -24,13 +24,15 @@ var current_smelt_time:float:
 			return current_recipe.smelt_time
 		return 0
 
+
+
 func _process(delta: float) -> void:
 	var held_item = Global.get_current_item()
 	var plr : Player = Main.instance.get_player()
 	if can_smelt(held_item, true).result and plr.get_targeted_interactable() == self:
-		modulate = Color.GREEN
+		set_outline(true)
 	else:
-		modulate = Color.WHITE
+		set_outline(false)
 	progress_bar.value = (smelt_timer / current_smelt_time) * 100
 	if current_recipe and inventory.size() > 0:
 		texture_rect.texture = current_recipe.result_item.texture

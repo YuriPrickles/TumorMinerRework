@@ -42,4 +42,5 @@ metadata/_custom_type_script = "uid://bcjxt6jjg1htp"
 script = ExtResource("4_4x3xj")
 rock_weights = Array[ExtResource("1_erio4")]([SubResource("Resource_bper2"), SubResource("Resource_uep2w"), SubResource("Resource_chkau"), SubResource("Resource_xqos5"), SubResource("Resource_roopn")])
 rock_spawn_chance = 0.4
+crate_spawn_chance = 0.9
 metadata/_custom_type_script = "uid://bv6mgv53f5afu"

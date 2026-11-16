@@ -63,6 +63,7 @@ func _physics_process(delta: float) -> void:
 		velocity = knockback_velocity
 	move_and_slide()
 
+## leftovers of a bygone system... maybe it will find its use someday
 func detect_thing(body:Node2D):
 	if body is RockNode:
 		body.on_detect()
@@ -74,7 +75,7 @@ func detect_thing(body:Node2D):
 		body.on_detect()
 		pickups.append(body)
 
-
+## leftovers of a bygone system... maybe it will find its use someday
 func undetect_thing(body:Node2D):
 	if body is RockNode and rocks.has(body):
 		body.on_undetect()
@@ -90,8 +91,7 @@ func get_targeted_interactable() -> Interactable:
 	var c_floor :Floor = Main.instance.current_floor
 	var tiles :TileMapLayer = c_floor.current_layout.layout_tiles
 	for interactable in c_floor.get_interactables():
-		var interactable_tilepos : Vector2i = tiles.local_to_map(interactable.position - interactable.placement_offset)
-		if get_targeted_tile() == interactable_tilepos or get_current_tile() == interactable_tilepos:
+		if get_targeted_tile() == interactable.get_current_tile() or get_current_tile() == interactable.get_current_tile():
 			return interactable
 	return null
 

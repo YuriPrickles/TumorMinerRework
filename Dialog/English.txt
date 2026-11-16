@@ -43,6 +43,16 @@ ITEM_CLAYPOTMOLD=Pot Mold
 ITEM_DESC_CLAYPOTMOLD=Heat into a Terracotta Pot.
 
 ITEM_TERRACOTTAPOT=Terracotta Pot
-ITEM_DESC_TERRACOTTAPOT=A versatile material.Holds most normal liquids.
+ITEM_DESC_TERRACOTTAPOT=A versatile material. Holds most normal liquids.
+
+ITEM_WATERPOT=Water Pot
+ITEM_DESC_WATERPOT=A pot of water. Useful for mixing stuff.
+
+ITEM_BRICK=Brick
+ITEM_DESC_BRICK=For crafting and throwing. +2 Defense for each full stack of bricks in your inventory.
+
+ITEM_CROCKPOT=Crock Pot
+ITEM_DESC_CROCKPOT=Put two Parts in and wait for a meal.
+
 
 END_OF_DIALOG_FILE

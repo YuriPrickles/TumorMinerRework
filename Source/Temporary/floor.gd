@@ -67,7 +67,7 @@ func spawn_ladder(pos: Vector2):
 
 func place_interactable(interactable:Interactable,pos:Vector2):
 	current_layout.astar_grid.set_point_solid(to_tile_grid(pos))
-	interactable.position = pos + Vector2(0,32)
+	interactable.position = pos
 	interactables.add_child(interactable)
 
 func to_tile_grid(pos:Vector2) -> Vector2i:
