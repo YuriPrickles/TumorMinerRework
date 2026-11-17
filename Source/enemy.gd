@@ -39,6 +39,10 @@ func basic_movement(delta):
 	var collision = move_and_collide(velocity * delta)
 	if collision and collision.get_collider() is Player:
 		on_collide_player(collision.get_collider())
+	if collision and collision.get_collider() is RockNode:
+		on_collide_rock(collision.get_collider())
+	if collision and collision.get_collider() is TileMapLayer:
+		on_collide_wall()
 	update_path()
 
 func update_path():
@@ -80,6 +84,10 @@ func on_hurt_animation():
 		enemy_sprite.animate("hurt")
 
 func on_collide_player(plr:Player):
+	pass
+func on_collide_rock(rck:RockNode):
+	pass
+func on_collide_wall():
 	pass
 
 func flinch(source):

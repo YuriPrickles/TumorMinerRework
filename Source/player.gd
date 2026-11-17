@@ -52,9 +52,11 @@ func _physics_process(delta: float) -> void:
 	
 	if stagger_timer > 0:
 		stagger_timer -= delta
+	#else:
+		#knockback_velocity = Vector2.ZERO
 	
 	var direction := Input.get_vector("left", "right","up","down")
-	if not stagger:
+	if not stagger: # and knockback_velocity == Vector2.ZERO:
 		if direction:
 			velocity = direction * SPEED * speed_mult
 		else:
@@ -122,7 +124,6 @@ func hurt(damage:int, source_position:Vector2, kb_force = 500):
 	stagger_timer = stagger_delay
 	knockback_velocity = position.direction_to(source_position) * -kb_force
 	Global.run_info.health -= damage
-	print(knockback_velocity)
 
 func heal(value):
 	Global.run_info.health += value

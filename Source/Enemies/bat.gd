@@ -52,12 +52,12 @@ func start_bite():
 	await enemy_sprite.hit
 	plr_in_bite_range = bite_hitbox.get_overlapping_bodies().has(plr)
 	if plr_in_bite_range:
-		plr.hurt(19, position)
+		plr.hurt(8, position)
 	await enemy_sprite.animation_player.animation_finished
 	enemy_sprite.animate("idle")
 	bite_cooldown_timer = BITE_COOLDOWN
 	doing_bite_attack = false
 
 func on_collide_player(plr:Player):
-	plr.hurt(7, position)
+	plr.hurt(3, position)
 	enemy_sprite.animate("hurt")
