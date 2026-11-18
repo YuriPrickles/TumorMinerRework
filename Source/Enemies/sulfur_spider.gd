@@ -54,6 +54,7 @@ func _physics_process(delta: float) -> void:
 
 
 func destroy():
+	state = State.DYING
 	shoot_timer = -INF
 	velocity = Vector2.ZERO
 	move_and_slide()

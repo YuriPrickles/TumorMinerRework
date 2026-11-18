@@ -7,7 +7,7 @@ func _init(stk:int=1) -> void:
 	type = Type.PICKAXE
 	auto_use = true
 	anim_type = AnimationType.PICKAXE
-	use_delay = 0.15
+	use_delay = 0.3
 
 func use_item(plr:Player) -> bool:
 	super(plr)

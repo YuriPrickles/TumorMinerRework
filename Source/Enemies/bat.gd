@@ -33,6 +33,9 @@ func _process(delta: float) -> void:
 	if bite_cooldown_timer > 0:
 		bite_cooldown_timer -= delta
 func _physics_process(delta: float) -> void:
+	var plr : Player = Main.instance.get_player()
+	if not doing_bite_attack and bite_range.get_overlapping_bodies().has(plr) and bite_cooldown_timer <= 0:
+		await start_bite()
 	enemy_sprite.sprite.flip_h = sign(velocity.x) > 0
 	if chasing and not doing_bite_attack:
 		basic_movement(delta)

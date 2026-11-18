@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://c6v8kcfr3mjg7" path="res://Source/enemy_sprite.tscn" id="1_hx5u2"]
 
-[sub_resource type="Shader" id="Shader_pil1o"]
+[sub_resource type="Shader" id="Shader_hx5u2"]
 resource_local_to_scene = true
 code = "shader_type canvas_item;
 
@@ -20,16 +20,16 @@ void fragment() {
 	}
 }"
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_e6jny"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_pil1o"]
 resource_local_to_scene = true
-shader = SubResource("Shader_pil1o")
+shader = SubResource("Shader_hx5u2")
 shader_parameter/active = false
 shader_parameter/tint = Color(1, 1, 1, 1)
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_lc8cy"]
 load_path = "res://.godot/imported/luepling.png-39ddda60712464fb4ac41631ecd945fb.ctex"
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_2b8e4"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_e6jny"]
 resource_local_to_scene = true
 atlas = SubResource("CompressedTexture2D_lc8cy")
 region = Rect2(0, 0, 128, 128)
@@ -529,9 +529,9 @@ _data = {
 animation_player = NodePath("AnimationPlayer")
 
 [node name="Sprite" parent="." index="0" unique_id=1916043660]
-material = SubResource("ShaderMaterial_e6jny")
+material = SubResource("ShaderMaterial_pil1o")
 position = Vector2(0, 8)
-texture = SubResource("AtlasTexture_2b8e4")
+texture = SubResource("AtlasTexture_e6jny")
 offset = Vector2(0, -64)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." index="2" unique_id=2098921351]

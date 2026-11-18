@@ -4,7 +4,8 @@ extends Enemy
 
 enum State {
 	IDLE,
-	CHASING
+	CHASING,
+	DYING
 }
 var state : State = State.IDLE
 func _ready() -> void:
@@ -27,6 +28,7 @@ func _ready() -> void:
 var is_inital_idle: bool = true
 var ember:PackedScene = preload("res://Source/Projectiles/ember.tscn")
 func _physics_process(delta: float) -> void:
+	if state == State.DYING: return
 	if velocity.x != 0:
 		enemy_sprite.scale.x = -1 if sign(velocity.x) != -1 else 1
 	if is_inital_idle and state == State.IDLE:
@@ -41,6 +43,7 @@ func _physics_process(delta: float) -> void:
 		move_and_collide(velocity * delta)
 
 func destroy():
+	state = State.DYING
 	velocity = Vector2.ZERO
 	move_and_slide()
 	enemy_sprite.force_animate("explode")
