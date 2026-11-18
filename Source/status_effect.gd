@@ -106,6 +106,7 @@ func process_effect(target:Dictionary, plr:Player) -> void :
 		consume_stack(target, EFFECTS.sulphured)
 		add_effect(target, currEffect)
 		plr.hurt(plrStatus[dmgInx], plr.position, 0)
+		decrease_duration(target, currEffect)
 		
 	currEffect = EFFECTS.burned
 	if (target.has(currEffect)):
@@ -136,3 +137,12 @@ func process_effect(target:Dictionary, plr:Player) -> void :
 #Same as process_effect but for enemy instances
 func process_enemy_effects(target:Dictionary, enemy:Enemy) -> void :
 	return
+
+func store_plr_effects() -> void:
+	Global.save_plr_effects(self)
+func apply_plr_effects() -> statusEffects:
+	var tempEffects : statusEffects = Global.load_plr_effects()
+	if (tempEffects != null):
+		return tempEffects
+	
+	return statusEffects.new()

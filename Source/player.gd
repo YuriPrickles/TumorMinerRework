@@ -34,6 +34,7 @@ func _ready() -> void:
 	interact_range.body_exited.connect(undetect_thing)
 	interact_range.area_entered.connect(detect_thing)
 	interact_range.area_exited.connect(undetect_thing)
+	retrieve_effects() #Re-applies effects accrued on a previous floor IF APPLICABLE
 
 func _physics_process(delta: float) -> void:
 	var mouse_vector:Vector2 = position.direction_to(get_global_mouse_position()).normalized()
@@ -67,7 +68,7 @@ func _physics_process(delta: float) -> void:
 			velocity = velocity.move_toward(Vector2.ZERO, SPEED / 3)
 	elif knockback_velocity != Vector2.ZERO:
 		velocity = knockback_velocity
-	
+	save_effects() #Remembers effects on player incase they move a floor
 	plrStatus.process_effect(plrStatus.active_effects, self)
 	move_and_slide()
 
@@ -141,6 +142,12 @@ func suffer_effect(effect:statusEffects.EFFECTS) -> void :
 	plrStatus.add_effect(plrStatus.active_effects, effect)
 	print(plrStatus.active_effects.has(effect))
 	print(plrStatus.active_effects.get(effects.burned))
+
+func save_effects() -> void:
+	plrStatus.store_plr_effects()
+
+func retrieve_effects() -> void:
+	plrStatus = plrStatus.apply_plr_effects()
 
 ##Returns a Vector2i position on the tilemap. Use map_to_local to actually do things with it.
 func get_current_tile() -> Vector2i:

@@ -5,6 +5,7 @@ var current_item_index:int
 var run_info:RunInfo
 var health_drain_timer:float = 0
 var base_health_drain_delay:float = 2.4
+var plr_active_effects:statusEffects
 
 @export_dir var items_texture_path: String
 
@@ -22,3 +23,8 @@ func _process(delta: float) -> void:
 func start_new_run():
 	run_info = RunInfo.new()
 	inv_manager = InventoryManager.new()
+
+func save_plr_effects(plr:statusEffects) -> void:
+	plr_active_effects = plr
+func load_plr_effects() -> statusEffects:
+	return plr_active_effects
