@@ -3,7 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://c6v8kcfr3mjg7" path="res://Source/enemy_sprite.tscn" id="1_n3o4k"]
 [ext_resource type="Texture2D" uid="uid://bojtf6vy56dk2" path="res://Assets/Temporary/coal_rat.png" id="2_lop3r"]
 
-[sub_resource type="Shader" id="Shader_os8ed"]
+[sub_resource type="Shader" id="Shader_n3o4k"]
 resource_local_to_scene = true
 code = "shader_type canvas_item;
 
@@ -21,9 +21,9 @@ void fragment() {
 	}
 }"
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_66ebh"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_lop3r"]
 resource_local_to_scene = true
-shader = SubResource("Shader_os8ed")
+shader = SubResource("Shader_n3o4k")
 shader_parameter/active = false
 shader_parameter/tint = Color(1, 1, 1, 1)
 
@@ -70,11 +70,11 @@ fill_from = Vector2(0.5, 0.5)
 atlas = ExtResource("2_lop3r")
 region = Rect2(64, 32, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_dfwqq"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_561tx"]
 atlas = ExtResource("2_lop3r")
 region = Rect2(64, 32, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_561tx"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_dfwqq"]
 atlas = ExtResource("2_lop3r")
 region = Rect2(64, 32, 32, 32)
 
@@ -163,7 +163,7 @@ tracks/5/keys = {
 tracks/6/type = "value"
 tracks/6/imported = false
 tracks/6/enabled = true
-tracks/6/path = NodePath("Sprite/Wheels/FrontWheel_L:rotation")
+tracks/6/path = NodePath("Sprite/Wheels/FrontWheels/FrontWheel_L:rotation")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/keys = {
@@ -175,7 +175,7 @@ tracks/6/keys = {
 tracks/7/type = "value"
 tracks/7/imported = false
 tracks/7/enabled = true
-tracks/7/path = NodePath("Sprite/Wheels/BackWheel_L:rotation")
+tracks/7/path = NodePath("Sprite/Wheels/BackWheels/BackWheel_L:rotation")
 tracks/7/interp = 1
 tracks/7/loop_wrap = true
 tracks/7/keys = {
@@ -187,7 +187,7 @@ tracks/7/keys = {
 tracks/8/type = "value"
 tracks/8/imported = false
 tracks/8/enabled = true
-tracks/8/path = NodePath("Sprite/Wheels/FrontWheel_R:rotation")
+tracks/8/path = NodePath("Sprite/Wheels/FrontWheels/FrontWheel_R:rotation")
 tracks/8/interp = 1
 tracks/8/loop_wrap = true
 tracks/8/keys = {
@@ -199,7 +199,7 @@ tracks/8/keys = {
 tracks/9/type = "value"
 tracks/9/imported = false
 tracks/9/enabled = true
-tracks/9/path = NodePath("Sprite/Wheels/BackWheel_R:rotation")
+tracks/9/path = NodePath("Sprite/Wheels/BackWheels/BackWheel_R:rotation")
 tracks/9/interp = 1
 tracks/9/loop_wrap = true
 tracks/9/keys = {
@@ -207,6 +207,130 @@ tracks/9/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [0.0]
+}
+tracks/10/type = "value"
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/path = NodePath("Sprite/Wheels/FrontWheels:position")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/11/type = "value"
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/path = NodePath("Sprite/Wheels/BackWheels:position")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/12/type = "value"
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/path = NodePath("Sprite:modulate")
+tracks/12/interp = 1
+tracks/12/loop_wrap = true
+tracks/12/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_os8ed"]
+resource_name = "explode"
+length = 2.6
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite/Tail_A:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4, 0.56666666, 0.6666667, 0.73333335),
+"transitions": PackedFloat32Array(1, 1.9318728, 0.29730177, 1.7411015, 1),
+"update": 0,
+"values": [0.2530727415391778, 0.25307274, 0.7661995416255103, -0.045378560551852964, 0.24434609527920614]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite/Tail_A/Tail_B:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.56666666, 0.73333335, 0.8),
+"transitions": PackedFloat32Array(1, 0.4061262, 1.5691684, 1),
+"update": 0,
+"values": [2.647664475275398, 2.6476645, -2.007128639793479, -2.1031217486531673]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite/Wheels/FrontWheels:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.26666665, 0.43333334, 0.6666667),
+"transitions": PackedFloat32Array(0.5, 1, 1.7, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(6, 8), Vector2(6, 8), Vector2(-12, -8)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Sprite:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.26666665, 0.43333334, 0.6666667),
+"transitions": PackedFloat32Array(0.5, 1, 1.7, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, -8), Vector2(0, -8), Vector2(0, 8)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Sprite/Wheels/BackWheels:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.26666665, 0.43333334, 0.6666666),
+"transitions": PackedFloat32Array(0.5, 1, 1.7, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(-6, 8), Vector2(-6, 8), Vector2(12, -8)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Sprite:scale")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 0.56666666, 0.6666666, 0.73333335, 1, 1.1333333, 1.2666667, 1.4000001, 1.5333333, 1.6666667, 1.8, 1.9333334, 2.0666666, 2.2, 2.2666667, 2.3333335, 2.4, 2.4666667, 2.5333333, 2.6000001),
+"transitions": PackedFloat32Array(1, 0.49999997, 1.4640857, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1, 1), Vector2(1.2, 0.7), Vector2(1, 1), Vector2(1, 1), Vector2(1.2, 0.9), Vector2(0.8, 1.1), Vector2(1.2, 0.9), Vector2(0.8, 1.1), Vector2(1.2, 0.9), Vector2(0.8, 1.1), Vector2(1.2, 0.9), Vector2(0.8, 1.1), Vector2(1.2, 0.9), Vector2(0.8, 1.1), Vector2(1.2, 0.9), Vector2(0.8, 1.1), Vector2(1.2, 0.9), Vector2(0.8, 1.1), Vector2(1.2, 0.9)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Sprite:modulate")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0, 1, 1.1333333, 1.2666667, 1.4000001, 1.5308292, 1.6641624, 1.7974958, 1.9308293, 2.0622663, 2.2, 2.2666667, 2.3333335, 2.4, 2.4666667, 2.5333333, 2.6000001),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(0.8056023, 0.19442049, 1.4439225e-06, 1), Color(1, 1, 1, 1), Color(0.8056023, 0.19442049, 1.4439225e-06, 1), Color(1, 1, 1, 1), Color(0.8056023, 0.19442049, 1.4439225e-06, 1), Color(1, 1, 1, 1), Color(0.8056023, 0.19442049, 1.4439225e-06, 1), Color(1, 1, 1, 1), Color(0.8056023, 0.19442049, 1.4439225e-06, 1), Color(1, 1, 1, 1), Color(0.8056023, 0.19442049, 1.4439225e-06, 1), Color(1, 1, 1, 1), Color(0.8056023, 0.19442049, 1.4439225e-06, 1), Color(1, 1, 1, 1), Color(0.8056023, 0.19442049, 1.4439225e-06, 1)]
 }
 
 [sub_resource type="Animation" id="Animation_q0lb5"]
@@ -343,7 +467,7 @@ tracks/5/keys = {
 tracks/6/type = "value"
 tracks/6/imported = false
 tracks/6/enabled = true
-tracks/6/path = NodePath("Sprite/Wheels/FrontWheel_L:rotation")
+tracks/6/path = NodePath("Sprite/Wheels/FrontWheels/FrontWheel_L:rotation")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/keys = {
@@ -355,7 +479,7 @@ tracks/6/keys = {
 tracks/7/type = "value"
 tracks/7/imported = false
 tracks/7/enabled = true
-tracks/7/path = NodePath("Sprite/Wheels/BackWheel_L:rotation")
+tracks/7/path = NodePath("Sprite/Wheels/BackWheels/BackWheel_L:rotation")
 tracks/7/interp = 1
 tracks/7/loop_wrap = true
 tracks/7/keys = {
@@ -367,7 +491,7 @@ tracks/7/keys = {
 tracks/8/type = "value"
 tracks/8/imported = false
 tracks/8/enabled = true
-tracks/8/path = NodePath("Sprite/Wheels/FrontWheel_R:rotation")
+tracks/8/path = NodePath("Sprite/Wheels/FrontWheels/FrontWheel_R:rotation")
 tracks/8/interp = 1
 tracks/8/loop_wrap = true
 tracks/8/keys = {
@@ -379,7 +503,7 @@ tracks/8/keys = {
 tracks/9/type = "value"
 tracks/9/imported = false
 tracks/9/enabled = true
-tracks/9/path = NodePath("Sprite/Wheels/BackWheel_R:rotation")
+tracks/9/path = NodePath("Sprite/Wheels/BackWheels/BackWheel_R:rotation")
 tracks/9/interp = 1
 tracks/9/loop_wrap = true
 tracks/9/keys = {
@@ -469,6 +593,7 @@ tracks/5/keys = {
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_77dpk"]
 _data = {
 &"RESET": SubResource("Animation_h8yab"),
+&"explode": SubResource("Animation_os8ed"),
 &"idle": SubResource("Animation_q0lb5"),
 &"walk": SubResource("Animation_n3o4k"),
 &"walk_start": SubResource("Animation_lop3r")
@@ -478,7 +603,7 @@ _data = {
 animation_player = NodePath("AnimationPlayer")
 
 [node name="Sprite" parent="." index="0" unique_id=1916043660]
-material = SubResource("ShaderMaterial_66ebh")
+material = SubResource("ShaderMaterial_lop3r")
 texture = SubResource("AtlasTexture_hx5u2")
 offset = Vector2(0, -40)
 
@@ -530,22 +655,26 @@ texture = SubResource("GradientTexture2D_66ebh")
 [node name="Wheels" type="Node2D" parent="Sprite" index="3" unique_id=1236161308]
 position = Vector2(0, -8)
 
-[node name="FrontWheel_L" type="Sprite2D" parent="Sprite/Wheels" index="0" unique_id=2122928627]
+[node name="FrontWheels" type="Node2D" parent="Sprite/Wheels" index="0" unique_id=290876938]
+
+[node name="FrontWheel_L" type="Sprite2D" parent="Sprite/Wheels/FrontWheels" index="0" unique_id=2122928627]
 position = Vector2(8, -2)
 texture = SubResource("AtlasTexture_v3b0y")
 
-[node name="BackWheel_L" type="Sprite2D" parent="Sprite/Wheels" index="1" unique_id=1494921133]
+[node name="FrontWheel_R" type="Sprite2D" parent="Sprite/Wheels/FrontWheels" index="1" unique_id=1495041482]
+z_index = -1
+position = Vector2(-10, -2)
+texture = SubResource("AtlasTexture_561tx")
+
+[node name="BackWheels" type="Node2D" parent="Sprite/Wheels" index="1" unique_id=1764115273]
+
+[node name="BackWheel_L" type="Sprite2D" parent="Sprite/Wheels/BackWheels" index="0" unique_id=1494921133]
 position = Vector2(45.000004, -2)
 rotation = 0.7717585
 scale = Vector2(0.99999994, 0.99999994)
 texture = SubResource("AtlasTexture_dfwqq")
 
-[node name="FrontWheel_R" type="Sprite2D" parent="Sprite/Wheels" index="2" unique_id=1495041482]
-z_index = -1
-position = Vector2(-10, -2)
-texture = SubResource("AtlasTexture_561tx")
-
-[node name="BackWheel_R" type="Sprite2D" parent="Sprite/Wheels" index="3" unique_id=816529172]
+[node name="BackWheel_R" type="Sprite2D" parent="Sprite/Wheels/BackWheels" index="1" unique_id=816529172]
 z_index = -1
 position = Vector2(28, -2)
 texture = SubResource("AtlasTexture_n3o4k")

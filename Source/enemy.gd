@@ -59,14 +59,18 @@ func update_path():
 func pos_to_cell(pos:Vector2) -> Vector2i:
 	return tilemap.local_to_map(pos)
 
+##Override for any pre-death shenanigans.
 func destroy():
 	on_destroy()
 	queue_free()
 
+##Override for things like death particles and loot.
 func on_destroy():
 	pass
 	
 func hurt(damage:int, source):
+	if health <= 0:
+		return
 	on_hurt(damage,source)
 	health -= damage
 	if health <= 0:

@@ -5,5 +5,5 @@
 [resource]
 resource_local_to_scene = true
 shader = ExtResource("1_10oh5")
-shader_parameter/active = false
+shader_parameter/active = true
 shader_parameter/tint = Color(1, 1, 1, 1)

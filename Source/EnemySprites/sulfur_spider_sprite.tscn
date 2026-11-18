@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://c6v8kcfr3mjg7" path="res://Source/enemy_sprite.tscn" id="1_2775d"]
 
-[sub_resource type="Shader" id="Shader_tisi1"]
+[sub_resource type="Shader" id="Shader_2775d"]
 resource_local_to_scene = true
 code = "shader_type canvas_item;
 
@@ -20,16 +20,16 @@ void fragment() {
 	}
 }"
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_abgjo"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_tisi1"]
 resource_local_to_scene = true
-shader = SubResource("Shader_tisi1")
+shader = SubResource("Shader_2775d")
 shader_parameter/active = false
 shader_parameter/tint = Color(1, 1, 1, 1)
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_wbtji"]
 load_path = "res://.godot/imported/sulfur_spider.png-f2d18a4a950abc66af96c0ad5e49b4fa.ctex"
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_cc2n2"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_abgjo"]
 resource_local_to_scene = true
 atlas = SubResource("CompressedTexture2D_wbtji")
 region = Rect2(0, 0, 64, 64)
@@ -368,9 +368,8 @@ _data = {
 animation_player = NodePath("AnimationPlayer")
 
 [node name="Sprite" parent="." index="0" unique_id=1916043660]
-material = SubResource("ShaderMaterial_abgjo")
-position = Vector2(0, 0)
-texture = SubResource("AtlasTexture_cc2n2")
+material = SubResource("ShaderMaterial_tisi1")
+texture = SubResource("AtlasTexture_abgjo")
 offset = Vector2(0, -20)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." index="2" unique_id=48130413]
