@@ -2,6 +2,7 @@ class_name EnemySprite
 extends Node2D
 
 @export var animation_player: AnimationPlayer
+@export var hit_flash_player: AnimationPlayer
 
 ##To be used when at like, the "hitting point" of an animation.[br]
 ##(e.g. The moment an enemy bites or slams a hammer or whatever)

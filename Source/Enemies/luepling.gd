@@ -1,3 +1,10 @@
+'''
+oh my god someone help me refactor this and
+add a state machine fuuuuuuck i messed up
+- Luci
+'''
+
+
 class_name Luepling
 extends Enemy
 @export var detection_range: Area2D
@@ -77,7 +84,7 @@ func _physics_process(delta: float) -> void:
 	enemy_sprite.sprite.flip_h = position.x <= plr.position.x
 	if chasing and not doing_bite_attack and not vomiting:
 		basic_movement(delta)
-
+var jumping:bool = false
 func basic_movement(delta):
 	while move_points.size() <= 1 or move_points[-1] == Vector2.ZERO or (runaway_target_cell and runaway_target_cell == Vector2i.ZERO):
 		modulate = Color.BLUE
@@ -95,6 +102,7 @@ func basic_movement(delta):
 		if jump_timer >= (0.3 if not running_away else 0.1) and landed:
 			enemy_sprite.force_animate("jump")
 			await enemy_sprite.hit
+			jumping = true
 			landed = false
 			set_collision_mask_value(1, false)
 			var tween:Tween = create_tween()
@@ -103,6 +111,7 @@ func basic_movement(delta):
 				enemy_sprite.animate("jump_land")
 				await enemy_sprite.hit
 				landed = true
+				jumping = false
 				jump_timer = 0
 				set_collision_mask_value(1, true)
 				if not vomited_egg and get_current_tile().distance_to(runaway_target_cell) < 2:
@@ -119,7 +128,7 @@ func basic_movement(delta):
 		return
 	if doing_fuck_all_timer < 0.5:
 		doing_fuck_all_timer += delta
-	else:
+	elif not jumping:
 		landed = true
 		doing_fuck_all_timer = 0
 	#var collision = move_and_collide(velocity * delta)

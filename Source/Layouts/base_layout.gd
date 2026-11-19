@@ -8,14 +8,17 @@ extends Node2D
 @export var enemy_spawn:EnemySpawn
 const TILE_SIZE = 64
 const WALL = Vector2i(0,0)
+const WATER_TILE = Vector2i(0,3)
 const ROCK_SPAWN = Vector2i(1,0)
 const ENEMY_SPAWN = Vector2i(1,1)
 const PLAYER_SPAWN = Vector2i(1,2)
+const CRATE_SPAWN = Vector2i(2,0)
 
 var rng = RandomNumberGenerator.new()
 var astar_grid:AStarGrid2D
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	rng.seed = randi()
 	astar_setup()
 	spawn_things()
 
@@ -38,6 +41,8 @@ func spawn_things():
 				spawn_rocks(tile)
 			PLAYER_SPAWN:
 				spawn_player(tile)
+			CRATE_SPAWN:
+				spawn_crate(tile)
 	for tile in layout_tiles.get_used_cells():
 		if is_wall(tile):
 			astar_grid.set_point_solid(tile)
@@ -56,6 +61,14 @@ func spawn_rocks(coords:Vector2i):
 		rock.position = layout_tiles.map_to_local(coords) + rock.rock_placement_offset
 		Main.instance.current_floor.rock_nodes.add_child(rock)
 
+var crate_scene:PackedScene = preload("res://Source/RockNodes/crate_node.tscn")
+func spawn_crate(coords:Vector2i):
+	if randf_range(0,1) < rock_spawn.crate_spawn_chance:
+		var rock:RockNode = crate_scene.instantiate()
+		astar_grid.set_point_solid(coords)
+		rock.position = layout_tiles.map_to_local(coords) + rock.rock_placement_offset
+		Main.instance.current_floor.rock_nodes.add_child(rock)
+
 func spawn_enemy(coords:Vector2i):
 	if randf_range(0,1) < enemy_spawn.enemy_spawn_chance:
 		var chosen_enemy_weight = enemy_spawn.enemy_weights[rng.rand_weighted(enemy_spawn.get_weights())]
@@ -65,7 +78,19 @@ func spawn_enemy(coords:Vector2i):
 
 func is_wall(coords:Vector2i) -> bool:
 	return layout_tiles.get_cell_atlas_coords(coords) == WALL
+
+##Check if an Event Tile is of a certain type.
 func check_event_tile(coords:Vector2i, type:Vector2i) -> bool:
 	return event_tiles.get_cell_atlas_coords(coords) == type
+
+##Returns the TileSet coords of a given Event Tile.
 func get_event_tile(coords:Vector2i) -> Vector2i:
 	return event_tiles.get_cell_atlas_coords(coords)
+
+##Check if an Layout Tile is of a certain type.
+func check_layout_tile(coords:Vector2i, type:Vector2i) -> bool:
+	return layout_tiles.get_cell_atlas_coords(coords) == type
+	
+##Returns the TileSet coords of a given Layout Tile.
+func get_layout_tile(coords:Vector2i) -> Vector2:
+	return layout_tiles.get_cell_atlas_coords(coords)

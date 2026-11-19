@@ -4,6 +4,7 @@ extends Resource
 @export var rock_weights: Array[RockWeight]
 
 @export_range(0.0,1.0) var rock_spawn_chance: float
+@export_range(0.0,1.0) var crate_spawn_chance: float
 
 func get_weights() ->  Array[float]:
 	var array: Array[float]

@@ -37,7 +37,7 @@ func break_rock():
 func on_break():
 	var flr = Main.instance.current_floor
 	if randf_range(0,1) < flr.ladder_spawn_chance:
-		flr.spawn_ladder(position)
+		flr.spawn_ladder(flr.to_local_position(get_current_tile()))
 	else:
 		flr.increase_ladder_chance()
 	drop_loot()
@@ -56,3 +56,6 @@ func get_current_tile() -> Vector2i:
 	var tiles :TileMapLayer = floor.current_layout.layout_tiles
 	var current_tile := tiles.local_to_map(position - rock_placement_offset)
 	return current_tile
+
+func on_hit_by_projectile(projectile:Projectile):
+	pass
