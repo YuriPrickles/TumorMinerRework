@@ -1,0 +1,376 @@
+[gd_scene format=3 uid="uid://bonjxhernejq6"]
+
+[ext_resource type="PackedScene" uid="uid://c6v8kcfr3mjg7" path="res://Source/enemy_sprite.tscn" id="1_2775d"]
+
+[sub_resource type="Shader" id="Shader_2775d"]
+resource_local_to_scene = true
+code = "shader_type canvas_item;
+
+uniform bool active = false;
+uniform vec4 tint : source_color = vec4(1., 1., 0., 1);
+
+void fragment() {
+	vec4 tint_copy = tint;
+	vec4 previous_color = texture(TEXTURE, UV);
+	
+	if (active == true)
+	{
+		tint_copy.a = previous_color.a;
+		COLOR = tint_copy;
+	}
+}"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_tisi1"]
+resource_local_to_scene = true
+shader = SubResource("Shader_2775d")
+shader_parameter/active = false
+shader_parameter/tint = Color(1, 1, 1, 1)
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_wbtji"]
+load_path = "res://.godot/imported/sulfur_spider.png-f2d18a4a950abc66af96c0ad5e49b4fa.ctex"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_abgjo"]
+resource_local_to_scene = true
+atlas = SubResource("CompressedTexture2D_wbtji")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="Animation" id="Animation_6rtlv"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:texture:region")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Rect2(0, 0, 64, 64)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Sprite:scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_tisi1"]
+resource_name = "death"
+length = 1.25
+step = 0.041666668
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:texture:region")
+tracks/0/interp = 0
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Rect2(0, 0, 64, 64)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.041666668, 0.083333336, 0.125, 0.25, 0.375, 0.45833334, 0.5416667, 1, 1.25),
+"transitions": PackedFloat32Array(0.4829681, 0.45062527, 0.40612623, 0.4829681, 0.31864017, 0.5743491, 0.5743491, 1, 1.5, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(5, 0), Vector2(-5, 0), Vector2(0, 0), Vector2(0, 0), Vector2(0, -50), Vector2(0, -50), Vector2(0, -38), Vector2(0, -38), Vector2(0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.041666668, 0.25, 0.49999997),
+"transitions": PackedFloat32Array(0.5358867, 1.8660661, 4.7568307, 0.5358867),
+"update": 0,
+"values": [0.0, -0.3141592653589793, -0.3141592653589793, 3.141592653589793]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Sprite:scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.20833333, 0.24999999, 0.33333334, 0.5416667, 0.5833334, 0.6666667, 1, 1.25),
+"transitions": PackedFloat32Array(0.3789291, 0.3789291, 0.3789291, 0.3789291, 0.3789291, 0.3789291, 1.5, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1.15, 0.9), Vector2(0.8, 1.2), Vector2(1, 1), Vector2(1.2, 0.75), Vector2(1, 1), Vector2(1, 1), Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_abgjo"]
+resource_name = "hurt"
+length = 0.33333334
+step = 0.041666668
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:texture:region")
+tracks/0/interp = 0
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Rect2(0, 0, 64, 64)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = false
+tracks/1/path = NodePath("Sprite:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(),
+"transitions": PackedFloat32Array(),
+"update": 0,
+"values": []
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.125, 0.33333334),
+"transitions": PackedFloat32Array(0.5358867, 1.8660661, 0.5358867),
+"update": 0,
+"values": [0.0, 0.3141592653589793, 0.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Sprite:scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.041666657),
+"transitions": PackedFloat32Array(0.3789291, 0.3789291),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1.05, 0.9)]
+}
+
+[sub_resource type="Animation" id="Animation_bwlt3"]
+resource_name = "idle"
+length = 0.5
+loop_mode = 1
+step = 0.041666668
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:texture:region")
+tracks/0/interp = 0
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Rect2(0, 0, 64, 64)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = false
+tracks/1/path = NodePath("Sprite:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(),
+"transitions": PackedFloat32Array(),
+"update": 0,
+"values": []
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(),
+"transitions": PackedFloat32Array(),
+"update": 0,
+"values": []
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Sprite:scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.16666667, 0.20833333),
+"transitions": PackedFloat32Array(0.3789291, 0.3789291, 0.3789291),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1, 1), Vector2(1.05, 0.9)]
+}
+
+[sub_resource type="Animation" id="Animation_wbtji"]
+resource_name = "mortar"
+length = 0.6666667
+step = 0.041666668
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:texture:region")
+tracks/0/interp = 0
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.25),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Rect2(0, 0, 64, 64), Rect2(128, 0, 64, 64)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = false
+tracks/1/path = NodePath("Sprite:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(),
+"transitions": PackedFloat32Array(),
+"update": 0,
+"values": []
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.33333334),
+"transitions": PackedFloat32Array(1.9318731, 2.4622889),
+"update": 0,
+"values": [0.0, 0.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Sprite:scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.25, 0.29166666, 0.5833333, 0.6666667),
+"transitions": PackedFloat32Array(1.3660403, 0.3789291, 1.319508, 1.319508, 1.3660403),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1.05, 0.9), Vector2(0.75, 1.25), Vector2(0.9, 1.1), Vector2(1, 1)]
+}
+tracks/4/type = "method"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath(".")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0.25),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [&"hit"],
+"method": &"emit_signal"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_cc2n2"]
+resource_name = "walk"
+length = 0.5
+loop_mode = 1
+step = 0.041666668
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:texture:region")
+tracks/0/interp = 0
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.25),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Rect2(0, 0, 64, 64), Rect2(64, 0, 64, 64)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = false
+tracks/1/path = NodePath("Sprite:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.20833333, 0.29166666),
+"transitions": PackedFloat32Array(0.30778614, 2.0705302, 3.8637445),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, 4), Vector2(0, -4)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.16666667, 0.33333334),
+"transitions": PackedFloat32Array(0.40612623, 0.24148393, 0.40612623),
+"update": 0,
+"values": [0.0, 0.08726646259971647, -0.08726646259971647]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_2s7yn"]
+_data = {
+&"RESET": SubResource("Animation_6rtlv"),
+&"death": SubResource("Animation_tisi1"),
+&"hurt": SubResource("Animation_abgjo"),
+&"idle": SubResource("Animation_bwlt3"),
+&"mortar": SubResource("Animation_wbtji"),
+&"walk": SubResource("Animation_cc2n2")
+}
+
+[node name="SulfurSpiderSprite" unique_id=872872831 node_paths=PackedStringArray("animation_player") instance=ExtResource("1_2775d")]
+animation_player = NodePath("AnimationPlayer")
+
+[node name="Sprite" parent="." index="0" unique_id=1916043660]
+material = SubResource("ShaderMaterial_tisi1")
+texture = SubResource("AtlasTexture_abgjo")
+offset = Vector2(0, -20)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="2" unique_id=48130413]
+libraries/ = SubResource("AnimationLibrary_2s7yn")

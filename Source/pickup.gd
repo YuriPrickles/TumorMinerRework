@@ -11,7 +11,7 @@ static func new_pickup(item:Item, pos:Vector2) -> Pickup:
 	var pickup:Pickup = preload("res://Source/pickup.tscn").instantiate()
 	pickup.item_stored = item
 	pickup.position = pos
-	Main.instance.current_floor.pickups.add_child(pickup)
+	Main.instance.current_floor.pickups.add_child.call_deferred(pickup)
 	return pickup
 func _ready() -> void:
 	sprite.texture = item_stored.texture

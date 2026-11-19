@@ -8,7 +8,7 @@ func _init() -> void:
 	inventory[0] = Pickaxe.new()
 	inventory[1] = Bonesaber.new()
 	inventory[2] = DynamiteWeak.new(4)
-	inventory[3] = BatLeg.new()
+	inventory[3] = MiniSmelter.new()
 
 func validate_item_slot(item:Item) -> void:
 	if item.stack <= 0 and inventory.has(item):

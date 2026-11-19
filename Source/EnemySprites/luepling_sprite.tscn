@@ -1,11 +1,37 @@
 [gd_scene format=3 uid="uid://l1e53yngr1f7"]
 
-[ext_resource type="Script" uid="uid://c24dg3skkdwgr" path="res://Source/enemy_sprite.gd" id="1_pil1o"]
-[ext_resource type="Texture2D" uid="uid://52atj615fi2r" path="res://Assets/Temporary/luepling.png" id="2_e6jny"]
+[ext_resource type="PackedScene" uid="uid://c6v8kcfr3mjg7" path="res://Source/enemy_sprite.tscn" id="1_hx5u2"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_6rtlv"]
+[sub_resource type="Shader" id="Shader_hx5u2"]
 resource_local_to_scene = true
-atlas = ExtResource("2_e6jny")
+code = "shader_type canvas_item;
+
+uniform bool active = false;
+uniform vec4 tint : source_color = vec4(1., 1., 0., 1);
+
+void fragment() {
+	vec4 tint_copy = tint;
+	vec4 previous_color = texture(TEXTURE, UV);
+	
+	if (active == true)
+	{
+		tint_copy.a = previous_color.a;
+		COLOR = tint_copy;
+	}
+}"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_pil1o"]
+resource_local_to_scene = true
+shader = SubResource("Shader_hx5u2")
+shader_parameter/active = false
+shader_parameter/tint = Color(1, 1, 1, 1)
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_lc8cy"]
+load_path = "res://.godot/imported/luepling.png-39ddda60712464fb4ac41631ecd945fb.ctex"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_e6jny"]
+resource_local_to_scene = true
+atlas = SubResource("CompressedTexture2D_lc8cy")
 region = Rect2(0, 0, 128, 128)
 
 [sub_resource type="Animation" id="Animation_6rtlv"]
@@ -487,7 +513,7 @@ tracks/4/keys = {
 }]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_546hj"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_j5d71"]
 _data = {
 &"RESET": SubResource("Animation_6rtlv"),
 &"bite": SubResource("Animation_lc8cy"),
@@ -499,15 +525,14 @@ _data = {
 &"vomit_egg": SubResource("Animation_j5d71")
 }
 
-[node name="LueplingSprite" type="Node2D" unique_id=872872831 node_paths=PackedStringArray("animation_player", "sprite")]
-script = ExtResource("1_pil1o")
+[node name="LueplingSprite" unique_id=872872831 node_paths=PackedStringArray("animation_player") instance=ExtResource("1_hx5u2")]
 animation_player = NodePath("AnimationPlayer")
-sprite = NodePath("Sprite")
 
-[node name="Sprite" type="Sprite2D" parent="." unique_id=1916043660]
+[node name="Sprite" parent="." index="0" unique_id=1916043660]
+material = SubResource("ShaderMaterial_pil1o")
 position = Vector2(0, 8)
-texture = SubResource("AtlasTexture_6rtlv")
+texture = SubResource("AtlasTexture_e6jny")
 offset = Vector2(0, -64)
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1060791081]
-libraries/ = SubResource("AnimationLibrary_546hj")
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="2" unique_id=2098921351]
+libraries/ = SubResource("AnimationLibrary_j5d71")

@@ -1,0 +1,33 @@
+[gd_scene format=3 uid="uid://ccoat3peiaebf"]
+
+[ext_resource type="PackedScene" uid="uid://ddqn8m1w1gwt1" path="res://Source/enemy.tscn" id="1_fnuag"]
+[ext_resource type="Script" uid="uid://d1y5n6lrxectr" path="res://Source/Enemies/sulfur_spider.gd" id="2_fnuag"]
+[ext_resource type="PackedScene" uid="uid://bonjxhernejq6" path="res://Source/EnemySprites/sulfur_spider_sprite.tscn" id="3_fnuag"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_coxhp"]
+radius = 432.2962
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_d6ajj"]
+
+[node name="SulfurSpider" unique_id=1878560834 node_paths=PackedStringArray("detection_range", "enemy_sprite") instance=ExtResource("1_fnuag")]
+z_index = 1
+collision_mask = 5
+script = ExtResource("2_fnuag")
+detection_range = NodePath("DetectionRange")
+enemy_sprite = NodePath("SulfurSpiderSprite")
+health = 22
+movement_speed = 100.0
+acceleration = 500.0
+
+[node name="DetectionRange" type="Area2D" parent="." index="0" unique_id=1993365856]
+position = Vector2(0, -10)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionRange" index="0" unique_id=296312709]
+shape = SubResource("CircleShape2D_coxhp")
+debug_color = Color(0.9882353, 0, 0.3137255, 0.039215688)
+
+[node name="CollisionShape2D" parent="." index="1" unique_id=483514922]
+position = Vector2(0, -10)
+shape = SubResource("RectangleShape2D_d6ajj")
+
+[node name="SulfurSpiderSprite" parent="." index="2" unique_id=872872831 instance=ExtResource("3_fnuag")]

@@ -58,9 +58,11 @@ func _physics_process(delta: float) -> void:
 	
 	if stagger_timer > 0:
 		stagger_timer -= delta
+	#else:
+		#knockback_velocity = Vector2.ZERO
 	
 	var direction := Input.get_vector("left", "right","up","down")
-	if not stagger:
+	if not stagger: # and knockback_velocity == Vector2.ZERO:
 		if direction:
 			velocity = direction * SPEED * speed_mult
 		else:
@@ -71,6 +73,7 @@ func _physics_process(delta: float) -> void:
 	plrStatus.process_effect(plrStatus.active_effects, self)
 	move_and_slide()
 
+## leftovers of a bygone system... maybe it will find its use someday
 func detect_thing(body:Node2D):
 	if body is RockNode:
 		body.on_detect()
@@ -82,7 +85,7 @@ func detect_thing(body:Node2D):
 		body.on_detect()
 		pickups.append(body)
 
-
+## leftovers of a bygone system... maybe it will find its use someday
 func undetect_thing(body:Node2D):
 	if body is RockNode and rocks.has(body):
 		body.on_undetect()
@@ -98,8 +101,7 @@ func get_targeted_interactable() -> Interactable:
 	var c_floor :Floor = Main.instance.current_floor
 	var tiles :TileMapLayer = c_floor.current_layout.layout_tiles
 	for interactable in c_floor.get_interactables():
-		var interactable_tilepos : Vector2i = tiles.local_to_map(interactable.position - interactable.placement_offset)
-		if get_targeted_tile() == interactable_tilepos or get_current_tile() == interactable_tilepos:
+		if get_targeted_tile() == interactable.get_current_tile() or get_current_tile() == interactable.get_current_tile():
 			return interactable
 	return null
 
@@ -125,12 +127,12 @@ func aim_to_mouse() -> Vector2:
 	return position.direction_to(get_global_mouse_position())
 
 
-func hurt(damage, source_position, kb_force = 500):
+func hurt(damage:int, source_position:Vector2, kb_force = 500):
 	if stagger: return
 	stagger_timer = stagger_delay
-	Global.run_info.health -= damage
 	knockback_velocity = position.direction_to(source_position) * -kb_force
 	#print(knockback_velocity)
+	Global.run_info.health -= damage
 
 func heal(value):
 	Global.run_info.health += value

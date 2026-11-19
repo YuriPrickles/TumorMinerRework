@@ -1,6 +1,7 @@
 class_name Enemy
 extends CharacterBody2D
 @export var enemy_sprite:EnemySprite
+
 @export var line_2d: Line2D
 @export var health: int
 @export var kb_res:float = 0
@@ -41,6 +42,10 @@ func basic_movement(delta):
 	var collision = move_and_collide(velocity * delta)
 	if collision and collision.get_collider() is Player:
 		on_collide_player(collision.get_collider())
+	if collision and collision.get_collider() is RockNode:
+		on_collide_rock(collision.get_collider())
+	if collision and collision.get_collider() is TileMapLayer:
+		on_collide_wall()
 	update_path()
 
 func update_path():
@@ -57,29 +62,39 @@ func update_path():
 func pos_to_cell(pos:Vector2) -> Vector2i:
 	return tilemap.local_to_map(pos)
 
+##Override for any pre-death shenanigans.
 func destroy():
 	on_destroy()
 	queue_free()
 
+##Override for things like death particles and loot.
 func on_destroy():
 	pass
 	
 func hurt(damage:int, source):
+	if health <= 0:
+		return
 	on_hurt(damage,source)
 	health -= damage
 	if health <= 0:
 		destroy()
 
 func on_hurt(damage:int, source):
+	enemy_sprite.hit_flash_player.play("hit_flash")
 	on_hurt_animation()
 	if source and kb_res < 1:
 		flinch(source)
 
+## Override this function to make sure the hurt animation does not override your enemy's animations.
 func on_hurt_animation():
 	if enemy_sprite.animation_player.has_animation("hurt"):
 		enemy_sprite.animate("hurt")
 
 func on_collide_player(plr:Player):
+	pass
+func on_collide_rock(rck:RockNode):
+	pass
+func on_collide_wall():
 	pass
 
 func flinch(source):

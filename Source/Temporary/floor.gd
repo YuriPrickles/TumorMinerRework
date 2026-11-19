@@ -62,12 +62,12 @@ func spawn_ladder(pos: Vector2):
 	if already_spawned_ladder: return
 	var ladder:Ladder = ladder_scene.instantiate()
 	ladder.position = pos
-	interactables.add_child(ladder)
+	interactables.add_child.call_deferred(ladder)
 	already_spawned_ladder = true
 
 func place_interactable(interactable:Interactable,pos:Vector2):
 	current_layout.astar_grid.set_point_solid(to_tile_grid(pos))
-	interactable.position = pos + Vector2(0,32)
+	interactable.position = pos
 	interactables.add_child(interactable)
 
 func to_tile_grid(pos:Vector2) -> Vector2i:
@@ -75,3 +75,18 @@ func to_tile_grid(pos:Vector2) -> Vector2i:
 
 func to_local_position(tilepos:Vector2i) -> Vector2:
 	return current_layout.layout_tiles.map_to_local(tilepos)
+
+func explode_at(pos:Vector2, boom_radius:int, boom_strength:int,damage:int=0) -> void:
+	var plr = Main.instance.get_player()
+	for rck in get_rock_nodes():
+		if rck.get_current_tile().distance_to(to_tile_grid(pos)) <= boom_radius:
+			plr.request_mine_action(rck, boom_strength)
+	for inter in get_interactables():
+		if inter.get_current_tile().distance_to(to_tile_grid(pos)) <= boom_radius:
+			plr.request_mine_action(inter, boom_strength)
+	if damage > 0:
+		for enemy in get_enemies():
+			if enemy.position.distance_to(pos) <= boom_radius * tile_size:
+				enemy.hurt(damage, self)
+		if to_local_position(plr.get_current_tile()).distance_to(pos) <= boom_radius * tile_size:
+			plr.hurt(damage, position,600)
