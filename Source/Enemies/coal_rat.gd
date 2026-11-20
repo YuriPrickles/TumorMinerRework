@@ -29,14 +29,15 @@ var is_inital_idle: bool = true
 var ember:PackedScene = preload("res://Source/Projectiles/ember.tscn")
 func _physics_process(delta: float) -> void:
 	if state == State.DYING: return
-	if velocity.x != 0:
-		enemy_sprite.scale.x = -1 if sign(velocity.x) != -1 else 1
+	enemy_sprite.scale.x = -1 if sign(velocity.x) != -1 else 1
 	if is_inital_idle and state == State.IDLE:
 		enemy_sprite.animate("idle")
 	else:
 		enemy_sprite.animate("walk")
-		if Engine.get_frames_drawn() % 24 == 0:
-			Projectile.new_projectile(ember, position + Vector2(enemy_sprite.sprite.scale.x * -72,0), Vector2.ZERO)
+		if Engine.get_frames_drawn() % 12 == 0:
+			var dir = sign(velocity.x)
+			if dir == 0: dir = 1
+			Projectile.new_projectile(ember, position + Vector2(dir * -72,0), Vector2.ZERO)
 	if state == State.CHASING:
 		basic_movement(delta)
 	else:
