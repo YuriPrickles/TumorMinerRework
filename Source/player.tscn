@@ -151,7 +151,7 @@ _data = {
 &"walk": SubResource("Animation_dx03v")
 }
 
-[node name="Player" type="CharacterBody2D" unique_id=1289355168 node_paths=PackedStringArray("interact_range", "held_item", "hand_spot", "player_sprite", "ArmLeft", "ArmRight", "LegLeft", "StepMarkerLeft", "LegRight", "StepMarkerRight")]
+[node name="Player" type="CharacterBody2D" unique_id=1289355168 node_paths=PackedStringArray("interact_range", "held_item", "hand_spot", "player_sprite", "ArmLeft", "AdditionalArmsLeft", "ArmRight", "AdditionalArmsRight", "LegLeft", "StepMarkerLeft", "LegRight", "StepMarkerRight")]
 collision_mask = 126
 script = ExtResource("1_tfb11")
 interact_range = NodePath("InteractRange")
@@ -159,7 +159,9 @@ held_item = NodePath("HandSpot/HeldItem")
 hand_spot = NodePath("HandSpot")
 player_sprite = NodePath("PlayerSprite")
 ArmLeft = NodePath("ModularLimbs/ModularArmLeft")
+AdditionalArmsLeft = NodePath("ModularLimbs/ModularArmLeft/AdditionalArmsLeft")
 ArmRight = NodePath("ModularLimbs/ModularArmRight")
+AdditionalArmsRight = NodePath("ModularLimbs/ModularArmRight/AdditionalArmsRight")
 LegLeft = NodePath("ModularLimbs/ModularLegLeft")
 StepMarkerLeft = NodePath("PlayerSprite/LimbOrigins/StepLeft")
 LegRight = NodePath("ModularLimbs/ModularLegRight")
@@ -207,9 +209,15 @@ position = Vector2(40, 0)
 position = Vector2(-16, -29)
 Origin = NodePath("../../PlayerSprite/LimbOrigins/ShoulderLeft")
 
+[node name="AdditionalArmsLeft" type="Node2D" parent="ModularLimbs/ModularArmLeft" unique_id=1297233594]
+show_behind_parent = true
+
 [node name="ModularArmRight" parent="ModularLimbs" unique_id=2084398380 node_paths=PackedStringArray("Origin") instance=ExtResource("4_h6ae0")]
 position = Vector2(16, -29)
 Origin = NodePath("../../PlayerSprite/LimbOrigins/ShoulderRight")
+
+[node name="AdditionalArmsRight" type="Node2D" parent="ModularLimbs/ModularArmRight" unique_id=835203458]
+show_behind_parent = true
 
 [node name="ModularLegLeft" parent="ModularLimbs" unique_id=1095512394 node_paths=PackedStringArray("Origin") instance=ExtResource("4_h6ae0")]
 position = Vector2(-16, -29)

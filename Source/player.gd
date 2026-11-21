@@ -26,9 +26,13 @@ var snapped_facing_dir:Vector2
 #LIMBS
 @export_group("Limbs")
 
+@onready var limb_visual:PackedScene = preload("res://Source/Visuals/modular_limb.tscn")
+
 @export_subgroup("Arms")
 @export var ArmLeft:Node
+@export var AdditionalArmsLeft:Node
 @export var ArmRight:Node
+@export var AdditionalArmsRight:Node
 ## Default Arm Length While Aiming
 @export var arm_length:float = 70
 ## Default Arm Length When Using an Item
@@ -37,8 +41,10 @@ var snapped_facing_dir:Vector2
 
 @export_subgroup("Legs")
 @export var LegLeft:Node
+@export var AdditionalLegsLeft:Node
 @export var StepMarkerLeft:Node
 @export var LegRight:Node
+@export var AdditionalLegsRight:Node
 @export var StepMarkerRight:Node
 
 
@@ -85,8 +91,11 @@ func _physics_process(delta: float) -> void:
 	
 	#Arms
 	var arms = [ArmLeft, ArmRight]
+	var addt_arms = [AdditionalArmsLeft, AdditionalArmsRight]
 	var aim_direction = int(aim_to_mouse().x >= 0)
-	for arm in arms:
+	for i in arms.size():
+		var arm = arms[i]
+		var addt = addt_arms[i]
 		var side = arms.find(arm)
 		if side == aim_direction:
 			arm.apex_destination = aim_to_mouse() * active_arm_length
@@ -97,13 +106,25 @@ func _physics_process(delta: float) -> void:
 				40 * (side * 2 - 1),
 				50
 			)
+		
+		for child in addt.get_children():
+			var angle = PI / (arm.get_child_count() - child.get_index() + 1)
+			angle *= sign(side * 2 - 1)
+			child.apex_destination = arm.apex_destination.rotated(angle)
 	
 	#Legs
 	var legs = [LegLeft, LegRight]
+	var addt_legs = [AdditionalLegsLeft, AdditionalLegsRight]
 	var steps = [StepMarkerLeft, StepMarkerRight]
 	for i in 2:
 		var dest = legs[i].get_local_destination(steps[i].global_position)
 		legs[i].apex_destination = dest
+		
+		var addt = addt_legs[i]
+		for child in addt.get_children():
+			var angle = PI / (addt.get_child_count() - child.get_index() + 1)
+			angle *= sign(i * 2 - 1)
+			child.apex_destination = legs[i].apex_destination.rotated(angle)
 	
 	if stagger_timer > 0:
 		stagger_timer -= delta
@@ -204,3 +225,65 @@ func use_arm(time:float = 0.1):
 	active_arm_length = arm_length_interact
 	await get_tree().create_timer(time).timeout
 	active_arm_length = arm_length
+
+func load_limb_visuals(limbs:Array):
+	var limb_visuals = [AdditionalArmsRight, AdditionalArmsRight]
+	# Clear limbs
+	for visual in limb_visuals:
+		for child in visual.get_children():
+			child.queue_free()
+	
+	var iter_arms = 0
+	var iter_legs = 0
+	for i in limbs.size():
+		var limb_instance = limb_visual.instantiate()
+		
+		var arms = [ArmLeft, ArmRight]
+		var legs = [LegLeft, LegRight]
+		var addt_arms = [AdditionalArmsLeft, AdditionalArmsRight]
+		var addt_legs = [AdditionalLegsLeft, AdditionalLegsRight]
+		
+		var limbs_array = null
+		var addt = null
+		
+		var side = 0
+		match limbs[i].part_type:
+			"arm":
+				limbs_array = arms
+				addt = addt_arms
+				
+				side = iter_arms % 2
+				
+				if iter_arms == 0:
+					ArmLeft.source_limb = limbs[i]
+					iter_arms += 1
+					continue
+				elif iter_arms == 1:
+					ArmRight.source_limb = limbs[i]
+					iter_arms += 1
+					continue
+				
+				iter_arms += 1
+			"leg":
+				limbs_array = legs
+				addt = addt_legs
+				
+				side = iter_legs % 2
+				
+				if iter_legs == 0:
+					LegLeft.source_limb = limbs[i]
+					iter_legs += 1
+					continue
+				elif iter_legs == 1:
+					LegRight.source_limb = limbs[i]
+					iter_legs += 1
+					continue
+				
+				iter_legs += 1
+		
+		var parent = addt[side]
+		var limb = limbs_array[side]
+		
+		parent.add_child(limb_instance)
+		limb_instance.Origin = limb.Origin
+		limb_instance.modulate.v = max(0, 1 - int( (i + 1) / 2) * 0.1)
