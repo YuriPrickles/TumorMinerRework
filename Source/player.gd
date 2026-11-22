@@ -13,8 +13,8 @@ var pickups:Array[Pickup]
 #Defense and attack stat, both additive
 
 #var plrEffects = {}
-var plrStatus = statusEffects.new() #Unique instance for handling player's statuses
-var effects = statusEffects.EFFECTS #Enumeration set with all effect names
+var plrStatus = StatusEffects.new() #Unique instance for handling player's statuses
+var effects = StatusEffects.EFFECTS #Enumeration set with all effect names
 
 
 var stagger: bool:
@@ -143,7 +143,7 @@ func heal(value):
 	Global.run_info.health += value
 
 #Call this function from your enemy to give the player a status!
-func suffer_effect(effect:statusEffects.EFFECTS) -> void :
+func suffer_effect(effect:StatusEffects.EFFECTS) -> void :
 	#print(effect)
 	plrStatus.add_effect(plrStatus.active_effects, effect)
 	#print(plrStatus.active_effects.has(effect))

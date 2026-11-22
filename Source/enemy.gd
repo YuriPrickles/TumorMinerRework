@@ -14,8 +14,8 @@ var current_point:int
 var current_cell:Vector2i
 var target_cell:Vector2i
 
-var enemy_status = statusEffects.new()
-var effects = statusEffects.EFFECTS
+var enemy_status = StatusEffects.new()
+var effects = StatusEffects.EFFECTS
 #Add atk, add def, understand how to affect health using status effects
 #Def modifier is additive
 
@@ -117,7 +117,7 @@ func get_current_tile() -> Vector2i:
 	var current_tile := tiles.local_to_map(position)
 	return current_tile
 
-func suffer_effect(effect:statusEffects.EFFECTS) -> void :
+func suffer_effect(effect:StatusEffects.EFFECTS) -> void :
 	#print(effect)
 	enemy_status.add_effect(enemy_status.active_effects, effect)
 	#print(plrStatus.active_effects.has(effect))

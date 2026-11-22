@@ -1,4 +1,4 @@
-class_name statusEffects extends Resource
+class_name StatusEffects extends Resource
 
 #Reference point for all statuses, editing them here SHOULD affect how they
 #act across all enemies and for the player
@@ -177,9 +177,9 @@ func process_enemy_effects(target:Dictionary, enemy:Enemy) -> void :
 
 func store_plr_effects() -> void:
 	Global.save_plr_effects(self)
-func apply_plr_effects() -> statusEffects:
-	var tempEffects : statusEffects = Global.load_plr_effects()
+func apply_plr_effects() -> StatusEffects:
+	var tempEffects : StatusEffects = Global.load_plr_effects()
 	if (tempEffects != null):
 		return tempEffects
 	
-	return statusEffects.new()
+	return StatusEffects.new()
