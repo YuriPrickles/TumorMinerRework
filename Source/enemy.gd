@@ -29,6 +29,7 @@ func _ready() -> void:
 	lambda.call_deferred()
 
 func _physics_process(delta: float) -> void:
+	enemy_status.process_enemy_effects(enemy_status.active_effects, self)
 	pass
 
 func basic_movement(delta):
