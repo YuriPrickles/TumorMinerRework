@@ -14,6 +14,11 @@ var current_point:int
 var current_cell:Vector2i
 var target_cell:Vector2i
 
+var enemy_status = statusEffects.new()
+var effects = statusEffects.EFFECTS
+#Add atk, add def, understand how to affect health using status effects
+#Def modifier is additive
+
 func _ready() -> void:
 	var lambda = func():
 		await get_tree().physics_frame
@@ -24,6 +29,7 @@ func _ready() -> void:
 	lambda.call_deferred()
 
 func _physics_process(delta: float) -> void:
+	enemy_status.process_enemy_effects(enemy_status.active_effects, self)
 	pass
 
 func basic_movement(delta):
@@ -87,6 +93,10 @@ func on_hurt_animation():
 	if enemy_sprite.animation_player.has_animation("hurt"):
 		enemy_sprite.animate("hurt")
 
+func heal(heal:int):
+	print("ERR: ENEMY HEAL NOT IMPLEMENTED")
+	return
+
 func on_collide_player(plr:Player):
 	pass
 func on_collide_rock(rck:RockNode):
@@ -106,3 +116,9 @@ func get_current_tile() -> Vector2i:
 	var tiles :TileMapLayer = c_floor.current_layout.layout_tiles
 	var current_tile := tiles.local_to_map(position)
 	return current_tile
+
+func suffer_effect(effect:statusEffects.EFFECTS) -> void :
+	#print(effect)
+	enemy_status.add_effect(enemy_status.active_effects, effect)
+	#print(plrStatus.active_effects.has(effect))
+	#print(plrStatus.active_effects.get(effects.burned))

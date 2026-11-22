@@ -6,9 +6,16 @@ extends CharacterBody2D
 @export var player_sprite: Sprite2D
 
 const SPEED = 300.0
+var   ACCEL = 1.0 #Multiplier used to adjust player speed with debuffs/buffs
 var rocks:Array[RockNode]
 var interactables:Array[Interactable]
 var pickups:Array[Pickup]
+#Defense and attack stat, both additive
+
+#var plrEffects = {}
+var plrStatus = statusEffects.new() #Unique instance for handling player's statuses
+var effects = statusEffects.EFFECTS #Enumeration set with all effect names
+
 
 var stagger: bool:
 	get:
@@ -28,6 +35,7 @@ func _ready() -> void:
 	interact_range.body_exited.connect(undetect_thing)
 	interact_range.area_entered.connect(detect_thing)
 	interact_range.area_exited.connect(undetect_thing)
+	retrieve_effects() #Re-applies effects accrued on a previous floor IF APPLICABLE
 
 func _physics_process(delta: float) -> void:
 	var mouse_vector:Vector2 = position.direction_to(get_global_mouse_position()).normalized()
@@ -63,6 +71,8 @@ func _physics_process(delta: float) -> void:
 			velocity = velocity.move_toward(Vector2.ZERO, SPEED / 3)
 	elif knockback_velocity != Vector2.ZERO:
 		velocity = knockback_velocity
+	save_effects() #Remembers effects on player incase they move a floor
+	plrStatus.process_effect(plrStatus.active_effects, self)
 	move_and_slide()
 
 ## leftovers of a bygone system... maybe it will find its use someday
@@ -122,11 +132,28 @@ func aim_to_mouse() -> Vector2:
 func hurt(damage:int, source_position:Vector2, kb_force = 500):
 	if stagger: return
 	stagger_timer = stagger_delay
+	#Test using player position for separting status vs. enemy damage
+	#Revamp atk/def stat for player and enemies
+	Global.run_info.health -= damage
 	knockback_velocity = position.direction_to(source_position) * -kb_force
+	#print(knockback_velocity)
 	Global.run_info.health -= damage
 
 func heal(value):
 	Global.run_info.health += value
+
+#Call this function from your enemy to give the player a status!
+func suffer_effect(effect:statusEffects.EFFECTS) -> void :
+	#print(effect)
+	plrStatus.add_effect(plrStatus.active_effects, effect)
+	#print(plrStatus.active_effects.has(effect))
+	#print(plrStatus.active_effects.get(effects.burned))
+
+func save_effects() -> void:
+	plrStatus.store_plr_effects()
+
+func retrieve_effects() -> void:
+	plrStatus = plrStatus.apply_plr_effects()
 
 ##Returns a Vector2i position on the tilemap. Use map_to_local to actually do things with it.
 func get_current_tile() -> Vector2i:
