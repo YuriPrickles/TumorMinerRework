@@ -136,6 +136,43 @@ func process_effect(target:Dictionary, plr:Player) -> void :
 
 #Same as process_effect but for enemy instances
 func process_enemy_effects(target:Dictionary, enemy:Enemy) -> void :
+	var enemyStatus
+	var currEffect
+	if not (target.size() >= 0) :
+		return
+	
+	currEffect = EFFECTS.engulfed
+	if (target.has(EFFECTS.burned) && target.has(EFFECTS.sulphured)):
+		enemyStatus = target.get(currEffect)
+		remove_effect(target, EFFECTS.burned)
+		consume_stack(target, EFFECTS.sulphured)
+		add_effect(target, currEffect)
+		enemy.hurt(enemyStatus[dmgInx], enemy.position)
+		decrease_duration(target, currEffect)
+		
+	currEffect = EFFECTS.burned
+	if (target.has(currEffect)):
+		enemyStatus = target.get(currEffect)
+		enemy.hurt(enemyStatus[dmgInx], enemy.position)
+		decrease_duration(target, currEffect)
+	
+	currEffect = EFFECTS.sulphured
+	if (target.has(currEffect)):
+		enemyStatus = target.get(currEffect)
+		enemy.hurt(enemyStatus[dmgInx], enemy.position)
+		decrease_duration(target, currEffect)
+	
+	currEffect = EFFECTS.poisoned
+	if (target.has(currEffect)):
+		enemyStatus = target.get(currEffect)
+		enemy.hurt(enemyStatus[dmgInx], enemy.position)
+		decrease_duration(target, currEffect)
+	
+	currEffect = EFFECTS.regen
+	if (target.has(currEffect)):
+		enemyStatus = target.get(currEffect)
+		decrease_duration(target, currEffect)
+		enemy.heal(enemyStatus[dmgInx])
 	return
 
 func store_plr_effects() -> void:

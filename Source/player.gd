@@ -10,6 +10,7 @@ var   ACCEL = 1.0 #Multiplier used to adjust player speed with debuffs/buffs
 var rocks:Array[RockNode]
 var interactables:Array[Interactable]
 var pickups:Array[Pickup]
+#Defense and attack stat, both additive
 
 #var plrEffects = {}
 var plrStatus = statusEffects.new() #Unique instance for handling player's statuses
@@ -131,6 +132,9 @@ func aim_to_mouse() -> Vector2:
 func hurt(damage:int, source_position:Vector2, kb_force = 500):
 	if stagger: return
 	stagger_timer = stagger_delay
+	#Test using player position for separting status vs. enemy damage
+	#Revamp atk/def stat for player and enemies
+	Global.run_info.health -= damage
 	knockback_velocity = position.direction_to(source_position) * -kb_force
 	#print(knockback_velocity)
 	Global.run_info.health -= damage
@@ -140,10 +144,10 @@ func heal(value):
 
 #Call this function from your enemy to give the player a status!
 func suffer_effect(effect:statusEffects.EFFECTS) -> void :
-	print(effect)
+	#print(effect)
 	plrStatus.add_effect(plrStatus.active_effects, effect)
-	print(plrStatus.active_effects.has(effect))
-	print(plrStatus.active_effects.get(effects.burned))
+	#print(plrStatus.active_effects.has(effect))
+	#print(plrStatus.active_effects.get(effects.burned))
 
 func save_effects() -> void:
 	plrStatus.store_plr_effects()
