@@ -10,7 +10,7 @@ func _init(stk:int=1) -> void:
 
 const spear = preload("res://Source/Projectiles/generic_spear.tscn")
 func use_item(plr:Player) -> bool:
-	var proj:GenericSpearProjectile = Projectile.new_projectile(spear,plr.position,plr.aim_to_mouse(),damage)
+	var proj:GenericSpearProjectile = Projectile.new_projectile(spear,plr.position,plr.aim_to_mouse(),damage + plr.get_plr_Atk())
 	proj.swing_time = use_delay
 	await super(plr)
 	return true

@@ -14,7 +14,7 @@ const ember = preload("res://Source/Projectiles/ember.tscn")
 func use_item(plr:Player) -> bool:
 	var flr : Floor = Main.instance.current_floor
 	var vel: Vector2 = plr.aim_to_mouse() * 7
-	var proj : Projectile = Projectile.new_projectile(ember,plr.position,vel,damage)
+	var proj : Projectile = Projectile.new_projectile(ember,plr.position,vel,damage + plr.get_plr_Atk())
 	proj.hostile = false
 	await super(plr)
 	return true

@@ -11,6 +11,17 @@ var rocks:Array[RockNode]
 var interactables:Array[Interactable]
 var pickups:Array[Pickup]
 #Defense and attack stat, both additive
+#Basic Stats applied to any and all effects from the player itself
+#AFFECTS BY PARTS ONLY
+var atk : int
+var def : int
+
+#Stat modifiers that are used to apply buffs, 
+#can be positive OR negative depending on result of all active buffs
+#AFFECTED BY STATUSES ONLY
+var atkMod : float
+var defMod : float
+var firstLoad : bool = true
 
 #var plrEffects = {}
 var plr_statuses:Array[StatusEffect]
@@ -33,6 +44,7 @@ func _ready() -> void:
 	interact_range.body_exited.connect(undetect_thing)
 	interact_range.area_entered.connect(detect_thing)
 	interact_range.area_exited.connect(undetect_thing)
+	if (firstLoad) : prepare_stats()
 	retrieve_effects() #Re-applies effects accrued on a previous floor IF APPLICABLE
 
 func _physics_process(delta: float) -> void:
@@ -71,10 +83,10 @@ func _physics_process(delta: float) -> void:
 		velocity = knockback_velocity
 	move_and_slide()
 
-var tickDuration : int
+var tickDuration : float
 func _process(delta: float) -> void:
-	tickDuration += Time.get_ticks_msec()
-	if (tickDuration % 100 == 0) :
+	tickDuration += delta
+	if (fmod(tickDuration, 1.5) == 0) :
 		tickDuration = 0
 		print("tick")
 		for eff in plr_statuses:
@@ -149,7 +161,7 @@ func hurt(elm:ElementalType, source_position:Vector2, kb_force = 500):
 	knockless_hurt(elm)
 
 func knockless_hurt(elm:ElementalType):
-	Global.run_info.health -= elm.damage
+	Global.run_info.health -= (elm.damage - (self.get_plr_Def()))
 	Global.popup_text(str(elm.damage),position,elm.color)
 
 func heal(value):
@@ -163,7 +175,7 @@ func suffer_effect(effect:StatusEffect) -> void :
 	#print(plr_statuses.active_effects.get(effects.burned))
 
 func save_effects() -> void:
-	Global.save_plr_effects(plr_statuses)
+	Global.save_plr_effects(self)
 
 func retrieve_effects() -> void:
 	plr_statuses = Global.load_plr_effects()
@@ -182,3 +194,17 @@ func get_targeted_tile() -> Vector2i:
 
 func react_to_element(type:ElementalType,is_status:bool = false):
 	pass
+
+func get_plr_Atk() -> float :
+	return self.atk * self.atkMod
+
+func get_plr_Def() -> float : 
+	return self.def * self.defMod
+
+func prepare_stats() -> void :
+	self.atk = 1
+	self.def = 1
+	self.atkMod = 1.0
+	self.defMod = 1.0
+	firstLoad = false
+	
