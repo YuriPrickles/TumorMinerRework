@@ -67,7 +67,11 @@ func on_hurt_animation():
 	if state != State.SHOOTING or state != State.DYING:
 		super()
 
-func react_to_element(type:ElementalType):
+func react_to_element(type:ElementalType,is_status=false):
+	if is_status: return
 	if type is ElementalType.ET_Fire:
 		suffer_effect(Engulfed.new(2))
 		StatusEffect.remove_effect(enemy_statuses, Burned)
+	if type is ElementalType.ET_Poison:
+		type.damage = -999
+		heal(4)

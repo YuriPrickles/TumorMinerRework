@@ -173,5 +173,5 @@ func get_targeted_tile() -> Vector2i:
 	var target_tile = get_current_tile() + Vector2i(snapped_facing_dir)
 	return target_tile
 
-func react_to_element(type:ElementalType):
+func react_to_element(type:ElementalType,is_status:bool = false):
 	pass

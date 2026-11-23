@@ -4,6 +4,7 @@ extends CharacterBody2D
 
 @export var line_2d: Line2D
 @export var health: int
+@export var max_health: int = -1
 @export var kb_res:float = 0
 @export var movement_speed: float = 150.0
 @export var acceleration: float = 256
@@ -17,11 +18,11 @@ var current_cell:Vector2i
 var target_cell:Vector2i
 
 var enemy_statuses : Array[StatusEffect]
-var effects = StatusEffect.EFFECTS
 #Add atk, add def, understand how to affect health using status effects
 #Def modifier is additive
 
 func _ready() -> void:
+	if max_health < 0: max_health = health
 	var lambda = func():
 		await get_tree().physics_frame
 		tilemap = Main.instance.current_floor.current_layout.layout_tiles
@@ -82,8 +83,9 @@ func hurt(elm:ElementalType, source=null):
 	if health <= 0:
 		return
 	on_hurt(elm.damage,source)
-	health -= elm.damage
-	Global.popup_text(str(elm.damage),position,elm.color)
+	health -= max(0,elm.damage)
+	if elm.damage >= 0:
+		Global.popup_text(str(elm.damage),position,elm.color)
 	if health <= 0:
 		destroy()
 
@@ -98,8 +100,9 @@ func on_hurt_animation():
 	if enemy_sprite.animation_player.has_animation("hurt"):
 		enemy_sprite.animate("hurt")
 
-func heal(heal:int):
-	print("ERR: ENEMY HEAL NOT IMPLEMENTED")
+func heal(heal_amount:int):
+	health = min(max_health, health + heal_amount)
+	Global.popup_text(str("+",heal_amount),position,Color.LIME)
 	return
 
 func on_collide_player(plr:Player):
@@ -128,5 +131,5 @@ func suffer_effect(effect:StatusEffect) -> void :
 	#print(plr_statuses.active_effects.has(effect))
 	#print(plr_statuses.active_effects.get(effects.burned))
 
-func react_to_element(type:ElementalType):
+func react_to_element(type:ElementalType,is_status=false):
 	pass

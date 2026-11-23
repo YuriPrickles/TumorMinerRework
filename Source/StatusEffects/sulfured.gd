@@ -16,12 +16,12 @@ func process_effect(plr:Player, delta) -> void :
 	timer += delta
 	decrease_duration(delta)
 	if timer > DMG_RATE:
-		plr.knockless_hurt(ElementalType.ET_Sulfur.new(damage,plr))
+		plr.knockless_hurt(ElementalType.ET_Sulfur.new(damage,plr,true))
 		timer = 0
 func process_enemy_effect(enemy:Enemy, delta) -> void :
 	super(enemy,delta)
 	timer += delta
 	decrease_duration(delta)
 	if timer > DMG_RATE:
-		enemy.hurt(ElementalType.ET_Sulfur.new(damage,enemy), null)
+		enemy.hurt(ElementalType.ET_Sulfur.new(damage,enemy,true), null)
 		timer = 0
