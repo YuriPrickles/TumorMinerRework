@@ -93,6 +93,7 @@ func consume_stack() -> void :
 
 func on_apply(array:Array[StatusEffect]):
 	pass
+
 #Reads through and implements ALL applied effects and interactions
 func process_effect(plr:Player, delta) -> void :
 	if (current_stacks <= 0 or duration <= 0.0):

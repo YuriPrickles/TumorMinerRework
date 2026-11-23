@@ -70,9 +70,16 @@ func _physics_process(delta: float) -> void:
 	elif knockback_velocity != Vector2.ZERO:
 		velocity = knockback_velocity
 	move_and_slide()
+
+var tickDuration : int
 func _process(delta: float) -> void:
-	for eff in plr_statuses:
-		eff.process_effect(self, delta)
+	tickDuration += Time.get_ticks_msec()
+	if (tickDuration % 100 == 0) :
+		tickDuration = 0
+		print("tick")
+		for eff in plr_statuses:
+			eff.process_effect(self, delta)
+
 ## leftovers of a bygone system... maybe it will find its use someday
 func detect_thing(body:Node2D):
 	if body is RockNode:
