@@ -27,6 +27,9 @@ ITEM_DESC_MINISMELTER=Smelts ores.
 ITEM_BATLEG=Bat Leg
 ITEM_DESC_BATLEG=Heals 20. +5% speed.
 
+ITEM_LUEPLINGFOOT=Lüpling Foot
+ITEM_DESC_LUEPLINGFOOT=Heals 10. Chance to negate damage taken.
+
 ITEM_COPPERPICKAXE=Copper Pickaxe
 ITEM_DESC_COPPERPICKAXE=For mining.
 

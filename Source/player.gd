@@ -109,6 +109,11 @@ func get_targeted_interactable() -> Interactable:
 
 func _input(event: InputEvent) -> void:
 	#region Inventory Control
+	if event.is_action_pressed("drop_item") and Global.get_current_item():
+		var pickup = Pickup.new_pickup(Global.get_current_item(),position)
+		pickup.delay_before_sentience = 3
+		Global.inv_manager.inventory[Global.current_item_index] = null
+		
 	var old_item = Global.get_current_item()
 	Global.current_item_index += roundi(Input.get_axis("inv_back","inv_forward"))
 	if Global.current_item_index < 0:
@@ -146,7 +151,7 @@ func heal(value):
 func suffer_effect(effect:StatusEffects.EFFECTS) -> void :
 	#print(effect)
 	plrStatus.add_effect(plrStatus.active_effects, effect)
-	#print(plrStatus.active_effects.has(effect))
+	print(plrStatus.active_effects.has(effect))
 	#print(plrStatus.active_effects.get(effects.burned))
 
 func save_effects() -> void:

@@ -6,6 +6,7 @@ func on_collide_wall():
 
 func on_collide_player(plr:Player) -> bool:
 	if super(plr):
+		plr.suffer_effect(StatusEffects.EFFECTS.sulphured)
 		destroy()
 		return true
 	return false
