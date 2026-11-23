@@ -18,6 +18,7 @@ enemy_sprite = NodePath("SulfurSpiderSprite")
 health = 22
 movement_speed = 100.0
 acceleration = 500.0
+tribes = 12
 
 [node name="DetectionRange" type="Area2D" parent="." index="0" unique_id=1993365856]
 position = Vector2(0, -10)

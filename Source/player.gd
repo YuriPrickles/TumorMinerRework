@@ -13,9 +13,7 @@ var pickups:Array[Pickup]
 #Defense and attack stat, both additive
 
 #var plrEffects = {}
-var plrStatus = StatusEffects.new() #Unique instance for handling player's statuses
-var effects = StatusEffects.EFFECTS #Enumeration set with all effect names
-
+var plr_statuses:Array[StatusEffect]
 
 var stagger: bool:
 	get:
@@ -71,10 +69,10 @@ func _physics_process(delta: float) -> void:
 			velocity = velocity.move_toward(Vector2.ZERO, SPEED / 3)
 	elif knockback_velocity != Vector2.ZERO:
 		velocity = knockback_velocity
-	save_effects() #Remembers effects on player incase they move a floor
-	plrStatus.process_effect(plrStatus.active_effects, self)
 	move_and_slide()
-
+func _process(delta: float) -> void:
+	for eff in plr_statuses:
+		eff.process_effect(self, delta)
 ## leftovers of a bygone system... maybe it will find its use someday
 func detect_thing(body:Node2D):
 	if body is RockNode:
@@ -134,31 +132,34 @@ func aim_to_mouse() -> Vector2:
 	return position.direction_to(get_global_mouse_position())
 
 
-func hurt(damage:int, source_position:Vector2, kb_force = 500):
+func hurt(elm:ElementalType, source_position:Vector2, kb_force = 500):
 	if stagger: return
 	stagger_timer = stagger_delay
 	#Test using player position for separting status vs. enemy damage
 	#Revamp atk/def stat for player and enemies
-	Global.run_info.health -= damage
 	knockback_velocity = position.direction_to(source_position) * -kb_force
 	#print(knockback_velocity)
-	Global.run_info.health -= damage
+	knockless_hurt(elm)
+
+func knockless_hurt(elm:ElementalType):
+	Global.run_info.health -= elm.damage
+	Global.popup_text(str(elm.damage),position,elm.color)
 
 func heal(value):
 	Global.run_info.health += value
 
 #Call this function from your enemy to give the player a status!
-func suffer_effect(effect:StatusEffects.EFFECTS) -> void :
+func suffer_effect(effect:StatusEffect) -> void :
 	#print(effect)
-	plrStatus.add_effect(plrStatus.active_effects, effect)
-	print(plrStatus.active_effects.has(effect))
-	#print(plrStatus.active_effects.get(effects.burned))
+	StatusEffect.add_effect(plr_statuses, effect)
+	#print(plr_statuses.active_effects.has(effect))
+	#print(plr_statuses.active_effects.get(effects.burned))
 
 func save_effects() -> void:
-	plrStatus.store_plr_effects()
+	Global.save_plr_effects(plr_statuses)
 
 func retrieve_effects() -> void:
-	plrStatus = plrStatus.apply_plr_effects()
+	plr_statuses = Global.load_plr_effects()
 
 ##Returns a Vector2i position on the tilemap. Use map_to_local to actually do things with it.
 func get_current_tile() -> Vector2i:
@@ -171,3 +172,6 @@ func get_current_tile() -> Vector2i:
 func get_targeted_tile() -> Vector2i:
 	var target_tile = get_current_tile() + Vector2i(snapped_facing_dir)
 	return target_tile
+
+func react_to_element(type:ElementalType):
+	pass

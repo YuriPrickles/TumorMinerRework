@@ -1,13 +1,13 @@
 class_name CoalRat
 extends Enemy
 @export var detection_range: Area2D
-
 enum State {
 	IDLE,
 	CHASING,
 	DYING
 }
 var state : State = State.IDLE
+var doused : bool = false
 func _ready() -> void:
 	super()
 	detection_range.body_entered.connect(
@@ -28,6 +28,7 @@ func _ready() -> void:
 var is_inital_idle: bool = true
 var ember:PackedScene = preload("res://Source/Projectiles/ember.tscn")
 func _physics_process(delta: float) -> void:
+	super(delta)
 	if state == State.DYING: return
 	enemy_sprite.scale.x = -1 if sign(velocity.x) != -1 else 1
 	if is_inital_idle and state == State.IDLE:
@@ -53,6 +54,6 @@ func destroy():
 	super()
 
 func on_collide_player(plr:Player):
-	plr.hurt(7, position)
+	plr.hurt(ElementalType.ET_Fire.new(7,plr), position)
 	enemy_sprite.animate("hurt")
 	super(plr)

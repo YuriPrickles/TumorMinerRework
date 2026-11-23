@@ -23,6 +23,7 @@ const TIME_TO_SHOOT : float = 2.4
 var projectile : PackedScene = preload("res://Source/Projectiles/sulfur_ball_projectile.tscn")
 
 func _physics_process(delta: float) -> void:
+	super(delta)
 	if state == State.DYING: return
 	enemy_sprite.sprite.flip_h = sign(velocity.x) > 0
 	var plr:Player = Main.instance.get_player()
@@ -65,3 +66,8 @@ func destroy():
 func on_hurt_animation():
 	if state != State.SHOOTING or state != State.DYING:
 		super()
+
+func react_to_element(type:ElementalType):
+	if type is ElementalType.ET_Fire:
+		suffer_effect(Engulfed.new(2))
+		StatusEffect.remove_effect(enemy_statuses, Burned)

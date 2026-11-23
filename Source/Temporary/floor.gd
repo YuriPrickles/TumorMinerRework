@@ -87,6 +87,6 @@ func explode_at(pos:Vector2, boom_radius:int, boom_strength:int,damage:int=0) ->
 	if damage > 0:
 		for enemy in get_enemies():
 			if enemy.position.distance_to(pos) <= boom_radius * tile_size:
-				enemy.hurt(damage, self)
+				enemy.hurt(ElementalType.ET_Neutral.new(damage,enemy), self)
 		if to_local_position(plr.get_current_tile()).distance_to(pos) <= boom_radius * tile_size:
-			plr.hurt(damage, position,600)
+			plr.hurt(ElementalType.ET_Neutral.new(damage,plr), position,600)

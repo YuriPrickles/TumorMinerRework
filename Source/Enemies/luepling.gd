@@ -52,7 +52,7 @@ func start_bite():
 		await enemy_sprite.hit
 		plr_in_bite_range = bite_hitbox.get_overlapping_bodies().has(plr)
 		if plr_in_bite_range:
-			plr.hurt(4, position, 0)
+			plr.knockless_hurt(ElementalType.ET_Neutral.new(4,plr))
 		await enemy_sprite.animation_player.animation_finished
 	enemy_sprite.animate("idle")
 	bite_cooldown_timer = BITE_COOLDOWN
@@ -74,6 +74,7 @@ func vomit_egg():
 	vomiting = false
 
 func _process(delta: float) -> void:
+	super(delta)
 	if bite_cooldown_timer > 0:
 		bite_cooldown_timer -= delta
 func _physics_process(delta: float) -> void:

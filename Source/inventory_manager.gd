@@ -7,8 +7,9 @@ func _init() -> void:
 	inventory.resize(9)
 	inventory[0] = Pickaxe.new()
 	inventory[1] = RubyWand.new()
-	inventory[2] = Spear.new()
-	inventory[3] = MiniSmelter.new()
+	inventory[2] = EmeraldWand.new()
+	inventory[3] = Spear.new()
+	inventory[4] = MiniSmelter.new()
 
 func validate_item_slot(item:Item) -> void:
 	if item.stack <= 0 and inventory.has(item):

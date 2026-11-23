@@ -19,6 +19,10 @@ config/icon="res://icon.svg"
 
 Global="*uid://uykcv83c2sxe"
 
+[debug]
+
+gdscript/warnings/narrowing_conversion=0
+
 [display]
 
 window/size/viewport_width=1920

@@ -23,7 +23,7 @@ var rotation_sweep_angle:float = deg_to_rad(135)
 var position_offset: Vector2
 
 func _process(delta: float) -> void:
-	print(str(position, "   ", Main.instance.get_player().position, "   ", position_offset))
+	#print(str(position, "   ", Main.instance.get_player().position, "   ", position_offset))
 	super(delta)
 	var tween = create_tween()
 	tween.tween_property(self, "position_offset", ((sprite.texture.get_size().x) * velocity),swing_time/2).set_ease(Tween.EASE_IN)

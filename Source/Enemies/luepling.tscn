@@ -23,6 +23,7 @@ bite_hitbox = NodePath("BiteHitbox")
 enemy_sprite = NodePath("LueplingSprite")
 health = 23
 kb_res = 1.0
+tribes = 1
 
 [node name="DetectionRange" type="Area2D" parent="." index="0" unique_id=1993365856]
 position = Vector2(0, -10)

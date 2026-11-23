@@ -1,4 +1,4 @@
-class_name StatusEffects extends Resource
+class_name StatusEffect extends Resource
 
 #Reference point for all statuses, editing them here SHOULD affect how they
 #act across all enemies and for the player
@@ -18,168 +18,89 @@ enum EFFECTS {burned, sulphured, engulfed, poisoned, rusted, cobwebbed, defUp, d
 	EFFECTS.atkDown   : [0, 10, 3],
 	EFFECTS.regen     : [5, 10, 3] #Should be used with plr.heal()
 }
-#@export var status_instance = {}
-@export var active_effects : Dictionary[EFFECTS, Array] = {
-	#effect : [dmg, remainingDuration, remainingStacks]
-}
+var duration:float = 0.0
+var max_stacks: int = 1
+var current_stacks: int = 0
 
-var dmgInx = 0
-var durationInx = 1
-var stackInx = 2
-
-func _init() -> void :
-	return
+func _init(time:float,stack:int = 1) -> void :
+	duration = time
+	current_stacks = stack
 
 #TO IMPLEMENT: 
 	#For each possible status in the library, if the stackcount is higher than 0
 	#add that status, to the 'active_effects' dictionary
 	#add it's damage, duration, and stack count for later calculation
 	#set stackcount in the LIBRARY to 0 so the stacks won't be added again later
-func add_effect(target:Dictionary, effect:EFFECTS) -> void :
-	var baseStatus = status_library.get(effect)
-	var plrStatus
-	if (target.has(effect)):
-		plrStatus = target.get(effect)
-	else :
-		plrStatus = baseStatus
-		plrStatus[stackInx] = 1
-	
-	if ((plrStatus[stackInx] < baseStatus[stackInx])): #Target ALREADY HAS a stack
-		plrStatus = target.get(effect)
-		plrStatus[stackInx] += 1 #Give target their first stack
-		target.set(effect, plrStatus)
-		reset_duration(target, effect) #Gained a new stack, refresh duration
-	else : #target DOES NOT HAVE a stack
-		plrStatus = baseStatus
-		plrStatus[stackInx] = 1
-		target.set(effect, plrStatus) #Give Target their first stack
+static func add_effect(array:Array[StatusEffect], effect:StatusEffect) -> void :
+	if has_effect(array, effect.get_script()):
+		for existing_eff in array:
+			if effect.get_script() == existing_eff.get_script():
+				existing_eff.duration += effect.duration
+				existing_eff.current_stacks = min(
+					existing_eff.max_stacks,
+					effect.current_stacks + existing_eff.current_stacks)
+				return
+	array.append(effect)
+	effect.on_apply(array)
+	#var baseStatus = status_library.get(effect)
+	#var plr_statuses
+	#if (target.has(effect)):
+		#plr_statuses = target.get(effect)
+	#else :
+		#plr_statuses = baseStatus
+		#plr_statuses[stackInx] = 1
+	#
+	#if ((plr_statuses[stackInx] < baseStatus[stackInx])): #Target ALREADY HAS a stack
+		#plr_statuses = target.get(effect)
+		#plr_statuses[stackInx] += 1 #Give target their first stack
+		#target.set(effect, plr_statuses)
+		#reset_duration(target, effect) #Gained a new stack, refresh duration
+	#else : #target DOES NOT HAVE a stack
+		#plr_statuses = baseStatus
+		#plr_statuses[stackInx] = 1
+		#target.set(effect, plr_statuses) #Give Target their first stack
 
 #Entirely removes status from the afflicted target, if they have it
-func remove_effect(target:Dictionary, effect:EFFECTS) -> void :
-	var plrStatus
-	if (target.has(effect)):
-		plrStatus = target.erase(effect)
-	else:
-		return
+static func remove_effect(array:Array[StatusEffect], effect_script:Script) -> void :
+	var marked_for_death:StatusEffect
+	for eff in array:
+		if effect_script == eff.get_script():
+			marked_for_death = eff
+	if marked_for_death:
+		array.erase(marked_for_death)
+	marked_for_death = null
 
-func decrease_duration(target:Dictionary, effect:EFFECTS) -> void:
-	var plrStatus = target.get(effect)
-	plrStatus[durationInx] -= 1
-	if (plrStatus[durationInx] <= 0):
-		remove_effect(target, effect)
-	else :
-		target.set(effect, plrStatus)
+func decrease_duration(delta:float) -> void:
+	duration -= delta
 
+static func has_effect(array:Array[StatusEffect],effect_script:Script) -> bool:
+	for eff in array:
+		if eff.get_script() == effect_script:
+			return true
+	return false
 #Resets duration for the given effect
-func reset_duration(target:Dictionary, effect:EFFECTS) -> void :
-	var baseStatus = status_library.get(effect)
-	var plrStatus
-	if (target.has(effect)):
-		plrStatus = target.get(effect)
-		plrStatus[durationInx] = baseStatus[durationInx]
-		target.set(effect, plrStatus)
+#func reset_duration(target:Dictionary, effect:EFFECTS) -> void :
+	#var baseStatus = status_library.get(effect)
+	#var plr_statuses
+	#if (target.has(effect)):
+		#plr_statuses = target.get(effect)
+		##plr_statuses[durationInx] = baseStatus[durationInx]
+		##target.set(effect, plr_statuses)
 
 #Removes a single stack of the given effect
-func consume_stack(target:Dictionary, effect:EFFECTS) -> void :
-	var plrStatus
-	if (target.has(effect)):
-		plrStatus = target.get(effect)
-		plrStatus[stackInx] -= 1
-		if (plrStatus[stackInx] <= 0) :
-			remove_effect(target, effect)
-		else :
-			target.set(effect, plrStatus)
-	else :
-		return
+func consume_stack() -> void :
+	current_stacks -= 1
 
+func on_apply(array:Array[StatusEffect]):
+	pass
 #Reads through and implements ALL applied effects and interactions
-func process_effect(target:Dictionary, plr:Player) -> void :
-	var plrStatus
-	var currEffect
-	if not (target.size() >= 0) :
-		return
-	
-	currEffect = EFFECTS.engulfed
-	if (target.has(EFFECTS.burned) && target.has(EFFECTS.sulphured)):
-		plrStatus = target.get(currEffect)
-		remove_effect(target, EFFECTS.burned)
-		consume_stack(target, EFFECTS.sulphured)
-		add_effect(target, currEffect)
-		plr.hurt(plrStatus[dmgInx], plr.position, 0)
-		decrease_duration(target, currEffect)
-		
-	currEffect = EFFECTS.burned
-	if (target.has(currEffect)):
-		plrStatus = target.get(currEffect)
-		plr.hurt(plrStatus[dmgInx], plr.position, 0)
-		decrease_duration(target, currEffect)
-	
-	currEffect = EFFECTS.sulphured
-	if (target.has(currEffect)):
-		plrStatus = target.get(currEffect)
-		plr.hurt(plrStatus[dmgInx], plr.position, 0)
-		decrease_duration(target, currEffect)
-	
-	currEffect = EFFECTS.poisoned
-	if (target.has(currEffect)):
-		plrStatus = target.get(currEffect)
-		plr.hurt(plrStatus[dmgInx], plr.position, 0)
-		decrease_duration(target, currEffect)
-	
-	currEffect = EFFECTS.regen
-	if (target.has(currEffect)):
-		plrStatus = target.get(currEffect)
-		decrease_duration(target, currEffect)
-		plr.heal(plrStatus[dmgInx])
-	
-	return
+func process_effect(plr:Player, delta) -> void :
+	if (current_stacks <= 0 or duration <= 0.0):
+		remove_effect(plr.plr_statuses, self.get_script())
+	pass
 
 #Same as process_effect but for enemy instances
-func process_enemy_effects(target:Dictionary, enemy:Enemy) -> void :
-	var enemyStatus
-	var currEffect
-	if not (target.size() >= 0) :
-		return
-	
-	currEffect = EFFECTS.engulfed
-	if (target.has(EFFECTS.burned) && target.has(EFFECTS.sulphured)):
-		enemyStatus = target.get(currEffect)
-		remove_effect(target, EFFECTS.burned)
-		consume_stack(target, EFFECTS.sulphured)
-		add_effect(target, currEffect)
-		enemy.hurt(enemyStatus[dmgInx], enemy.position)
-		decrease_duration(target, currEffect)
-		
-	currEffect = EFFECTS.burned
-	if (target.has(currEffect)):
-		enemyStatus = target.get(currEffect)
-		enemy.hurt(enemyStatus[dmgInx], enemy.position)
-		decrease_duration(target, currEffect)
-	
-	currEffect = EFFECTS.sulphured
-	if (target.has(currEffect)):
-		enemyStatus = target.get(currEffect)
-		enemy.hurt(enemyStatus[dmgInx], enemy.position)
-		decrease_duration(target, currEffect)
-	
-	currEffect = EFFECTS.poisoned
-	if (target.has(currEffect)):
-		enemyStatus = target.get(currEffect)
-		enemy.hurt(enemyStatus[dmgInx], enemy.position)
-		decrease_duration(target, currEffect)
-	
-	currEffect = EFFECTS.regen
-	if (target.has(currEffect)):
-		enemyStatus = target.get(currEffect)
-		decrease_duration(target, currEffect)
-		enemy.heal(enemyStatus[dmgInx])
-	return
-
-func store_plr_effects() -> void:
-	Global.save_plr_effects(self)
-func apply_plr_effects() -> StatusEffects:
-	var tempEffects : StatusEffects = Global.load_plr_effects()
-	if (tempEffects != null):
-		return tempEffects
-	
-	return StatusEffects.new()
+func process_enemy_effect(enemy:Enemy, delta) -> void :
+	if (current_stacks <= 0 or duration <= 0.0):
+		remove_effect(enemy.enemy_statuses, self.get_script())
+	pass

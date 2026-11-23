@@ -1,14 +1,13 @@
 class_name Projectile
 extends Area2D
 @export var collision_shape: CollisionShape2D
-
 @export var hostile: bool
 @export var damage: int
 @export var knockback: float = 500
 @export var lifetime: float = 3
-@export var multi_hit_delay:float = -1
-var multi_hit_timer:float = 0.0
+@export var knockless: bool = false
 
+var multi_hit_timer:float = 0.0
 var velocity: Vector2
 
 var hit_enemies_array : Array[Enemy]
@@ -26,8 +25,7 @@ static func new_projectile(proj:PackedScene, pos, vel, dmg=-1, h=null) -> Projec
 	Main.instance.current_floor.projectiles.add_child(projectile)
 	return projectile
 func _ready() -> void:
-	if multi_hit_delay < 0:
-		body_entered.connect(
+	body_entered.connect(
 			on_body_enter
 		)
 
@@ -67,12 +65,17 @@ func on_body_enter(body:Node2D):
 		on_collide_rock(body as RockNode)
 	
 
+func get_damage(dmg, target):
+	return ElementalType.ET_Neutral.new(dmg,target)
 func on_collide_player(plr:Player) -> bool:
 	if not hostile: return false
 	if not hit_players_array.has(plr):
 		#if multi_hit_delay > -1:
 		hit_players_array.append(plr)
-		plr.hurt(damage,position,knockback)
+		if not knockless:
+			plr.hurt(get_damage(damage,plr),position,knockback)
+		else:
+			plr.knockless_hurt(get_damage(damage,plr))
 	else:
 		return false
 	return true
@@ -80,7 +83,7 @@ func on_collide_enemy(enemy:Enemy) -> bool:
 	if hostile: return false
 	if not hit_enemies_array.has(enemy):
 		hit_enemies_array.append(enemy)
-		enemy.hurt(damage,self)
+		enemy.hurt(get_damage(damage,enemy),self if not knockless else null)
 	else:
 		return false
 	return true

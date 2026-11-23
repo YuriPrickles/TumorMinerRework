@@ -20,6 +20,7 @@ health = 37
 kb_res = 1.0
 movement_speed = 70.0
 acceleration = 500.0
+tribes = 2
 
 [node name="DetectionRange" type="Area2D" parent="." index="0" unique_id=1993365856]
 position = Vector2(0, -10)

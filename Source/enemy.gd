@@ -7,6 +7,8 @@ extends CharacterBody2D
 @export var kb_res:float = 0
 @export var movement_speed: float = 150.0
 @export var acceleration: float = 256
+@export_flags("Neutral", "Fire", "Sulfur", "Bug", "Flying",) var tribes: int
+
 var grid:AStarGrid2D
 var tilemap:TileMapLayer
 var move_points:PackedVector2Array
@@ -14,8 +16,8 @@ var current_point:int
 var current_cell:Vector2i
 var target_cell:Vector2i
 
-var enemy_status = StatusEffects.new()
-var effects = StatusEffects.EFFECTS
+var enemy_statuses : Array[StatusEffect]
+var effects = StatusEffect.EFFECTS
 #Add atk, add def, understand how to affect health using status effects
 #Def modifier is additive
 
@@ -28,8 +30,10 @@ func _ready() -> void:
 		target_cell = current_cell
 	lambda.call_deferred()
 
-func _physics_process(delta: float) -> void:
-	enemy_status.process_enemy_effects(enemy_status.active_effects, self)
+func _physics_process(delta: float) -> void: pass
+func _process(delta: float) -> void:
+	for eff in enemy_statuses:
+		eff.process_enemy_effect(self, delta)
 	pass
 
 func basic_movement(delta):
@@ -74,17 +78,18 @@ func destroy():
 func on_destroy():
 	pass
 	
-func hurt(damage:int, source):
+func hurt(elm:ElementalType, source=null):
 	if health <= 0:
 		return
-	on_hurt(damage,source)
-	health -= damage
+	on_hurt(elm.damage,source)
+	health -= elm.damage
+	Global.popup_text(str(elm.damage),position,elm.color)
 	if health <= 0:
 		destroy()
 
 func on_hurt(damage:int, source):
 	enemy_sprite.hit_flash_player.play("hit_flash")
-	on_hurt_animation()
+	if source: on_hurt_animation()
 	if source and kb_res < 1:
 		flinch(source)
 
@@ -117,8 +122,11 @@ func get_current_tile() -> Vector2i:
 	var current_tile := tiles.local_to_map(position)
 	return current_tile
 
-func suffer_effect(effect:StatusEffects.EFFECTS) -> void :
+func suffer_effect(effect:StatusEffect) -> void :
 	#print(effect)
-	enemy_status.add_effect(enemy_status.active_effects, effect)
-	#print(plrStatus.active_effects.has(effect))
-	#print(plrStatus.active_effects.get(effects.burned))
+	StatusEffect.add_effect(enemy_statuses, effect)
+	#print(plr_statuses.active_effects.has(effect))
+	#print(plr_statuses.active_effects.get(effects.burned))
+
+func react_to_element(type:ElementalType):
+	pass
