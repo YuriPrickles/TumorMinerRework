@@ -44,7 +44,6 @@ func _ready() -> void:
 	interact_range.body_exited.connect(undetect_thing)
 	interact_range.area_entered.connect(detect_thing)
 	interact_range.area_exited.connect(undetect_thing)
-	if (firstLoad) : prepare_stats()
 	retrieve_effects() #Re-applies effects accrued on a previous floor IF APPLICABLE
 
 func _physics_process(delta: float) -> void:
@@ -86,7 +85,8 @@ func _physics_process(delta: float) -> void:
 var tickDuration : float
 func _process(delta: float) -> void:
 	tickDuration += delta
-	if (fmod(tickDuration, 1.5) == 0) :
+	#print(fmod(tickDuration, 100))
+	if (fmod(tickDuration, 100) > 1) :
 		tickDuration = 0
 		print("tick")
 		for eff in plr_statuses:
@@ -169,10 +169,7 @@ func heal(value):
 
 #Call this function from your enemy to give the player a status!
 func suffer_effect(effect:StatusEffect) -> void :
-	#print(effect)
 	StatusEffect.add_effect(plr_statuses, effect)
-	#print(plr_statuses.active_effects.has(effect))
-	#print(plr_statuses.active_effects.get(effects.burned))
 
 func save_effects() -> void:
 	Global.save_plr_effects(self)
@@ -202,9 +199,11 @@ func get_plr_Def() -> float :
 	return self.def * self.defMod
 
 func prepare_stats() -> void :
-	self.atk = 1
-	self.def = 1
 	self.atkMod = 1.0
 	self.defMod = 1.0
-	firstLoad = false
-	
+
+func plrAtkMod_apply(newMod:float) -> void:
+	self.atkMod += newMod
+
+func plrDefMod_apply(newMod:float) -> void:
+	self.atkDef += newMod

@@ -4,23 +4,24 @@ class_name StatusEffect extends Resource
 #act across all enemies and for the player
 enum EFFECTS {burned, sulphured, engulfed, poisoned, rusted, cobwebbed, defUp, defDown, atkUp, atkDown, regen}
 @export var status : EFFECTS
-@export var status_library : Dictionary[EFFECTS, Array]= {
-	#effect     : [dmg, duration, maxStacks], Dmg can be used as a debuff modifier
-	EFFECTS.burned    : [3, 7, 5],
-	EFFECTS.sulphured : [1, 7, 5],
-	EFFECTS.engulfed  : [5, 4, 3], #occurs when sulphered+burned
-	EFFECTS.poisoned  : [5, 7, 5],
-	EFFECTS.rusted    : [0, 15, 3],
-	EFFECTS.cobwebbed : [3, 1, 1], #Should only occur when standing on the web
-	EFFECTS.defUp     : [0, 10, 3],
-	EFFECTS.defDown   : [0, 10, 3],
-	EFFECTS.atkUp     : [0, 10, 3],
-	EFFECTS.atkDown   : [0, 10, 3],
-	EFFECTS.regen     : [5, 10, 3] #Should be used with plr.heal()
-}
+#@export var status_library : Dictionary[EFFECTS, Array]= {
+	##effect     : [dmg, duration, maxStacks], Dmg can be used as a debuff modifier
+	#EFFECTS.burned    : [3, 7, 5],
+	#EFFECTS.sulphured : [1, 7, 5],
+	#EFFECTS.engulfed  : [5, 4, 3], #occurs when sulphered+burned
+	#EFFECTS.poisoned  : [5, 7, 5],
+	#EFFECTS.rusted    : [0, 15, 3],
+	#EFFECTS.cobwebbed : [3, 1, 1], #Should only occur when standing on the web
+	#EFFECTS.defUp     : [0, 10, 3],
+	#EFFECTS.defDown   : [0, 10, 3],
+	#EFFECTS.atkUp     : [0, 10, 3],
+	#EFFECTS.atkDown   : [0, 10, 3],
+	#EFFECTS.regen     : [5, 10, 3] #Should be used with plr.heal()
+#}
 var duration:float = 0.0
-var max_stacks: int = 1
+var max_stacks: int
 var current_stacks: int = 0
+
 
 func _init(time:float,stack:int = 1) -> void :
 	duration = time
@@ -78,14 +79,7 @@ static func has_effect(array:Array[StatusEffect],effect_script:Script) -> bool:
 		if eff.get_script() == effect_script:
 			return true
 	return false
-#Resets duration for the given effect
-#func reset_duration(target:Dictionary, effect:EFFECTS) -> void :
-	#var baseStatus = status_library.get(effect)
-	#var plr_statuses
-	#if (target.has(effect)):
-		#plr_statuses = target.get(effect)
-		##plr_statuses[durationInx] = baseStatus[durationInx]
-		##target.set(effect, plr_statuses)
+
 
 #Removes a single stack of the given effect
 func consume_stack() -> void :
@@ -94,7 +88,6 @@ func consume_stack() -> void :
 func on_apply(array:Array[StatusEffect]):
 	pass
 
-#Reads through and implements ALL applied effects and interactions
 func process_effect(plr:Player, delta) -> void :
 	if (current_stacks <= 0 or duration <= 0.0):
 		remove_effect(plr.plr_statuses, self.get_script())
