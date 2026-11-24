@@ -8,6 +8,8 @@ extends CharacterBody2D
 @export var kb_res:float = 0
 @export var movement_speed: float = 150.0
 @export var acceleration: float = 256
+##Enemy will have an outline when in range of a pickaxe.
+@export var allow_mining: bool = false
 @export_flags("Neutral", "Fire", "Sulfur", "Bug", "Flying",) var tribes: int
 
 var grid:AStarGrid2D
@@ -132,4 +134,16 @@ func suffer_effect(effect:StatusEffect) -> void :
 	#print(plr_statuses.active_effects.get(effects.burned))
 
 func react_to_element(type:ElementalType,is_status=false):
+	pass
+
+## Override to add additional conditions for being mineable.[br]
+## Takes in the player's targeted tile as a parameter.[br]
+## Has no conditions by default other than allow_mining.
+func is_mineable(target_tile:Vector2i):
+	if allow_mining:
+		return true
+	return false
+
+## Override to do something when this is mined.
+func on_mine(strength:int):
 	pass

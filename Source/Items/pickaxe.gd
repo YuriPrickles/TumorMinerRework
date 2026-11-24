@@ -21,4 +21,7 @@ func use_item(plr:Player) -> bool:
 	for interactable in c_floor.get_interactables():
 		if target_tile == interactable.get_current_tile() or current_tile == interactable.get_current_tile():
 			plr.request_mine_action(interactable, strength)
+	for enemy in c_floor.get_enemies():
+		if enemy.allow_mining and enemy.is_mineable(target_tile):
+			enemy.on_mine(strength)
 	return true

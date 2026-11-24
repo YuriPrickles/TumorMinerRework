@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="LayoutPool" format=3 uid="uid://d3g5g64rd8u4s"]
+
+[ext_resource type="PackedScene" uid="uid://dqahygjx0a7kv" path="res://Source/Layouts/cave_lupus_arena.tscn" id="1_wvhde"]
+[ext_resource type="Script" uid="uid://o0k5hbnfusc4" path="res://Source/layout_pool.gd" id="2_cqsvq"]
+
+[resource]
+script = ExtResource("2_cqsvq")
+layout_pool = Array[PackedScene]([ExtResource("1_wvhde")])
+metadata/_custom_type_script = "uid://o0k5hbnfusc4"

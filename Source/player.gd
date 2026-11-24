@@ -88,7 +88,7 @@ func _process(delta: float) -> void:
 	tickDuration += delta
 	if (fmod(tickDuration, 100) > 1) :
 		tickDuration = 0
-		print("tick")
+		#print("tick")
 		for eff in plr_statuses:
 			eff.process_effect(self, delta)
 

@@ -25,6 +25,7 @@ var ladder_spawn_chance: float = 0.05
 var ldr_ch_incr_min: float = 0.02
 var ldr_ch_incr_max: float = 0.04
 var tile_size: int = 64
+var enemies_cleared: bool = false
 func _ready() -> void:
 	current_layout = layout_pool.layout_pool.pick_random().instantiate()
 	environment.add_child(current_layout)
@@ -35,6 +36,10 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
+	if not enemies_cleared and get_enemies().size() <= 0:
+		enemies_cleared = true
+		for spot in current_layout.guaranteed_ladder_spots:
+			spawn_ladder(to_local_position(spot), true)
 	queue_redraw()
 	#if Engine.get_frames_drawn() % 30 == 0:
 		#queue_redraw()
@@ -58,8 +63,9 @@ func _draw() -> void:
 func increase_ladder_chance():
 	ladder_spawn_chance += randf_range(ldr_ch_incr_min,ldr_ch_incr_max)
 
-func spawn_ladder(pos: Vector2):
-	if already_spawned_ladder: return
+func spawn_ladder(pos: Vector2, force_spawn:bool = false):
+	if already_spawned_ladder or (not force_spawn and not current_layout.allow_random_ladder):
+		return
 	var ladder:Ladder = ladder_scene.instantiate()
 	ladder.position = pos
 	interactables.add_child.call_deferred(ladder)

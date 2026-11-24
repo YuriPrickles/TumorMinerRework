@@ -22,7 +22,7 @@ var rotation_sweep_angle:float = deg_to_rad(135)
 
 var position_offset: Vector2
 
-func _process(delta: float) -> void:
+func _physics_process(delta: float) -> void:
 	#print(str(position, "   ", Main.instance.get_player().position, "   ", position_offset))
 	super(delta)
 	var tween = create_tween()

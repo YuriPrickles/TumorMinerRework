@@ -1,7 +1,7 @@
 class_name LuepusEgg
 extends RockNode
 
-const TIME_TO_SPAWN:float = 4.0
+var TIME_TO_SPAWN:float = 4.0
 var spawn_timer:float=0.0
 func drop_loot():
 	pass

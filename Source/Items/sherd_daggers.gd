@@ -5,7 +5,7 @@ func _init(stk:int=1) -> void:
 	type = Type.WEAPON
 	anim_type = AnimationType.INVISIBLE
 	use_delay = 0.2
-	damage = 1
+	damage = 8
 	super(stk)
 
 const sword = preload("res://Source/Projectiles/sherd_dagger.tscn")

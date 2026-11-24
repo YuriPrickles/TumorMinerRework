@@ -9,7 +9,7 @@ extends Projectile
 
 var _boom_timer :float = 0.0
 
-func _process(delta: float) -> void:
+func _physics_process(delta: float) -> void:
 	velocity = velocity.move_toward(Vector2.ZERO, delta * 8)
 	texture.rotation_degrees += 1.5 * ( abs(velocity.normalized().length()))
 	

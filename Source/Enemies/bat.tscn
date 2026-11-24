@@ -21,7 +21,7 @@ detection_range = NodePath("DetectionRange")
 bite_range = NodePath("BiteRange")
 bite_hitbox = NodePath("BiteHitbox")
 enemy_sprite = NodePath("BatSprite")
-health = 15
+health = 70
 kb_res = 0.5
 tribes = 1
 
