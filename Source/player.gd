@@ -86,7 +86,7 @@ func _physics_process(delta: float) -> void:
 var tickDuration : float
 func _process(delta: float) -> void:
 	tickDuration += delta
-	if (fmod(tickDuration, 1.5) == 0) :
+	if (fmod(tickDuration, 100) > 1) :
 		tickDuration = 0
 		print("tick")
 		for eff in plr_statuses:
