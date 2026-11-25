@@ -8,6 +8,11 @@ var base_health_drain_delay:float = 2.4
 var plr_active_effects:Array[StatusEffect]
 var plrAtkBase : float
 var plrDefBase : float
+## Depth is increased when going down a ladder,[br]
+## but before the floor is refreshed.
+var boss_room:bool:
+	get:
+		return Global.run_info.depth % 7 == 0
 
 @export_dir var items_texture_path: String
 
@@ -18,10 +23,11 @@ func get_current_item() -> Item:
 	return inv_manager.inventory[current_item_index]
 
 func _process(delta: float) -> void:
-	health_drain_timer += delta
-	if health_drain_timer >= base_health_drain_delay:
-		health_drain_timer = 0
-		run_info.health -= 1
+	if not get_tree().paused:
+		health_drain_timer += delta
+		if health_drain_timer >= base_health_drain_delay:
+			health_drain_timer = 0
+			run_info.health -= 1
 func start_new_run():
 	run_info = RunInfo.new()
 	inv_manager = InventoryManager.new()

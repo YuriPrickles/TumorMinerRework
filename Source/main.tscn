@@ -8,13 +8,14 @@
 [ext_resource type="PackedScene" uid="uid://cvum5b21xj4gy" path="res://Source/crafting_ui.tscn" id="5_8cnld"]
 [ext_resource type="PackedScene" uid="uid://dinl76e0yis8" path="res://Source/parts_menu_ui.tscn" id="6_r8bwp"]
 
-[node name="Main" type="Node" unique_id=1688167972 node_paths=PackedStringArray("fader", "crafting_ui", "parts_menu_ui")]
+[node name="Main" type="Node" unique_id=1688167972 node_paths=PackedStringArray("fader", "crafting_ui", "parts_menu_ui", "ui")]
 process_mode = 3
 script = ExtResource("1_kvypo")
 floor_scene = ExtResource("1_wkcc7")
 fader = NodePath("UI/Fader")
 crafting_ui = NodePath("UI/CraftingUI")
 parts_menu_ui = NodePath("UI/PartsMenuUI")
+ui = NodePath("UI")
 
 [node name="UI" type="CanvasLayer" parent="." unique_id=1462521204]
 process_mode = 3

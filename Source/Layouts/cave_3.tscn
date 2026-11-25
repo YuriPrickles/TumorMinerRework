@@ -18,4 +18,4 @@ tile_map_data = PackedByteArray("AAAIAA4AAwABAAIAAAAAAPz/AwABAAEAAAADAPr/AwABAAE
 position = Vector2(-704, -1024)
 
 [node name="BottomRight" parent="." index="4" unique_id=328952114]
-position = Vector2(2176, 1216)
+position = Vector2(2176, 1600)

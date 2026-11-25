@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://cctenaidiwaci" path="res://Source/Temporary/floor.gd" id="1_gl3tf"]
 [ext_resource type="Resource" uid="uid://dlecevi0rrqc8" path="res://Resources/LayoutPools/cave_layouts.tres" id="2_h30fj"]
 [ext_resource type="PackedScene" uid="uid://bokb41tlveis0" path="res://Source/Interactables/ladder.tscn" id="2_mvrx8"]
+[ext_resource type="Resource" uid="uid://d3g5g64rd8u4s" path="res://Resources/LayoutPools/cave_boss.tres" id="3_mvrx8"]
 
 [node name="Floor" type="Node2D" unique_id=1371881429 node_paths=PackedStringArray("enemies", "interactables", "pickups", "projectiles", "rock_nodes", "environment")]
 process_mode = 1
@@ -16,6 +17,7 @@ rock_nodes = NodePath("Environment/RockNodes")
 environment = NodePath("Environment")
 ladder_scene = ExtResource("2_mvrx8")
 layout_pool = ExtResource("2_h30fj")
+boss_layout_pool = ExtResource("3_mvrx8")
 
 [node name="Environment" type="Node2D" parent="." unique_id=556961827]
 y_sort_enabled = true
