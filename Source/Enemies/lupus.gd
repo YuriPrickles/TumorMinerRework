@@ -36,7 +36,7 @@ func _physics_process(delta: float) -> void:
 			attack_timer += delta
 			enemy_sprite.animate("walk")
 			basic_movement(delta)
-			if attack_timer > 3:
+			if attack_timer > 5:
 				attack_timer = 0
 				c_state = State.START_DIGGING
 			if bite_range.get_overlapping_bodies().has(plr) and bite_cooldown_timer <= 0:
@@ -47,6 +47,12 @@ func _physics_process(delta: float) -> void:
 			velocity = Vector2.ZERO
 		State.START_DIGGING:
 			dig_sequence()
+		State.RESTING:
+			attack_timer += delta
+			
+			if attack_timer > 5:
+				attack_timer = 0
+				c_state = State.CHASING
 	move_and_collide(velocity * delta)
 
 var plr_in_bite_range: bool = false
@@ -79,14 +85,16 @@ func dig_sequence():
 	enemy_sprite.animate("post_dig")
 	await enemy_sprite.animation_player.animation_finished
 	enemy_sprite.animate("rest_idle")
-	c_state = State.CHASING
+	c_state = State.RESTING
 
 func start_bite():
 	var plr : Player = Main.instance.get_player()
 	enemy_sprite.force_animate("bite")
-	await enemy_sprite.hit
-	velocity = position.direction_to(plr.position) * (12 * movement_speed)
 	bite_hitbox.rotation = deg_to_rad(90) + plr.position.direction_to(position).angle()
+
+	var temp_vel:Vector2 = position.direction_to(plr.position) * (12 * movement_speed)
+	await enemy_sprite.hit
+	velocity = temp_vel
 	await enemy_sprite.hit
 	velocity = Vector2.ZERO
 	plr_in_bite_range = bite_hitbox.get_overlapping_bodies().has(plr)

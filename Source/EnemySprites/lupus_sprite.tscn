@@ -2,9 +2,9 @@
 
 [ext_resource type="PackedScene" uid="uid://c6v8kcfr3mjg7" path="res://Source/enemy_sprite.tscn" id="1_bqevb"]
 [ext_resource type="Shader" uid="uid://cdhg26rdlj0dq" path="res://Source/hit_flash.gdshader" id="2_k6hag"]
-[ext_resource type="Texture2D" uid="uid://b80ab8k32ky" path="res://Assets/Graphics/Gameplay/Items/lupus.png" id="3_4l5a6"]
+[ext_resource type="Texture2D" uid="uid://b80ab8k32ky" path="res://Assets/Temporary/lupus.png" id="3_4l5a6"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_4w0pp"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_bqevb"]
 resource_local_to_scene = true
 shader = ExtResource("2_k6hag")
 shader_parameter/active = false
@@ -310,7 +310,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0, 0.33333334, 0.41666666, 0.5, 0.9166666, 1),
 "transitions": PackedFloat32Array(2.0705302, 1, 2.7320805, 1, 1.3660405, 2.7320805),
 "update": 0,
-"values": [-0.5235987755982988, 0.12217304763960307, 0.12217305, -0.4799655442984406, -0.4799655442984406, -0.5235987755982988]
+"values": [-0.5235987755982988, 0.12217304763960309, 0.12217305, -0.4799655442984406, -0.4799655442984406, -0.5235987755982988]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -322,7 +322,7 @@ tracks/2/keys = {
 "times": PackedFloat32Array(0, 0.25, 0.33333334, 0.9166666, 1),
 "transitions": PackedFloat32Array(1.5, 1.5, 1, 0.6, 1.5),
 "update": 0,
-"values": [0.7853981633974483, 0.7853981633974483, 1.1013027580084223, 1.1013027580084223, 0.7853981633974483]
+"values": [0.7853981633974483, 0.7853981633974483, 1.1013027580084225, 1.1013027580084225, 0.7853981633974483]
 }
 tracks/3/type = "value"
 tracks/3/imported = false
@@ -334,7 +334,7 @@ tracks/3/keys = {
 "times": PackedFloat32Array(0, 0.25, 0.33333334, 0.9166666, 1),
 "transitions": PackedFloat32Array(1.5, 0.6, 1, 0.6, 1.5),
 "update": 0,
-"values": [-0.80634211442138, -0.80634211442138, -1.9338248112097174, -1.9338248112097174, -0.80634211442138]
+"values": [-0.80634211442138, -0.80634211442138, -1.9338248112097176, -1.9338248112097176, -0.80634211442138]
 }
 tracks/4/type = "value"
 tracks/4/imported = false
@@ -358,7 +358,7 @@ tracks/5/keys = {
 "times": PackedFloat32Array(0, 0.25, 0.33333334, 0.9166666, 1),
 "transitions": PackedFloat32Array(1.5, 0.6, 1, 0.6, 1.5),
 "update": 0,
-"values": [0.6981317007977318, 0.6981317007977318, 1.1013027580084223, 1.1013027580084223, 0.6981317007977318]
+"values": [0.6981317007977318, 0.6981317007977318, 1.1013027580084225, 1.1013027580084225, 0.6981317007977318]
 }
 tracks/6/type = "value"
 tracks/6/imported = false
@@ -488,7 +488,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0, 0.6666667, 3.1666665, 3.4166667),
 "transitions": PackedFloat32Array(2.0705302, 1, 2.7320805, 1),
 "update": 0,
-"values": [-0.5235987755982988, 0.12217304763960307, 0.12217305, -0.4799655442984406]
+"values": [-0.5235987755982988, 0.12217304763960309, 0.12217305, -0.4799655442984406]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -500,7 +500,7 @@ tracks/2/keys = {
 "times": PackedFloat32Array(0, 0.25, 0.6666667, 3.1666667, 3.4166667),
 "transitions": PackedFloat32Array(1.5, 1.5, 1, 1, 1),
 "update": 0,
-"values": [0.7853981633974483, 0.7853981633974483, 1.1013027580084223, 1.1013027, -0.6911503837897549]
+"values": [0.7853981633974483, 0.7853981633974483, 1.1013027580084225, 1.1013027, -0.6911503837897549]
 }
 tracks/3/type = "value"
 tracks/3/imported = false
@@ -512,7 +512,7 @@ tracks/3/keys = {
 "times": PackedFloat32Array(0, 0.25, 0.6666667, 3.1666667, 3.4166667),
 "transitions": PackedFloat32Array(1.5, 0.6, 1, 1, 1),
 "update": 0,
-"values": [-0.80634211442138, -0.80634211442138, -1.9338248112097174, -1.9338248, -0.08203047484373328]
+"values": [-0.80634211442138, -0.80634211442138, -1.9338248112097176, -1.9338248, -0.08203047484373328]
 }
 tracks/4/type = "value"
 tracks/4/imported = false
@@ -536,7 +536,7 @@ tracks/5/keys = {
 "times": PackedFloat32Array(0, 0.25, 0.6666667, 3.1666667, 3.4166667),
 "transitions": PackedFloat32Array(1.5, 0.6, 1, 0.5, 1),
 "update": 0,
-"values": [0.6981317007977318, 0.6981317007977318, 1.1013027580084223, 1.1013027, -0.42935099599060544]
+"values": [0.6981317007977318, 0.6981317007977318, 1.1013027580084225, 1.1013027, -0.42935099599060544]
 }
 tracks/6/type = "value"
 tracks/6/imported = false
@@ -723,7 +723,7 @@ tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [1.1013027580084223]
+"values": [1.1013027580084225]
 }
 tracks/3/type = "value"
 tracks/3/imported = false
@@ -735,7 +735,7 @@ tracks/3/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [-1.9338248112097174]
+"values": [-1.9338248112097176]
 }
 tracks/4/type = "value"
 tracks/4/imported = false
@@ -759,7 +759,7 @@ tracks/5/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [1.1013027580084223]
+"values": [1.1013027580084225]
 }
 tracks/6/type = "value"
 tracks/6/imported = false
@@ -1076,7 +1076,7 @@ tracks/12/keys = {
 "times": PackedFloat32Array(0, 0.50000006, 0.5416667, 0.5833334, 0.62500006, 0.6666667, 0.7083334, 0.75000006, 0.79166675, 1.0416667, 1.0833334, 1.125, 1.1666667, 1.2083334),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 0,
-"values": [0.0, 0.0, -0.12217304763960307, -0.4363323129985824, -0.7853981633974483, -0.8726646259971648, -0.7853981633974483, -0.8726646259971648, -0.7853981633974483, -0.12217304763960307, -0.24434609527920614, -0.12217304763960307, -0.24434609527920614, 0.0]
+"values": [0.0, 0.0, -0.12217304763960309, -0.4363323129985824, -0.7853981633974483, -0.8726646259971648, -0.7853981633974483, -0.8726646259971648, -0.7853981633974483, -0.12217304763960309, -0.24434609527920617, -0.12217304763960309, -0.24434609527920617, 0.0]
 }
 
 [sub_resource type="Animation" id="Animation_gh1pe"]
@@ -1117,7 +1117,7 @@ tracks/2/keys = {
 "times": PackedFloat32Array(0, 0.33333334),
 "transitions": PackedFloat32Array(1.5, 1.5),
 "update": 0,
-"values": [1.1013027580084223, 0.7853981633974483]
+"values": [1.1013027580084225, 0.7853981633974483]
 }
 tracks/3/type = "value"
 tracks/3/imported = false
@@ -1129,7 +1129,7 @@ tracks/3/keys = {
 "times": PackedFloat32Array(0, 0.33333334),
 "transitions": PackedFloat32Array(1.5, 1.5),
 "update": 0,
-"values": [-1.9338248112097174, -0.80634211442138]
+"values": [-1.9338248112097176, -0.80634211442138]
 }
 tracks/4/type = "value"
 tracks/4/imported = false
@@ -1153,7 +1153,7 @@ tracks/5/keys = {
 "times": PackedFloat32Array(0, 0.33333334),
 "transitions": PackedFloat32Array(1.5, 1.5),
 "update": 0,
-"values": [1.1013027580084223, 0.6981317007977318]
+"values": [1.1013027580084225, 0.6981317007977318]
 }
 tracks/6/type = "value"
 tracks/6/imported = false
@@ -1266,7 +1266,7 @@ tracks/2/keys = {
 "times": PackedFloat32Array(0, 0.16666667),
 "transitions": PackedFloat32Array(1.5, 1),
 "update": 0,
-"values": [0.7853981633974483, 1.1013027580084223]
+"values": [0.7853981633974483, 1.1013027580084225]
 }
 tracks/3/type = "value"
 tracks/3/imported = false
@@ -1278,7 +1278,7 @@ tracks/3/keys = {
 "times": PackedFloat32Array(0, 0.16666667),
 "transitions": PackedFloat32Array(1.5, 1),
 "update": 0,
-"values": [-0.80634211442138, -1.9338248112097174]
+"values": [-0.80634211442138, -1.9338248112097176]
 }
 tracks/4/type = "value"
 tracks/4/imported = false
@@ -1302,7 +1302,7 @@ tracks/5/keys = {
 "times": PackedFloat32Array(0, 0.16666667),
 "transitions": PackedFloat32Array(1.5, 1),
 "update": 0,
-"values": [0.6981317007977318, 1.1013027580084223]
+"values": [0.6981317007977318, 1.1013027580084225]
 }
 tracks/6/type = "value"
 tracks/6/imported = false
@@ -1416,7 +1416,7 @@ tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1.5),
 "update": 0,
-"values": [1.1013027580084223]
+"values": [1.1013027580084225]
 }
 tracks/3/type = "value"
 tracks/3/imported = false
@@ -1428,7 +1428,7 @@ tracks/3/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1.5),
 "update": 0,
-"values": [-1.9338248112097174]
+"values": [-1.9338248112097176]
 }
 tracks/4/type = "value"
 tracks/4/imported = false
@@ -1452,7 +1452,7 @@ tracks/5/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1.5),
 "update": 0,
-"values": [1.1013027580084223]
+"values": [1.1013027580084225]
 }
 tracks/6/type = "value"
 tracks/6/imported = false
@@ -1685,7 +1685,7 @@ tracks/12/keys = {
 "times": PackedFloat32Array(0, 0.16666667, 0.33333334, 0.5833333),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 0,
-"values": [0.0, 0.0, 0.48345620280242907, 0.0]
+"values": [0.0, 0.0, 0.483456202802429, 0.0]
 }
 tracks/13/type = "value"
 tracks/13/imported = false
@@ -1697,7 +1697,7 @@ tracks/13/keys = {
 "times": PackedFloat32Array(0, 0.16666667, 0.33333334, 0.5833333),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 0,
-"values": [0.0, 0.0, 0.48345620280242907, 0.0]
+"values": [0.0, 0.0, 0.483456202802429, 0.0]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_k8bd3"]
@@ -1718,7 +1718,7 @@ animation_player = NodePath("AnimationPlayer")
 
 [node name="Sprite" parent="." index="0" unique_id=1916043660]
 z_index = 1
-material = SubResource("ShaderMaterial_4w0pp")
+material = SubResource("ShaderMaterial_bqevb")
 
 [node name="ExtraOffset" type="Node2D" parent="Sprite" index="0" unique_id=2064288678]
 use_parent_material = true

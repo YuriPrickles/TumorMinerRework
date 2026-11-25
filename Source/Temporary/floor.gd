@@ -18,6 +18,7 @@ func get_rock_nodes() -> Array[RockNode]:
 
 @export var ladder_scene:PackedScene
 @export var layout_pool:LayoutPool
+@export var boss_layout_pool:LayoutPool
 
 var current_layout:Layout
 var already_spawned_ladder:bool = false
@@ -27,7 +28,10 @@ var ldr_ch_incr_max: float = 0.04
 var tile_size: int = 64
 var enemies_cleared: bool = false
 func _ready() -> void:
-	current_layout = layout_pool.layout_pool.pick_random().instantiate()
+	if Global.boss_room:
+		current_layout = boss_layout_pool.layout_pool.pick_random().instantiate()
+	else:
+		current_layout = layout_pool.layout_pool.pick_random().instantiate()
 	environment.add_child(current_layout)
 	tile_size = current_layout.layout_tiles.tile_set.tile_size.x
 	queue_redraw()
