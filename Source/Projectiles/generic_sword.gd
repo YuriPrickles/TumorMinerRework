@@ -21,7 +21,7 @@ func _ready() -> void:
 	rotation_start = velocity.angle() + deg_to_rad(90)
 
 var rotation_sweep_angle:float = deg_to_rad(135)
-func _process(delta: float) -> void:
+func _physics_process(delta: float) -> void:
 	super(delta)
 	rotation = velocity.angle()
 	var tween = create_tween()

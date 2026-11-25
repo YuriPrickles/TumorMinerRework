@@ -6,6 +6,7 @@ extends Node2D
 @export var bottom_right: Marker2D
 @export var rock_spawn:RockSpawn
 @export var enemy_spawn:EnemySpawn
+@export var allow_random_ladder:bool = true
 const TILE_SIZE = 64
 const WALL = Vector2i(0,0)
 const WATER_TILE = Vector2i(0,3)
@@ -13,7 +14,9 @@ const ROCK_SPAWN = Vector2i(1,0)
 const ENEMY_SPAWN = Vector2i(1,1)
 const PLAYER_SPAWN = Vector2i(1,2)
 const CRATE_SPAWN = Vector2i(2,0)
+const GUARANTEED_LADDER_ON_CLEAR = Vector2i(2,1)
 
+var guaranteed_ladder_spots:Array
 var rng = RandomNumberGenerator.new()
 var astar_grid:AStarGrid2D
 # Called when the node enters the scene tree for the first time.
@@ -28,12 +31,13 @@ func astar_setup() -> void:
 	astar_grid.cell_size = layout_tiles.tile_set.tile_size
 	astar_grid.default_compute_heuristic = AStarGrid2D.HEURISTIC_CHEBYSHEV
 	astar_grid.default_estimate_heuristic = AStarGrid2D.HEURISTIC_CHEBYSHEV
-	astar_grid.region = Rect2(top_left.position,bottom_right.position - top_left.position)
+	astar_grid.region = Rect2(top_left.position/ astar_grid.cell_size,(bottom_right.position - top_left.position)/ astar_grid.cell_size)
 	astar_grid.update()
+	print(layout_tiles.get_used_rect())
+	print(astar_grid.region)
 
 func spawn_things():
 	for tile in event_tiles.get_used_cells():
-		
 		match get_event_tile(tile):
 			ENEMY_SPAWN:
 				spawn_enemy(tile)
@@ -43,6 +47,8 @@ func spawn_things():
 				spawn_player(tile)
 			CRATE_SPAWN:
 				spawn_crate(tile)
+			GUARANTEED_LADDER_ON_CLEAR:
+				guaranteed_ladder_spots.append(tile)
 	for tile in layout_tiles.get_used_cells():
 		if is_wall(tile):
 			astar_grid.set_point_solid(tile)
@@ -94,3 +100,13 @@ func check_layout_tile(coords:Vector2i, type:Vector2i) -> bool:
 ##Returns the TileSet coords of a given Layout Tile.
 func get_layout_tile(coords:Vector2i) -> Vector2:
 	return layout_tiles.get_cell_atlas_coords(coords)
+
+func get_random_free_tile() -> Vector2i:
+	var picked_tile:Vector2i = Vector2i.MIN
+	picked_tile = layout_tiles.get_used_cells().pick_random()
+	while (is_wall(picked_tile) or astar_grid.is_point_solid(picked_tile) or
+	layout_tiles.local_to_map(top_left.position) >= picked_tile or
+	layout_tiles.local_to_map(bottom_right.position) <= picked_tile):
+		picked_tile = layout_tiles.get_used_cells().pick_random()
+		#print(is_wall(picked_tile), layout_tiles.local_to_map(top_left.position) <= picked_tile, layout_tiles.local_to_map(bottom_right.position) >= picked_tile)
+	return picked_tile

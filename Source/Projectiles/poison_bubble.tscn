@@ -34,7 +34,6 @@ blend_mode = 1
 
 [node name="PoisonBubbleProjectile" unique_id=921495114 instance=ExtResource("1_m1mue")]
 script = ExtResource("2_m1mue")
-damage = 2
 knockback = 0.0
 lifetime = 8.0
 

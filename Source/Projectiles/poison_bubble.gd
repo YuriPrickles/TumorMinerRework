@@ -1,7 +1,7 @@
 class_name PoisonBubbleProjectile
 extends Projectile
 
-func _process(delta: float) -> void:
+func _physics_process(delta: float) -> void:
 	super(delta)
 	velocity = velocity.move_toward(Vector2.ZERO,delta * 4)
 func on_collide_wall():

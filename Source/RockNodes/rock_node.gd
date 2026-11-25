@@ -3,6 +3,7 @@ extends StaticBody2D
 
 const rock_placement_offset = Vector2(0,32)
 @export var animation_player: AnimationPlayer
+@export var sprite: Sprite2D
 
 @export var click_area: Area2D
 @export var health:int = 2

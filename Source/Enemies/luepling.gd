@@ -120,7 +120,7 @@ func basic_movement(delta):
 				if prepare_bite_on_land:
 					await start_bite()
 					prepare_bite_on_land = false
-				if not vomited_egg and (running_away or health < 12):
+				if not vomited_egg and (running_away or health < max_health * 0.4):
 					running_away = true
 					update_path_runaway()
 				else:

@@ -21,7 +21,7 @@ detection_range = NodePath("DetectionRange")
 bite_range = NodePath("BiteRange")
 bite_hitbox = NodePath("BiteHitbox")
 enemy_sprite = NodePath("LueplingSprite")
-health = 23
+health = 100
 kb_res = 1.0
 tribes = 1
 

@@ -29,7 +29,7 @@ func _ready() -> void:
 			on_body_enter
 		)
 
-func _process(delta: float) -> void:
+func _physics_process(delta: float) -> void:
 	#if multi_hit_delay > -1:
 		#multi_hit_timer += delta
 		#if multi_hit_timer > multi_hit_delay:
