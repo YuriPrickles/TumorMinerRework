@@ -4,8 +4,6 @@ extends Item
 var heal_amount:int
 var points:int
 
-var part_type:String
-
 func _init(stk:int = 1) -> void:
 	if get_item_class_name() != "Part":
 		super(stk)
