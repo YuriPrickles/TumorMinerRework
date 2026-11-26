@@ -1,22 +1,8 @@
 class_name StatusEffect extends Resource
 
-enum EFFECTS {burned, sulphured, engulfed, poisoned, rusted, cobwebbed, defUp, defDown, atkUp, atkDown, regen}
-@export var status : EFFECTS
-#@export var status_library : Dictionary[EFFECTS, Array]= {
-	##effect     : [dmg, duration, maxStacks], Dmg can be used as a debuff modifier
-	#EFFECTS.burned    : [3, 7, 5],
-	#EFFECTS.sulphured : [1, 7, 5],
-	#EFFECTS.engulfed  : [5, 4, 3], #occurs when sulphered+burned
-	#EFFECTS.poisoned  : [5, 7, 5],
-	#EFFECTS.rusted    : [0, 15, 3],
-	#EFFECTS.cobwebbed : [3, 1, 1], #Should only occur when standing on the web
-	#EFFECTS.defUp     : [0, 10, 3],
-	#EFFECTS.defDown   : [0, 10, 3],
-	#EFFECTS.atkUp     : [0, 10, 3],
-	#EFFECTS.atkDown   : [0, 10, 3],
-	#EFFECTS.regen     : [5, 10, 3] #Should be used with plr.heal()
-#}
+
 var duration:float = 0.0
+var max_duration: float
 var max_stacks: int
 var current_stacks: int = 0
 
@@ -30,18 +16,21 @@ func _init(time:float,stack:int = 1) -> void :
 	#add that status, to the 'active_effects' dictionary
 	#add it's damage, duration, and stack count for later calculation
 	#set stackcount in the LIBRARY to 0 so the stacks won't be added again later
-static func add_effect(array:Array[StatusEffect], effect:StatusEffect) -> void :
+static func add_effect(array:Array[StatusEffect], effect:StatusEffect, plr:Player=null, enemy:Enemy=null) -> void :
 	if has_effect(array, effect.get_script()):
 		for existing_eff in array:
 			if effect.get_script() == existing_eff.get_script():
-				existing_eff.duration += effect.duration
+				existing_eff.duration = min(
+					effect.max_duration, 
+					effect.duration + existing_eff.duration)
+					
 				existing_eff.current_stacks = min(
 					existing_eff.max_stacks,
 					effect.current_stacks + existing_eff.current_stacks)
 				return
 			else : print("ERR: UNKNOWN EFFECT")
 	array.append(effect)
-	effect.on_apply(array)
+	effect.on_apply(array, plr, enemy)
 	#var baseStatus = status_library.get(effect)
 	#var plr_statuses
 	#if (target.has(effect)):
@@ -61,12 +50,13 @@ static func add_effect(array:Array[StatusEffect], effect:StatusEffect) -> void :
 		#target.set(effect, plr_statuses) #Give Target their first stack
 
 #Entirely removes status from the afflicted target, if they have it
-static func remove_effect(array:Array[StatusEffect], effect_script:Script) -> void :
+static func remove_effect(array:Array[StatusEffect], effect_script:Script, plr:Player=null, enemy:Enemy=null) -> void :
 	var marked_for_death:StatusEffect
 	for eff in array:
 		if effect_script == eff.get_script():
 			marked_for_death = eff
 	if marked_for_death:
+		marked_for_death.on_remove(plr, enemy)
 		array.erase(marked_for_death)
 	marked_for_death = null
 
@@ -83,16 +73,19 @@ func decrease_duration(delta:float) -> void:
 func consume_stack() -> void :
 	current_stacks -= 1
 
-func on_apply(array:Array[StatusEffect]):
+func on_apply(array:Array[StatusEffect], plr:Player = null, enemy:Enemy = null):
 	pass
+
+func on_remove(plr:Player=null, enemy:Enemy=null):
+	return
 
 func process_effect(plr:Player, delta) -> void :
 	if (current_stacks <= 0 or duration <= 0.0):
-		remove_effect(plr.plr_statuses, self.get_script())
+		remove_effect(plr.plr_statuses, self.get_script(), plr, null)
 	pass
 
 #Same as process_effect but for enemy instances
 func process_enemy_effect(enemy:Enemy, delta) -> void :
 	if (current_stacks <= 0 or duration <= 0.0):
-		remove_effect(enemy.enemy_statuses, self.get_script())
+		remove_effect(enemy.enemy_statuses, self.get_script(), null, enemy)
 	pass

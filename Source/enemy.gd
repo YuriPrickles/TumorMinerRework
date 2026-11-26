@@ -129,7 +129,7 @@ func get_current_tile() -> Vector2i:
 
 func suffer_effect(effect:StatusEffect) -> void :
 	#print(effect)
-	StatusEffect.add_effect(enemy_statuses, effect)
+	StatusEffect.add_effect(enemy_statuses, effect, null, self)
 	#print(plr_statuses.active_effects.has(effect))
 	#print(plr_statuses.active_effects.get(effects.burned))
 

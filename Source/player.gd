@@ -14,8 +14,8 @@ var pickups:Array[Pickup]
 #Defense and attack stat, both additive
 #Basic Stats applied to any and all effects from the player itself
 #AFFECTS BY PARTS ONLY
-var atk : int
-var def : int
+var atk : int = 1
+var def : int = 1
 
 #Stat modifiers that are used to apply buffs, 
 #can be positive OR negative depending on result of all active buffs
@@ -85,10 +85,10 @@ func _physics_process(delta: float) -> void:
 var tickDuration : float
 func _process(delta: float) -> void:
 	tickDuration += delta
+	#prepare_stats()
 	#print(fmod(tickDuration, 100))
 	if (fmod(tickDuration, 100) > 1) :
 		tickDuration = 0
-		#print("tick")
 		for eff in plr_statuses:
 			eff.process_effect(self, delta)
 
@@ -146,7 +146,8 @@ func _input(event: InputEvent) -> void:
 
 func request_mine_action(rock, strength):
 	rock.on_mine(strength, self)
-	StatusEffect.add_effect(self.plr_statuses, atkBuff.new(30, 30))
+	StatusEffect.add_effect(self.plr_statuses, atkBuff.new(10, 9), self, null)
+	print(get_plr_Atk())
 
 func aim_to_mouse() -> Vector2:
 	return position.direction_to(get_global_mouse_position())
@@ -170,7 +171,7 @@ func heal(value):
 
 #Call this function from your enemy to give the player a status!
 func suffer_effect(effect:StatusEffect) -> void :
-	StatusEffect.add_effect(plr_statuses, effect)
+	StatusEffect.add_effect(plr_statuses, effect, self, null)
 
 func save_effects() -> void:
 	Global.save_plr_effects(self)
@@ -200,8 +201,8 @@ func get_plr_Def() -> float :
 	return self.def * self.def_mod
 
 func prepare_stats() -> void :
-	self.atk = 1.0
-	self.def = 1.0
+	self.atk_mod = 1.0
+	self.def_mod = 1.0
 
 func apply_plr_atkMod(newMod:float) -> void:
 	self.atk_mod += newMod
