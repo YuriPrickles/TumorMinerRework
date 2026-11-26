@@ -1,0 +1,35 @@
+[gd_scene format=3 uid="uid://c7heybv5eqhc2"]
+
+[ext_resource type="Script" uid="uid://bnd1fxmcl6msd" path="res://Source/audio.gd" id="1_vem32"]
+[ext_resource type="AudioStream" uid="uid://cxr8vg2pg523x" path="res://Assets/Audio/cave1_calm.ogg" id="2_1e6kq"]
+[ext_resource type="AudioStream" uid="uid://dtps7jx17xwoj" path="res://Assets/Audio/cave1_battle.ogg" id="3_1e6kq"]
+[ext_resource type="AudioStream" uid="uid://cqc1hk2h0xftx" path="res://Assets/Audio/cave1_boss_intro.ogg" id="3_ilmjg"]
+[ext_resource type="AudioStream" uid="uid://c5tdmocvfgvsm" path="res://Assets/Audio/cave1_boss.ogg" id="4_upyu2"]
+[ext_resource type="AudioStream" uid="uid://b0o2b5ad3dsrj" path="res://Assets/Audio/cave1_boss_vocals.ogg" id="5_6vgnx"]
+
+[node name="Audio" type="Node" unique_id=134069284 node_paths=PackedStringArray("calm_layer", "battle_layer", "boss_intro", "boss_layer", "boss_vocals_layer")]
+script = ExtResource("1_vem32")
+calm_layer = NodePath("CalmLayer")
+battle_layer = NodePath("BattleLayer")
+boss_intro = NodePath("BossIntro")
+boss_layer = NodePath("BossLayer")
+boss_vocals_layer = NodePath("BossVocalsLayer")
+
+[node name="CalmLayer" type="AudioStreamPlayer" parent="." unique_id=1513683596]
+process_mode = 3
+stream = ExtResource("2_1e6kq")
+
+[node name="BattleLayer" type="AudioStreamPlayer" parent="." unique_id=487528249]
+stream = ExtResource("3_1e6kq")
+volume_db = -80.0
+
+[node name="BossIntro" type="AudioStreamPlayer" parent="." unique_id=975549762]
+stream = ExtResource("3_ilmjg")
+
+[node name="BossLayer" type="AudioStreamPlayer" parent="." unique_id=1205605236]
+stream = ExtResource("4_upyu2")
+volume_db = -80.0
+
+[node name="BossVocalsLayer" type="AudioStreamPlayer" parent="." unique_id=1077977501]
+stream = ExtResource("5_6vgnx")
+volume_db = -80.0

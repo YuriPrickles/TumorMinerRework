@@ -233,6 +233,7 @@ func aim_to_mouse() -> Vector2:
 
 func hurt(elm:ElementalType, source_position:Vector2, kb_force = 500):
 	if stagger: return
+	Global.trigger_combat_state()
 	stagger_timer = stagger_delay
 	#Test using player position for separting status vs. enemy damage
 	#Revamp atk/def stat for player and enemies
@@ -271,6 +272,22 @@ func get_current_tile() -> Vector2i:
 func get_targeted_tile() -> Vector2i:
 	var target_tile = get_current_tile() + Vector2i(snapped_facing_dir)
 	return target_tile
+
+func react_to_element(type:ElementalType,is_status:bool = false):
+	pass
+
+func get_plr_Atk() -> float :
+	return self.atk * self.atkMod
+
+func get_plr_Def() -> float : 
+	return self.def * self.defMod
+
+func prepare_stats() -> void :
+	self.atk = 1
+	self.def = 1
+	self.atkMod = 1.0
+	self.defMod = 1.0
+	firstLoad = false
 
 #Let me know if you want me to move this somewhere else in the script
 ## Pulse the arm for juicy effect

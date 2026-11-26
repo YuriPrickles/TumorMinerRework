@@ -12,11 +12,28 @@ var plrDefBase : float
 ## but before the floor is refreshed.
 var boss_room:bool:
 	get:
-		return Global.run_info.depth % 7 == 0
+		return Global.run_info.depth % 2 == 0
 
 @export_dir var items_texture_path: String
 
+var level_state:LevelState = LevelState.CALM
+enum LevelState {
+	CALM,
+	BATTLE,
+	BOSS
+}
+var combat_chill_timer:float = 0.0
+const COMBAT_CHILL_THRESHOLD:float = 7.0
+var audio:Audio
+func trigger_combat_state():
+	if level_state == LevelState.BOSS: return
+	if level_state != LevelState.BATTLE:
+		audio.activate_track(audio.battle_layer)
+	level_state = LevelState.BATTLE
+	combat_chill_timer = COMBAT_CHILL_THRESHOLD
+
 func _ready() -> void:
+	audio = Main.instance.audio
 	start_new_run()
 
 func get_current_item() -> Item:
@@ -28,6 +45,10 @@ func _process(delta: float) -> void:
 		if health_drain_timer >= base_health_drain_delay:
 			health_drain_timer = 0
 			run_info.health -= 1
+		combat_chill_timer -= delta
+		if combat_chill_timer <= 0 and level_state != LevelState.BOSS:
+			level_state = LevelState.CALM
+			audio.activate_track(audio.calm_layer)
 func start_new_run():
 	run_info = RunInfo.new()
 	inv_manager = InventoryManager.new()

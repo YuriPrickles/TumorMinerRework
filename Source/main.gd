@@ -8,6 +8,7 @@ var current_floor: Floor
 @export var crafting_ui: CraftingUI
 @export var parts_menu_ui: Control
 @export var ui: CanvasLayer
+@export var audio: Audio
 
 
 
