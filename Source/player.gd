@@ -6,25 +6,9 @@ extends CharacterBody2D
 @export var player_sprite: Sprite2D
 
 const SPEED = 300.0
-var   ACCEL = 1.0 #Multiplier used to adjust player speed with debuffs/buffs
 var rocks:Array[RockNode]
 var interactables:Array[Interactable]
 var pickups:Array[Pickup]
-#Defense and attack stat, both additive
-#Basic Stats applied to any and all effects from the player itself
-#AFFECTS BY PARTS ONLY
-var atk : int
-var def : int
-
-#Stat modifiers that are used to apply buffs, 
-#can be positive OR negative depending on result of all active buffs
-#AFFECTED BY STATUSES ONLY
-var atkMod : float
-var defMod : float
-var firstLoad : bool = true
-
-#var plrEffects = {}
-var plr_statuses:Array[StatusEffect]
 
 var stagger: bool:
 	get:
@@ -69,8 +53,6 @@ func _ready() -> void:
 	interact_range.body_exited.connect(undetect_thing)
 	interact_range.area_entered.connect(detect_thing)
 	interact_range.area_exited.connect(undetect_thing)
-	if (firstLoad) : prepare_stats()
-	retrieve_effects() #Re-applies effects accrued on a previous floor IF APPLICABLE
 
 func _physics_process(delta: float) -> void:
 	var mouse_vector:Vector2 = position.direction_to(get_global_mouse_position()).normalized()
@@ -146,8 +128,6 @@ func _physics_process(delta: float) -> void:
 	
 	if stagger_timer > 0:
 		stagger_timer -= delta
-	#else:
-		#knockback_velocity = Vector2.ZERO
 	
 	var direction := Input.get_vector("left", "right","up","down")
 	if not stagger:
@@ -163,16 +143,6 @@ func _physics_process(delta: float) -> void:
 		velocity = knockback_velocity
 	move_and_slide()
 
-var tickDuration : float
-func _process(delta: float) -> void:
-	tickDuration += delta
-	if (fmod(tickDuration, 100) > 1) :
-		tickDuration = 0
-		#print("tick")
-		for eff in plr_statuses:
-			eff.process_effect(self, delta)
-
-## leftovers of a bygone system... maybe it will find its use someday
 func detect_thing(body:Node2D):
 	if body is RockNode:
 		body.on_detect()
@@ -184,7 +154,7 @@ func detect_thing(body:Node2D):
 		body.on_detect()
 		pickups.append(body)
 
-## leftovers of a bygone system... maybe it will find its use someday
+
 func undetect_thing(body:Node2D):
 	if body is RockNode and rocks.has(body):
 		body.on_undetect()
@@ -200,17 +170,13 @@ func get_targeted_interactable() -> Interactable:
 	var c_floor :Floor = Main.instance.current_floor
 	var tiles :TileMapLayer = c_floor.current_layout.layout_tiles
 	for interactable in c_floor.get_interactables():
-		if get_targeted_tile() == interactable.get_current_tile() or get_current_tile() == interactable.get_current_tile():
+		var interactable_tilepos : Vector2i = tiles.local_to_map(interactable.position - interactable.placement_offset)
+		if get_targeted_tile() == interactable_tilepos or get_current_tile() == interactable_tilepos:
 			return interactable
 	return null
 
 func _input(event: InputEvent) -> void:
 	#region Inventory Control
-	if event.is_action_pressed("drop_item") and Global.get_current_item():
-		var pickup = Pickup.new_pickup(Global.get_current_item(),position)
-		pickup.delay_before_sentience = 3
-		Global.inv_manager.inventory[Global.current_item_index] = null
-		
 	var old_item = Global.get_current_item()
 	Global.current_item_index += roundi(Input.get_axis("inv_back","inv_forward"))
 	if Global.current_item_index < 0:
@@ -231,34 +197,15 @@ func aim_to_mouse() -> Vector2:
 	return position.direction_to(get_global_mouse_position())
 
 
-func hurt(elm:ElementalType, source_position:Vector2, kb_force = 500):
+func hurt(damage, source_position):
 	if stagger: return
 	stagger_timer = stagger_delay
-	#Test using player position for separting status vs. enemy damage
-	#Revamp atk/def stat for player and enemies
-	knockback_velocity = position.direction_to(source_position) * -kb_force
-	#print(knockback_velocity)
-	knockless_hurt(elm)
-
-func knockless_hurt(elm:ElementalType):
-	Global.run_info.health -= (elm.damage - (self.get_plr_Def()))
-	Global.popup_text(str(elm.damage),position,elm.color)
+	Global.run_info.health -= damage
+	knockback_velocity = position.direction_to(source_position) * -500
+	print(knockback_velocity)
 
 func heal(value):
 	Global.run_info.health += value
-
-#Call this function from your enemy to give the player a status!
-func suffer_effect(effect:StatusEffect) -> void :
-	#print(effect)
-	StatusEffect.add_effect(plr_statuses, effect)
-	#print(plr_statuses.active_effects.has(effect))
-	#print(plr_statuses.active_effects.get(effects.burned))
-
-func save_effects() -> void:
-	Global.save_plr_effects(self)
-
-func retrieve_effects() -> void:
-	plr_statuses = Global.load_plr_effects()
 
 ##Returns a Vector2i position on the tilemap. Use map_to_local to actually do things with it.
 func get_current_tile() -> Vector2i:

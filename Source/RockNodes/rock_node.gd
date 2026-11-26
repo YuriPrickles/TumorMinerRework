@@ -3,7 +3,6 @@ extends StaticBody2D
 
 const rock_placement_offset = Vector2(0,32)
 @export var animation_player: AnimationPlayer
-@export var sprite: Sprite2D
 
 @export var click_area: Area2D
 @export var health:int = 2
@@ -22,7 +21,6 @@ func _process(delta: float) -> void:
 	pass
 
 func on_mine(value, plr:Player):
-	animation_player.stop()
 	animation_player.play("hit")
 	health -= value
 	if health <= 0:
@@ -38,7 +36,7 @@ func break_rock():
 func on_break():
 	var flr = Main.instance.current_floor
 	if randf_range(0,1) < flr.ladder_spawn_chance:
-		flr.spawn_ladder(flr.to_local_position(get_current_tile()))
+		flr.spawn_ladder(position)
 	else:
 		flr.increase_ladder_chance()
 	drop_loot()
@@ -57,6 +55,3 @@ func get_current_tile() -> Vector2i:
 	var tiles :TileMapLayer = floor.current_layout.layout_tiles
 	var current_tile := tiles.local_to_map(position - rock_placement_offset)
 	return current_tile
-
-func on_hit_by_projectile(projectile:Projectile):
-	pass

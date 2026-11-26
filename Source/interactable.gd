@@ -1,16 +1,14 @@
 class_name Interactable
 extends StaticBody2D
 
-@export var main_sprite: Sprite2D
-@export var placement_offset = Vector2(32,64)
-
+@export var  placement_offset = Vector2(32,64)
+@export var click_area: Area2D
 var in_range:bool = false
-var hovered:bool:
-	get():
-		return Main.instance.get_player().get_targeted_interactable() == self
+var hovered:bool = false
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass
+	click_area.mouse_entered.connect(func():hovered=true)
+	click_area.mouse_exited.connect(func():hovered=false)
 
 func _process(delta: float) -> void:
 	pass
@@ -31,8 +29,3 @@ func get_current_tile() -> Vector2i:
 	
 func on_mine(value, plr:Player):
 	pass
-
-
-
-func set_outline(value:bool) -> void:
-	(main_sprite.material as ShaderMaterial).set_shader_parameter("line_thickness", 0 if not value else 2)

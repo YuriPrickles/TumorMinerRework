@@ -1,9 +1,0 @@
-[gd_resource type="ShaderMaterial" format=3 uid="uid://ctkbda5y45mor"]
-
-[ext_resource type="Shader" uid="uid://c0jfts5eio0ij" path="res://Source/outline.gdshader" id="1_dsvw1"]
-
-[resource]
-shader = ExtResource("1_dsvw1")
-shader_parameter/line_color = Color(0, 0, 0, 1)
-shader_parameter/line_thickness = 0.0
-shader_parameter/add_margins = true

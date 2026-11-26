@@ -2,26 +2,6 @@
 
 [ext_resource type="PackedScene" uid="uid://cr5c3wmtrsm7q" path="res://Source/interactable.tscn" id="1_2xfvy"]
 [ext_resource type="Script" uid="uid://cqlhnnopl4hlk" path="res://Source/Interactables/ladder.gd" id="2_lcc81"]
-[ext_resource type="Shader" uid="uid://c0jfts5eio0ij" path="res://Source/outline.gdshader" id="3_shf7l"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_shf7l"]
-resource_local_to_scene = true
-shader = ExtResource("3_shf7l")
-shader_parameter/line_color = Color(1, 1, 1, 1)
-shader_parameter/line_thickness = 0.0
-shader_parameter/add_margins = true
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_shf7l"]
-size = Vector2(64, 64)
-
-[node name="Ladder" unique_id=1300855250 node_paths=PackedStringArray("main_sprite") instance=ExtResource("1_2xfvy")]
+[node name="Ladder" unique_id=1300855250 instance=ExtResource("1_2xfvy")]
 script = ExtResource("2_lcc81")
-main_sprite = NodePath("Sprite2D")
-
-[node name="Sprite2D" parent="." index="0" unique_id=1306761943]
-material = SubResource("ShaderMaterial_shf7l")
-position = Vector2(0, 25)
-
-[node name="CollisionShape2D" parent="." index="1" unique_id=1266669074]
-position = Vector2(0, 0)
-shape = SubResource("RectangleShape2D_shf7l")

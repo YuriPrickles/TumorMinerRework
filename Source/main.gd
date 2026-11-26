@@ -7,7 +7,6 @@ var current_floor: Floor
 @export var fader: Fader
 @export var crafting_ui: CraftingUI
 @export var parts_menu_ui: Control
-@export var ui: CanvasLayer
 
 
 
@@ -28,14 +27,9 @@ func _ready() -> void:
 	refresh_floor()
 func get_player() -> Player:
 	return current_floor.get_node("Player")
-var boss_intro_scene: PackedScene = preload("res://Source/BossIntros/lupus_boss_intro.tscn")
 func refresh_floor():
 	fader.fade_in()
 	await fader.faded_in
-	if Global.boss_room:
-		var intro:BossIntro = boss_intro_scene.instantiate()
-		ui.add_child(intro)
-		await intro.done
 	if current_floor: current_floor.queue_free()
 	current_floor = floor_scene.instantiate()
 	add_child(current_floor)

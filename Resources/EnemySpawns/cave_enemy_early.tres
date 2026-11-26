@@ -4,14 +4,11 @@
 [ext_resource type="Script" uid="uid://c0wqrm8yhbqj4" path="res://Resources/EnemySpawns/BaseScripts/enemy_spawn.gd" id="2_13mhs"]
 [ext_resource type="PackedScene" uid="uid://hyk575rjw36g" path="res://Source/Enemies/bat.tscn" id="2_dpmr3"]
 [ext_resource type="PackedScene" uid="uid://cpw0ssvtaiorf" path="res://Source/Enemies/fly.tscn" id="3_dpmr3"]
-[ext_resource type="PackedScene" uid="uid://bka711ty6bc8o" path="res://Source/Enemies/luepling.tscn" id="4_xk2ds"]
-[ext_resource type="PackedScene" uid="uid://ccoat3peiaebf" path="res://Source/Enemies/sulfur_spider.tscn" id="5_y6q2p"]
-[ext_resource type="PackedScene" uid="uid://bmoy6rcuy6utp" path="res://Source/Enemies/coal_rat.tscn" id="6_6df83"]
 
 [sub_resource type="Resource" id="Resource_h5b18"]
 script = ExtResource("1_stq03")
 enemy_type = ExtResource("2_dpmr3")
-weight = 0.4
+weight = 0.1
 metadata/_custom_type_script = "uid://dtatoef65ifuw"
 
 [sub_resource type="Resource" id="Resource_4xtxy"]
@@ -20,26 +17,8 @@ enemy_type = ExtResource("3_dpmr3")
 weight = 1.0
 metadata/_custom_type_script = "uid://dtatoef65ifuw"
 
-[sub_resource type="Resource" id="Resource_2kfcb"]
-script = ExtResource("1_stq03")
-enemy_type = ExtResource("4_xk2ds")
-weight = 0.2
-metadata/_custom_type_script = "uid://dtatoef65ifuw"
-
-[sub_resource type="Resource" id="Resource_fnuag"]
-script = ExtResource("1_stq03")
-enemy_type = ExtResource("5_y6q2p")
-weight = 0.3
-metadata/_custom_type_script = "uid://dtatoef65ifuw"
-
-[sub_resource type="Resource" id="Resource_8w7xd"]
-script = ExtResource("1_stq03")
-enemy_type = ExtResource("6_6df83")
-weight = 0.1
-metadata/_custom_type_script = "uid://dtatoef65ifuw"
-
 [resource]
 script = ExtResource("2_13mhs")
-enemy_weights = Array[ExtResource("1_stq03")]([SubResource("Resource_h5b18"), SubResource("Resource_4xtxy"), SubResource("Resource_2kfcb"), SubResource("Resource_fnuag"), SubResource("Resource_8w7xd")])
-enemy_spawn_chance = 0.25
+enemy_weights = Array[ExtResource("1_stq03")]([SubResource("Resource_h5b18"), SubResource("Resource_4xtxy")])
+enemy_spawn_chance = 0.2
 metadata/_custom_type_script = "uid://dtatoef65ifuw"

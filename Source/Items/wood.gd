@@ -1,7 +1,0 @@
-class_name Wood
-extends Item
-
-func _init(stk:int=1) -> void:
-	anim_type = AnimationType.NONE
-	max_stack = 50
-	super(stk)

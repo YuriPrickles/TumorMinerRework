@@ -15,7 +15,7 @@ func _init(stk:int = 1) -> void:
 	consumable = true
 	stack = 1
 
-func part_effects(plr:Player):
+func apply_effects(plr:Player):
 	pass
 
 func reset_effect(plr:Player):
@@ -24,7 +24,7 @@ func reset_effect(plr:Player):
 func use_item(plr:Player) -> bool:
 	await super(plr)
 	plr.heal(heal_amount)
-	#apply_effects(plr)
+	apply_effects(plr)
 	Global.run_info.build.parts.append(self)
 	return true
 

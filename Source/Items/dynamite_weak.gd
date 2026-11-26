@@ -6,7 +6,7 @@ func _init(stk:int=1) -> void:
 	type = Type.WEAPON
 	anim_type = AnimationType.PICKAXE
 	use_delay = 0.3
-	damage = 25
+	damage = 9
 	consumable = true
 	super(stk)
 

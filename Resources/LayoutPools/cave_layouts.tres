@@ -3,9 +3,8 @@
 [ext_resource type="PackedScene" uid="uid://c4k8f8j67exkq" path="res://Source/Layouts/cave_1.tscn" id="1_743v0"]
 [ext_resource type="Script" uid="uid://o0k5hbnfusc4" path="res://Source/layout_pool.gd" id="1_mwhmb"]
 [ext_resource type="PackedScene" uid="uid://bhgrwvmey2df1" path="res://Source/Layouts/cave_2.tscn" id="2_fg5rn"]
-[ext_resource type="PackedScene" uid="uid://cir30dv1n5cj3" path="res://Source/Layouts/cave_3.tscn" id="3_fg5rn"]
 
 [resource]
 script = ExtResource("1_mwhmb")
-layout_pool = Array[PackedScene]([ExtResource("1_743v0"), ExtResource("2_fg5rn"), ExtResource("3_fg5rn")])
+layout_pool = Array[PackedScene]([ExtResource("1_743v0"), ExtResource("2_fg5rn")])
 metadata/_custom_type_script = "uid://o0k5hbnfusc4"

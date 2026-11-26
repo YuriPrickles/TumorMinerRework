@@ -2,18 +2,10 @@
 
 [ext_resource type="PackedScene" uid="uid://cr5c3wmtrsm7q" path="res://Source/interactable.tscn" id="1_q5wnq"]
 [ext_resource type="Script" uid="uid://dbca3w8noalar" path="res://Source/Interactables/mini_smelter_interactable.gd" id="2_uj41n"]
-[ext_resource type="Shader" uid="uid://c0jfts5eio0ij" path="res://Source/outline.gdshader" id="3_sehn5"]
 [ext_resource type="Texture2D" uid="uid://cwu60ietb6x7d" path="res://Assets/Temporary/mini_smelter_placeable.png" id="3_uj41n"]
 [ext_resource type="Texture2D" uid="uid://dtdu0p3vsisvx" path="res://Assets/Graphics/Gameplay/Items/iron_ore.png" id="4_tellt"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_sehn5"]
-resource_local_to_scene = true
-shader = ExtResource("3_sehn5")
-shader_parameter/line_color = Color(1, 1, 1, 1)
-shader_parameter/line_thickness = 0.0
-shader_parameter/add_margins = true
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_yytvb"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_tellt"]
 resource_local_to_scene = true
 atlas = ExtResource("3_uj41n")
 region = Rect2(0, 0, 64, 128)
@@ -54,7 +46,7 @@ tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(0, 32)]
+"values": [Vector2(0, 0)]
 }
 tracks/3/type = "value"
 tracks/3/imported = false
@@ -107,7 +99,7 @@ tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(0, 32)]
+"values": [Vector2(0, 0)]
 }
 tracks/3/type = "value"
 tracks/3/imported = false
@@ -158,27 +150,20 @@ _data = {
 &"sleep": SubResource("Animation_tellt")
 }
 
-[node name="MiniSmelterInteractable" unique_id=1300855250 node_paths=PackedStringArray("animation_player", "texture_rect", "progress_bar", "main_sprite") instance=ExtResource("1_q5wnq")]
-y_sort_enabled = false
+[node name="Interactable" unique_id=1300855250 node_paths=PackedStringArray("animation_player", "texture_rect", "progress_bar") instance=ExtResource("1_q5wnq")]
 script = ExtResource("2_uj41n")
 animation_player = NodePath("AnimationPlayer")
 texture_rect = NodePath("ProgressBar/TextureRect")
 progress_bar = NodePath("ProgressBar")
-main_sprite = NodePath("Sprite2D")
 
-[node name="Sprite2D" parent="." index="0" unique_id=1306761943]
-material = SubResource("ShaderMaterial_sehn5")
-position = Vector2(0, 32)
-texture = SubResource("AtlasTexture_yytvb")
+[node name="Sprite2D" parent="." index="1" unique_id=1306761943]
+texture = SubResource("AtlasTexture_tellt")
 offset = Vector2(0, -64)
 
-[node name="CollisionShape2D" parent="." index="1" unique_id=1266669074]
-position = Vector2(0, 7)
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="2" unique_id=440302820]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="3" unique_id=440302820]
 libraries/ = SubResource("AnimationLibrary_sehn5")
 
-[node name="ProgressBar" type="ProgressBar" parent="." index="3" unique_id=234320254]
+[node name="ProgressBar" type="ProgressBar" parent="." index="4" unique_id=234320254]
 z_index = 2
 custom_minimum_size = Vector2(64, 64)
 anchors_preset = 8
@@ -187,9 +172,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -32.0
-offset_top = -128.0
+offset_top = -167.0
 offset_right = 32.0
-offset_bottom = -64.0
+offset_bottom = -103.0
 grow_horizontal = 2
 grow_vertical = 2
 step = 1.0

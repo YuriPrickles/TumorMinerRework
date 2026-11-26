@@ -7,8 +7,6 @@
 [ext_resource type="Script" uid="uid://bv6mgv53f5afu" path="res://Resources/RockSpawns/BaseScripts/rock_spawn.gd" id="4_4x3xj"]
 [ext_resource type="PackedScene" uid="uid://byf0fpifdpm7o" path="res://Source/RockNodes/iron_node.tscn" id="5_rxh7i"]
 [ext_resource type="PackedScene" uid="uid://cbfnnemqoqm6h" path="res://Source/RockNodes/sulfur_node.tscn" id="6_oco56"]
-[ext_resource type="PackedScene" uid="uid://i0i024wbyr4r" path="res://Source/RockNodes/ruby_node.tscn" id="7_rxh7i"]
-[ext_resource type="PackedScene" uid="uid://dip7sm4yo3epx" path="res://Source/RockNodes/emerald_node.tscn" id="8_oco56"]
 
 [sub_resource type="Resource" id="Resource_bper2"]
 script = ExtResource("1_erio4")
@@ -40,21 +38,8 @@ rock_type = ExtResource("6_oco56")
 weight = 0.04
 metadata/_custom_type_script = "uid://bcjxt6jjg1htp"
 
-[sub_resource type="Resource" id="Resource_66l0f"]
-script = ExtResource("1_erio4")
-rock_type = ExtResource("7_rxh7i")
-weight = 0.01
-metadata/_custom_type_script = "uid://bcjxt6jjg1htp"
-
-[sub_resource type="Resource" id="Resource_pjrpf"]
-script = ExtResource("1_erio4")
-rock_type = ExtResource("8_oco56")
-weight = 0.01
-metadata/_custom_type_script = "uid://bcjxt6jjg1htp"
-
 [resource]
 script = ExtResource("4_4x3xj")
-rock_weights = Array[ExtResource("1_erio4")]([SubResource("Resource_bper2"), SubResource("Resource_uep2w"), SubResource("Resource_chkau"), SubResource("Resource_xqos5"), SubResource("Resource_roopn"), SubResource("Resource_66l0f"), SubResource("Resource_pjrpf")])
-rock_spawn_chance = 0.3
-crate_spawn_chance = 0.2
+rock_weights = Array[ExtResource("1_erio4")]([SubResource("Resource_bper2"), SubResource("Resource_uep2w"), SubResource("Resource_chkau"), SubResource("Resource_xqos5"), SubResource("Resource_roopn")])
+rock_spawn_chance = 0.4
 metadata/_custom_type_script = "uid://bv6mgv53f5afu"

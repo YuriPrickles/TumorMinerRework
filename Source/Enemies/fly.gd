@@ -28,7 +28,5 @@ func _physics_process(delta: float) -> void:
 		move_and_collide(velocity * delta)
 
 func on_collide_player(plr:Player):
-	plr.hurt(ElementalType.ET_Neutral.new(3,plr), position)
-	#plr.suffer_effect(effects.burned)
-		#NOTE: Testing statement, applies burn to the player on each hit
+	plr.hurt(3, position)
 	on_hurt(0,plr)
