@@ -1,0 +1,37 @@
+[gd_scene format=3 uid="uid://bmoy6rcuy6utp"]
+
+[ext_resource type="PackedScene" uid="uid://ddqn8m1w1gwt1" path="res://Source/enemy.tscn" id="1_8w7xd"]
+[ext_resource type="Script" uid="uid://b73ss8ufm66nw" path="res://Source/Enemies/coal_rat.gd" id="2_8w7xd"]
+[ext_resource type="PackedScene" uid="uid://j4v7lci25bs" path="res://Source/EnemySprites/coal_rat_sprite.tscn" id="3_4c8tl"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_coxhp"]
+radius = 203.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_d6ajj"]
+size = Vector2(60, 20)
+
+[node name="CoalRat" unique_id=1878560834 node_paths=PackedStringArray("detection_range", "enemy_sprite") instance=ExtResource("1_8w7xd")]
+z_index = 1
+collision_mask = 87
+script = ExtResource("2_8w7xd")
+detection_range = NodePath("DetectionRange")
+enemy_sprite = NodePath("CoalRatSprite")
+health = 180
+kb_res = 1.0
+movement_speed = 70.0
+acceleration = 500.0
+tribes = 2
+
+[node name="DetectionRange" type="Area2D" parent="." index="0" unique_id=1993365856]
+position = Vector2(0, -10)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionRange" index="0" unique_id=296312709]
+shape = SubResource("CircleShape2D_coxhp")
+debug_color = Color(0.9882353, 0, 0.3137255, 0.039215688)
+
+[node name="CoalRatSprite" parent="." index="1" unique_id=872872831 instance=ExtResource("3_4c8tl")]
+position = Vector2(-16, 0)
+
+[node name="CollisionShape2D" parent="." index="2" unique_id=483514922]
+position = Vector2(0, -10)
+shape = SubResource("RectangleShape2D_d6ajj")

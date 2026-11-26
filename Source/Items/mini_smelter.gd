@@ -11,16 +11,14 @@ func _init(stk:int=1) -> void:
 
 var smelter_scene : PackedScene = preload("res://Source/Interactables/mini_smelter_interactable.tscn")
 func use_item(plr:Player) -> bool:
-	var pos = Main.instance.current_floor.get_local_mouse_position()
-	pos = Main.instance.current_floor.current_layout.layout_tiles.local_to_map(pos)
-	pos = Main.instance.current_floor.current_layout.layout_tiles.map_to_local(pos)
+	var pos = Main.instance.current_floor.to_local_position(plr.get_targeted_tile())
 	for inter:Interactable in Main.instance.current_floor.interactables.get_children():
 		if inter.position == pos:
 			return false
 		if Main.instance.current_floor.current_layout.astar_grid.is_point_solid(Main.instance.current_floor.to_tile_grid(pos)):
 			return false
 	await super(plr)
-	var smelter = smelter_scene.instantiate()
+	var smelter:MiniSmelterInteractable = smelter_scene.instantiate()
 	Main.instance.current_floor.place_interactable(smelter,pos)
 	return true
 

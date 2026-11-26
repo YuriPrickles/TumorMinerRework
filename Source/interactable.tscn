@@ -1,28 +1,27 @@
 [gd_scene format=3 uid="uid://cr5c3wmtrsm7q"]
 
+[ext_resource type="Shader" uid="uid://c0jfts5eio0ij" path="res://Source/outline.gdshader" id="1_qo6en"]
 [ext_resource type="Script" uid="uid://da4dixws2owex" path="res://Source/interactable.gd" id="1_t5488"]
 [ext_resource type="Texture2D" uid="uid://dcm6rqed667mt" path="res://Assets/Temporary/ladder_down.png" id="2_t5488"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_v3b0y"]
-size = Vector2(64, 64)
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_qo6en"]
+resource_local_to_scene = true
+shader = ExtResource("1_qo6en")
+shader_parameter/line_color = Color(1, 1, 1, 1)
+shader_parameter/line_thickness = 0.0
+shader_parameter/add_margins = true
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_coxhp"]
 size = Vector2(64, 50)
 
-[node name="Interactable" type="StaticBody2D" unique_id=1300855250 node_paths=PackedStringArray("click_area")]
+[node name="Interactable" type="StaticBody2D" unique_id=1300855250]
 y_sort_enabled = true
 collision_layer = 64
 collision_mask = 9
 script = ExtResource("1_t5488")
-click_area = NodePath("ClickArea")
-
-[node name="ClickArea" type="Area2D" parent="." unique_id=331627381]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="ClickArea" unique_id=729982914]
-position = Vector2(0, -32)
-shape = SubResource("RectangleShape2D_v3b0y")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1306761943]
+material = SubResource("ShaderMaterial_qo6en")
 texture = ExtResource("2_t5488")
 offset = Vector2(0, -32)
 

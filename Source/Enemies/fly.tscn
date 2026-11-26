@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://ddqn8m1w1gwt1" path="res://Source/enemy.tscn" id="1_4xtxy"]
 [ext_resource type="Script" uid="uid://bsnu4legp2yr0" path="res://Source/Enemies/fly.gd" id="2_4xtxy"]
-[ext_resource type="PackedScene" uid="uid://c7sfcpeelhq8v" path="res://Source/EnemySprites/fly_sprite.tscn" id="3_qu8xp"]
+[ext_resource type="PackedScene" uid="uid://312k1hvh2gau" path="res://Source/EnemySprites/fly_sprite.tscn" id="3_qu8xp"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_coxhp"]
 radius = 300.2399
@@ -15,10 +15,11 @@ collision_mask = 5
 script = ExtResource("2_4xtxy")
 detection_range = NodePath("DetectionRange")
 enemy_sprite = NodePath("FlySprite")
-health = 5
+health = 12
 kb_res = -0.2
 movement_speed = 300.0
 acceleration = 128.0
+tribes = 25
 
 [node name="DetectionRange" type="Area2D" parent="." index="0" unique_id=1993365856]
 position = Vector2(0, -10)

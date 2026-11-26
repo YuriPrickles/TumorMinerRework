@@ -1,8 +1,10 @@
 [gd_scene format=3 uid="uid://uykcv83c2sxe"]
 
 [ext_resource type="Script" uid="uid://cp2oe23llj7ep" path="res://Source/global.gd" id="1_c2ffm"]
+[ext_resource type="PackedScene" uid="uid://dyyk44nuvcvnb" path="res://Source/popup_text.tscn" id="2_beyle"]
 
 [node name="Global" type="Node" unique_id=1651205115]
 process_mode = 3
 script = ExtResource("1_c2ffm")
 items_texture_path = "res://Assets/Graphics/Gameplay/Items"
+popup_text_scene = ExtResource("2_beyle")

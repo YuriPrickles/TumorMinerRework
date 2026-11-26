@@ -18,6 +18,7 @@ func get_rock_nodes() -> Array[RockNode]:
 
 @export var ladder_scene:PackedScene
 @export var layout_pool:LayoutPool
+@export var boss_layout_pool:LayoutPool
 
 var current_layout:Layout
 var already_spawned_ladder:bool = false
@@ -25,8 +26,12 @@ var ladder_spawn_chance: float = 0.05
 var ldr_ch_incr_min: float = 0.02
 var ldr_ch_incr_max: float = 0.04
 var tile_size: int = 64
+var enemies_cleared: bool = false
 func _ready() -> void:
-	current_layout = layout_pool.layout_pool.pick_random().instantiate()
+	if Global.boss_room:
+		current_layout = boss_layout_pool.layout_pool.pick_random().instantiate()
+	else:
+		current_layout = layout_pool.layout_pool.pick_random().instantiate()
 	environment.add_child(current_layout)
 	tile_size = current_layout.layout_tiles.tile_set.tile_size.x
 	queue_redraw()
@@ -35,6 +40,10 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
+	if not enemies_cleared and get_enemies().size() <= 0:
+		enemies_cleared = true
+		for spot in current_layout.guaranteed_ladder_spots:
+			spawn_ladder(to_local_position(spot), true)
 	queue_redraw()
 	#if Engine.get_frames_drawn() % 30 == 0:
 		#queue_redraw()
@@ -58,16 +67,17 @@ func _draw() -> void:
 func increase_ladder_chance():
 	ladder_spawn_chance += randf_range(ldr_ch_incr_min,ldr_ch_incr_max)
 
-func spawn_ladder(pos: Vector2):
-	if already_spawned_ladder: return
+func spawn_ladder(pos: Vector2, force_spawn:bool = false):
+	if already_spawned_ladder or (not force_spawn and not current_layout.allow_random_ladder):
+		return
 	var ladder:Ladder = ladder_scene.instantiate()
 	ladder.position = pos
-	interactables.add_child(ladder)
+	interactables.add_child.call_deferred(ladder)
 	already_spawned_ladder = true
 
 func place_interactable(interactable:Interactable,pos:Vector2):
 	current_layout.astar_grid.set_point_solid(to_tile_grid(pos))
-	interactable.position = pos + Vector2(0,32)
+	interactable.position = pos
 	interactables.add_child(interactable)
 
 func to_tile_grid(pos:Vector2) -> Vector2i:
@@ -75,3 +85,18 @@ func to_tile_grid(pos:Vector2) -> Vector2i:
 
 func to_local_position(tilepos:Vector2i) -> Vector2:
 	return current_layout.layout_tiles.map_to_local(tilepos)
+
+func explode_at(pos:Vector2, boom_radius:int, boom_strength:int,damage:int=0) -> void:
+	var plr = Main.instance.get_player()
+	for rck in get_rock_nodes():
+		if rck.get_current_tile().distance_to(to_tile_grid(pos)) <= boom_radius:
+			plr.request_mine_action(rck, boom_strength)
+	for inter in get_interactables():
+		if inter.get_current_tile().distance_to(to_tile_grid(pos)) <= boom_radius:
+			plr.request_mine_action(inter, boom_strength)
+	if damage > 0:
+		for enemy in get_enemies():
+			if enemy.position.distance_to(pos) <= boom_radius * tile_size:
+				enemy.hurt(ElementalType.ET_Neutral.new(damage,enemy), self)
+		if to_local_position(plr.get_current_tile()).distance_to(pos) <= boom_radius * tile_size:
+			plr.hurt(ElementalType.ET_Neutral.new(damage,plr), position,600)

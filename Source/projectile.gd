@@ -1,29 +1,41 @@
 class_name Projectile
 extends Area2D
 @export var collision_shape: CollisionShape2D
-
 @export var hostile: bool
 @export var damage: int
-@export var knockback: float
+@export var knockback: float = 500
+@export var lifetime: float = 3
+@export var knockless: bool = false
 
+var multi_hit_timer:float = 0.0
 var velocity: Vector2
-var lifetime: float = 3
 
-static func new_projectile(proj:PackedScene, pos, vel, dmg, h=false) -> Projectile:
+var hit_enemies_array : Array[Enemy]
+var hit_players_array : Array[Player]
+var hit_rocks_array : Array[RockNode]
+
+
+static func new_projectile(proj:PackedScene, pos, vel, dmg=-1, h=null) -> Projectile:
 	var projectile:Projectile = proj.instantiate()
 	projectile.position = pos
 	projectile.velocity = vel
-	projectile.damage = dmg
-	projectile.hostile = h
+	projectile.damage = dmg if dmg >= 0 else projectile.damage
+	projectile.hostile = h if h else projectile.hostile
 	assert(projectile is Projectile,"not a projectile!")
 	Main.instance.current_floor.projectiles.add_child(projectile)
 	return projectile
 func _ready() -> void:
 	body_entered.connect(
-		on_body_enter
-	)
+			on_body_enter
+		)
 
-func _process(delta: float) -> void:
+func _physics_process(delta: float) -> void:
+	#if multi_hit_delay > -1:
+		#multi_hit_timer += delta
+		#if multi_hit_timer > multi_hit_delay:
+			#for body in get_overlapping_bodies():
+				#on_body_enter(body)
+			#multi_hit_timer = 0
 	tick_down(delta)
 	movement()
 
@@ -53,11 +65,34 @@ func on_body_enter(body:Node2D):
 		on_collide_rock(body as RockNode)
 	
 
-func on_collide_player(plr:Player):
-	pass
-func on_collide_enemy(enemy:Enemy):
-	pass
+func get_damage(dmg, target):
+	return ElementalType.ET_Neutral.new(dmg,target)
+func on_collide_player(plr:Player) -> bool:
+	if not hostile: return false
+	if not hit_players_array.has(plr):
+		#if multi_hit_delay > -1:
+		hit_players_array.append(plr)
+		if not knockless:
+			plr.hurt(get_damage(damage,plr),position,knockback)
+		else:
+			plr.knockless_hurt(get_damage(damage,plr))
+	else:
+		return false
+	return true
+func on_collide_enemy(enemy:Enemy) -> bool:
+	if hostile: return false
+	if not hit_enemies_array.has(enemy):
+		hit_enemies_array.append(enemy)
+		enemy.hurt(get_damage(damage,enemy),self if not knockless else null)
+	else:
+		return false
+	return true
 func on_collide_wall():
 	pass
-func on_collide_rock(rock:RockNode):
-	pass
+func on_collide_rock(rock:RockNode) -> bool:
+	if not hit_rocks_array.has(rock):
+		hit_rocks_array.append(rock)
+		rock.on_hit_by_projectile(self)
+	else:
+		return false
+	return true

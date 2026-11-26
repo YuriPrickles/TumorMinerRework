@@ -7,7 +7,7 @@ func _init(stk:int=1) -> void:
 	type = Type.PICKAXE
 	auto_use = true
 	anim_type = AnimationType.PICKAXE
-	use_delay = 0.15
+	use_delay = 0.3
 
 func use_item(plr:Player) -> bool:
 	super(plr)
@@ -21,4 +21,7 @@ func use_item(plr:Player) -> bool:
 	for interactable in c_floor.get_interactables():
 		if target_tile == interactable.get_current_tile() or current_tile == interactable.get_current_tile():
 			plr.request_mine_action(interactable, strength)
+	for enemy in c_floor.get_enemies():
+		if enemy.allow_mining and enemy.is_mineable(target_tile):
+			enemy.on_mine(strength)
 	return true

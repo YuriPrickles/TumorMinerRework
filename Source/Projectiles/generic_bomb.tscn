@@ -8,13 +8,14 @@
 radius = 32.0
 
 [node name="BombProj" unique_id=921495114 node_paths=PackedStringArray("texture") instance=ExtResource("1_lxnnm")]
+collision_mask = 6
 script = ExtResource("2_lxnnm")
 boom_radius = 2
 boom_strength = 4
 fuse_duration = 2.0
 destroys_things = true
 texture = NodePath("Texture")
-damage = 3
+knockback = 0.0
 
 [node name="Texture" type="Sprite2D" parent="." index="0" unique_id=103154065]
 texture = ExtResource("3_lxnnm")
