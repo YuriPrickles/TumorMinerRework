@@ -1,7 +1,5 @@
 class_name StatusEffect extends Resource
 
-#Reference point for all statuses, editing them here SHOULD affect how they
-#act across all enemies and for the player
 enum EFFECTS {burned, sulphured, engulfed, poisoned, rusted, cobwebbed, defUp, defDown, atkUp, atkDown, regen}
 @export var status : EFFECTS
 #@export var status_library : Dictionary[EFFECTS, Array]= {
@@ -72,15 +70,14 @@ static func remove_effect(array:Array[StatusEffect], effect_script:Script) -> vo
 		array.erase(marked_for_death)
 	marked_for_death = null
 
-func decrease_duration(delta:float) -> void:
-	duration -= delta
-
 static func has_effect(array:Array[StatusEffect],effect_script:Script) -> bool:
 	for eff in array:
 		if eff.get_script() == effect_script:
 			return true
 	return false
 
+func decrease_duration(delta:float) -> void:
+	duration -= delta
 
 #Removes a single stack of the given effect
 func consume_stack() -> void :

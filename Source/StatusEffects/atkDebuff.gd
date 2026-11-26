@@ -8,5 +8,5 @@ func _init(newDuration:float, newStacks:int):
 
 func process_effect(plr:Player, delta) -> void:
 	super.process_effect(plr, delta)
-	plr.plrDefMod_apply(atkMod_instance)
+	plr.apply_plr_atkMod((atkMod_instance * self.current_stacks))
 	super.decrease_duration(delta)

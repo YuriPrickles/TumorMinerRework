@@ -4,6 +4,7 @@ extends CharacterBody2D
 @export var held_item: HeldItem
 @export var hand_spot: Marker2D
 @export var player_sprite: Sprite2D
+@export var plr_statuses: Array[StatusEffect]
 
 const SPEED = 300.0
 var   ACCEL = 1.0 #Multiplier used to adjust player speed with debuffs/buffs
@@ -23,8 +24,6 @@ var atk_mod : float = 1.0
 var def_mod : float = 1.0
 var firstLoad : bool = true
 
-#var plrEffects = {}
-var plr_statuses:Array[StatusEffect]
 
 var stagger: bool:
 	get:
@@ -147,6 +146,7 @@ func _input(event: InputEvent) -> void:
 
 func request_mine_action(rock, strength):
 	rock.on_mine(strength, self)
+	StatusEffect.add_effect(self.plr_statuses, atkBuff.new(30, 30))
 
 func aim_to_mouse() -> Vector2:
 	return position.direction_to(get_global_mouse_position())
@@ -203,8 +203,8 @@ func prepare_stats() -> void :
 	self.atk = 1.0
 	self.def = 1.0
 
-func plratk_mod_apply(newMod:float) -> void:
+func apply_plr_atkMod(newMod:float) -> void:
 	self.atk_mod += newMod
 
-func plrdef_mod_apply(newMod:float) -> void:
+func apply_plr_defMod(newMod:float) -> void:
 	self.atkDef += newMod
