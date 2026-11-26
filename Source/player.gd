@@ -19,8 +19,8 @@ var def : int
 #Stat modifiers that are used to apply buffs, 
 #can be positive OR negative depending on result of all active buffs
 #AFFECTED BY STATUSES ONLY
-var atkMod : float
-var defMod : float
+var atk_mod : float = 1.0
+var def_mod : float = 1.0
 var firstLoad : bool = true
 
 #var plrEffects = {}
@@ -44,6 +44,7 @@ func _ready() -> void:
 	interact_range.body_exited.connect(undetect_thing)
 	interact_range.area_entered.connect(detect_thing)
 	interact_range.area_exited.connect(undetect_thing)
+	prepare_stats()
 	retrieve_effects() #Re-applies effects accrued on a previous floor IF APPLICABLE
 
 func _physics_process(delta: float) -> void:
@@ -193,17 +194,17 @@ func react_to_element(type:ElementalType,is_status:bool = false):
 	pass
 
 func get_plr_Atk() -> float :
-	return self.atk * self.atkMod
+	return self.atk * self.atk_mod
 
 func get_plr_Def() -> float : 
-	return self.def * self.defMod
+	return self.def * self.def_mod
 
 func prepare_stats() -> void :
-	self.atkMod = 1.0
-	self.defMod = 1.0
+	self.atk = 1.0
+	self.def = 1.0
 
-func plrAtkMod_apply(newMod:float) -> void:
-	self.atkMod += newMod
+func plratk_mod_apply(newMod:float) -> void:
+	self.atk_mod += newMod
 
-func plrDefMod_apply(newMod:float) -> void:
+func plrdef_mod_apply(newMod:float) -> void:
 	self.atkDef += newMod

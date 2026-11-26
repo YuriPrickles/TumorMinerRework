@@ -2,6 +2,7 @@ class_name atkBuff extends StatusEffect
 
 @export var atkMod_instance : float = 1.75
 
+
 func _init(newDuration:float, newStacks:int):
 	self.duration = newDuration
 	self.current_stacks = newStacks

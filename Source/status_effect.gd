@@ -41,6 +41,7 @@ static func add_effect(array:Array[StatusEffect], effect:StatusEffect) -> void :
 					existing_eff.max_stacks,
 					effect.current_stacks + existing_eff.current_stacks)
 				return
+			else : print("ERR: UNKNOWN EFFECT")
 	array.append(effect)
 	effect.on_apply(array)
 	#var baseStatus = status_library.get(effect)
