@@ -5,7 +5,6 @@ func _init(stk:int = 1) -> void:
 	super(stk)
 	heal_amount = 20
 	points = 2
-	part_type = "leg"
 
 func apply_effects(plr:Player):
 	plr.speed_mult += 1.05
