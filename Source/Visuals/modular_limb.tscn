@@ -1,0 +1,23 @@
+[gd_scene format=3 uid="uid://bln2464v45iy5"]
+
+[ext_resource type="Script" uid="uid://b1pigd4hrnsl2" path="res://Source/Visuals/modular_limb.gd" id="1_rprkq"]
+[ext_resource type="Texture2D" uid="uid://bmiuoierr7sl0" path="res://Assets/Temporary/tumor_hand.png" id="2_l5u2h"]
+
+[sub_resource type="Curve" id="Curve_l5u2h"]
+_data = [Vector2(0, 0.7979275), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[node name="ModularLimb" type="Node2D" unique_id=2084398380 node_paths=PackedStringArray("LimbDisplay", "ApexDisplay")]
+script = ExtResource("1_rprkq")
+LimbDisplay = NodePath("LimbDisplay")
+ApexDisplay = NodePath("ApexDisplay")
+
+[node name="LimbDisplay" type="Line2D" parent="." unique_id=1000622853]
+points = PackedVector2Array(0, 0, 0, 0)
+width_curve = SubResource("Curve_l5u2h")
+default_color = Color(0, 0, 0, 1)
+begin_cap_mode = 2
+end_cap_mode = 2
+
+[node name="ApexDisplay" type="Sprite2D" parent="." unique_id=1635452938]
+texture = ExtResource("2_l5u2h")
