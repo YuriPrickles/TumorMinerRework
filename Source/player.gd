@@ -87,10 +87,12 @@ func _process(delta: float) -> void:
 	tickDuration += delta
 	#prepare_stats()
 	#print(fmod(tickDuration, 100))
-	if (fmod(tickDuration, 100) > 1) :
-		tickDuration = 0
-		for eff in plr_statuses:
-			eff.process_effect(self, delta)
+	#if (fmod(tickDuration, 100) > 1) :
+		#tickDuration = 0
+	for eff in plr_statuses:
+		eff.process_effect(self, delta) 
+			#NOTE: Consider changing this to a set interval, 
+				#since this is already set to be called once a second
 
 ## leftovers of a bygone system... maybe it will find its use someday
 func detect_thing(body:Node2D):
@@ -146,8 +148,6 @@ func _input(event: InputEvent) -> void:
 
 func request_mine_action(rock, strength):
 	rock.on_mine(strength, self)
-	StatusEffect.add_effect(self.plr_statuses, atkBuff.new(10, 9), self, null)
-	print(get_plr_Atk())
 
 func aim_to_mouse() -> Vector2:
 	return position.direction_to(get_global_mouse_position())

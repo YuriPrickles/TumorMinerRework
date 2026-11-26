@@ -25,3 +25,7 @@ func process_enemy_effect(enemy:Enemy, delta) -> void :
 	if timer > DMG_RATE:
 		enemy.hurt(ElementalType.ET_Sulfur.new(damage,enemy,true), null)
 		timer = 0
+
+
+func on_apply(array:Array[StatusEffect], plr:Player = null, enemy:Enemy = null): return
+func on_remove(plr:Player=null, enemy:Enemy=null): return

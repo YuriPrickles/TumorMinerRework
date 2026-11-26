@@ -16,7 +16,16 @@ func process_effect(plr:Player, delta) -> void:
 		#plr.apply_plr_atkMod((atkMod_instance * self.current_stacks))
 
 func on_apply(effects:Array[StatusEffect], plr:Player = null, enemy:Enemy = null) -> void :
-	if not (plr == null): print("PLAYER ATK HANDLER")
-	else : if not (enemy == null) : print("ENEMY ATK HANDLER")
-	
+	print(plr)
+	print(enemy)
+	if not (plr == null): 
+		print("PLAYER ATK HANDLER")
+		plr.apply_plr_atkMod(self.current_stacks * atkMod_instance)
+		return
+	else : if not (enemy == null) : 
+		print("ENEMY ATK HANDLER")
+		return
 	print("ERR: NO ATK BUFF APPLIED")
+
+func on_remove(plr:Player=null, enemy:Enemy=null) -> void :
+	plr.apply_plr_atkMod(self.current_stacks * atkMod_instance * -1)

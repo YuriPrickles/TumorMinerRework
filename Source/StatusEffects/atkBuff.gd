@@ -22,8 +22,10 @@ func on_apply(effects:Array[StatusEffect], plr:Player = null, enemy:Enemy = null
 	if not (plr == null): 
 		print("PLAYER ATK HANDLER")
 		plr.apply_plr_atkMod(self.current_stacks * atkMod_instance)
-	else : if not (enemy == null) : print("ENEMY ATK HANDLER")
-	
+		return
+	else : if not (enemy == null) : 
+		print("ENEMY ATK HANDLER")
+		return
 	print("ERR: NO ATK BUFF APPLIED")
 
 func on_remove(plr:Player=null, enemy:Enemy=null) -> void :
