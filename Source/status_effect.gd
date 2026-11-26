@@ -12,10 +12,8 @@ func _init(time:float,stack:int = 1) -> void :
 	current_stacks = stack
 
 #TO IMPLEMENT: 
-	#For each possible status in the library, if the stackcount is higher than 0
-	#add that status, to the 'active_effects' dictionary
-	#add it's damage, duration, and stack count for later calculation
-	#set stackcount in the LIBRARY to 0 so the stacks won't be added again later
+	#POSSIBLE FIX NEEDED:
+		#Might need to add code to check if we're adding to a player or enemys
 static func add_effect(array:Array[StatusEffect], effect:StatusEffect, plr:Player=null, enemy:Enemy=null) -> void :
 	if has_effect(array, effect.get_script()):
 		for existing_eff in array:

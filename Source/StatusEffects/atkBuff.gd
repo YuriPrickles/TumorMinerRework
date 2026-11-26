@@ -1,6 +1,6 @@
 class_name atkBuff extends StatusEffect
 
-@export var atkMod_instance : float = 1.75
+var atkMod_instance : float = 1.75
 
 
 func _init(newDuration:float, newStacks:int):
@@ -25,8 +25,13 @@ func on_apply(effects:Array[StatusEffect], plr:Player = null, enemy:Enemy = null
 		return
 	else : if not (enemy == null) : 
 		print("ENEMY ATK HANDLER")
+		enemy.setEnemy_atk(atkMod_instance * self.current_stacks)
 		return
 	print("ERR: NO ATK BUFF APPLIED")
 
 func on_remove(plr:Player=null, enemy:Enemy=null) -> void :
-	plr.apply_plr_atkMod(self.current_stacks * atkMod_instance * -1)
+	if not (plr==null):
+		plr.apply_plr_atkMod(self.current_stacks * atkMod_instance * -1)
+	else : if not (enemy==null):
+		enemy.setEnemy_atk(atkMod_instance * -1)
+	else : print("ERR: NO PLR OR ENEMY FOUND")

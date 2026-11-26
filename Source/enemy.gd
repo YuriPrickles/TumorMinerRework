@@ -19,7 +19,10 @@ var current_point:int
 var current_cell:Vector2i
 var target_cell:Vector2i
 
+#Because enemies cannot equip Parts, statuses affect their base stats
 var enemy_statuses : Array[StatusEffect]
+var atk : float 
+var def : float
 #Add atk, add def, understand how to affect health using status effects
 #Def modifier is additive
 
@@ -32,9 +35,11 @@ func _ready() -> void:
 		current_cell = pos_to_cell(global_position)
 		target_cell = current_cell
 	lambda.call_deferred()
+	prepare_stats()
 
 func _physics_process(delta: float) -> void: pass
 func _process(delta: float) -> void:
+	prepare_stats()
 	for eff in enemy_statuses:
 		eff.process_enemy_effect(self, delta)
 	pass
@@ -147,3 +152,19 @@ func is_mineable(target_tile:Vector2i):
 ## Override to do something when this is mined.
 func on_mine(strength:int):
 	pass
+
+func prepare_stats() -> void :
+	atk = 1.0
+	def = 1.0
+
+func getEnemy_atk() -> float :
+	return atk
+
+func getEnemy_def() -> float:
+	return def
+
+func setEnemy_atk(mod:float) -> void:
+	atk += mod
+
+func setEnemy_def(mod:float) -> void:
+	def += mod

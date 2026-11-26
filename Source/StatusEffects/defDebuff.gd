@@ -24,8 +24,13 @@ func on_apply(effects:Array[StatusEffect], plr:Player = null, enemy:Enemy = null
 		return
 	else : if not (enemy == null) : 
 		print("ENEMY DEF HANDLER")
+		enemy.setEnemy_def(defMod_instance * self.current_stacks)
 		return
 	print("ERR: NO DEF BUFF APPLIED")
 
 func on_remove(plr:Player=null, enemy:Enemy=null) -> void :
-	plr.apply_plr_defMod(self.current_stacks * defMod_instance * -1)
+	if not (plr==null):
+		plr.apply_plr_defMod(self.current_stacks * defMod_instance * -1)
+	else : if not (enemy==null):
+		enemy.setEnemy_def(defMod_instance * -1)
+	else : print("ERR: NO PLR OR ENEMY FOUND")
