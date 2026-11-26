@@ -18,6 +18,9 @@ tile_set = ExtResource("1_1hrp4")
 [node name="EventTiles" type="TileMapLayer" parent="." unique_id=1233129027]
 tile_set = ExtResource("1_1hrp4")
 
+[node name="DecorTiles" type="TileMapLayer" parent="." unique_id=710155120]
+tile_set = ExtResource("1_1hrp4")
+
 [node name="TopLeft" type="Marker2D" parent="." unique_id=723770778]
 modulate = Color(6.9815493, 8.1111145, 0, 1)
 z_index = 1

@@ -27,6 +27,9 @@ ITEM_DESC_MINISMELTER=Smelts ores.
 ITEM_BATLEG=Bat Leg
 ITEM_DESC_BATLEG=Heals 20. +5% speed.
 
+ITEM_LUEPLINGFOOT=Lüpling Foot
+ITEM_DESC_LUEPLINGFOOT=Heals 10. Chance to negate damage taken.
+
 ITEM_COPPERPICKAXE=Copper Pickaxe
 ITEM_DESC_COPPERPICKAXE=For mining.
 
@@ -38,5 +41,29 @@ ITEM_DESC_CLAY=Soft. Heat to harden.
 
 ITEM_DYNAMITEWEAK=Weak Dynamite
 ITEM_DESC_DYNAMITEWEAK=Blows up a small area. LMB to place, Shift + LMB to throw.
+
+ITEM_CLAYPOTMOLD=Pot Mold
+ITEM_DESC_CLAYPOTMOLD=Heat into a Terracotta Pot.
+
+ITEM_TERRACOTTAPOT=Terracotta Pot
+ITEM_DESC_TERRACOTTAPOT=A versatile material. Holds most normal liquids.
+
+ITEM_WATERPOT=Water Pot
+ITEM_DESC_WATERPOT=A pot of water. Useful for mixing stuff.
+
+ITEM_BRICK=Brick
+ITEM_DESC_BRICK=For crafting and throwing. +2 Defense for each full stack of bricks in your inventory.
+
+ITEM_CROCKPOT=Crock Pot
+ITEM_DESC_CROCKPOT=Put two Parts in and wait for a meal.
+
+ITEM_EMERALD=Emerald
+ITEM_DESC_EMERALD=Has poisonous powers.
+
+ITEM_RUBY=Ruby
+ITEM_DESC_RUBY=Has fiery powers.
+
+ITEM_RUBYWAND=Ruby Wand
+ITEM_DESC_RUBYWAND=Shoots a fast fire bolt.
 
 END_OF_DIALOG_FILE
