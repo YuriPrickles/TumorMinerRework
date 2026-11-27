@@ -1,5 +1,7 @@
 # this is a comment that the language loader will not read
 
+
+
 ITEM_BONESABER=Bonesaber
 ITEM_DESC_BONESABER=A sword.
 
@@ -29,6 +31,9 @@ ITEM_DESC_BATLEG=Heals 20. +5% speed.
 
 ITEM_LUEPLINGFOOT=Lüpling Foot
 ITEM_DESC_LUEPLINGFOOT=Heals 10. Chance to negate damage taken.
+
+ITEM_COPPERPICKAXE=Copper Pickaxe
+ITEM_DESC_COPPERPICKAXE=For mining.
 
 ITEM_COPPERPICKAXE=Copper Pickaxe
 ITEM_DESC_COPPERPICKAXE=For mining.
@@ -67,6 +72,6 @@ ITEM_RUBYWAND=Ruby Wand
 ITEM_DESC_RUBYWAND=Shoots a fast fire bolt.
 
 ITEM_EMERALDWAND=Emerald Wand
-ITEM_DESC_EMERALDWAND=Shoots a fast fire bolt.
+ITEM_DESC_EMERALDWAND=Shoots a poison bolt.
 
 END_OF_DIALOG_FILE
