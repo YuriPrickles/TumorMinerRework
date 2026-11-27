@@ -15,6 +15,7 @@ var boss_room:bool:
 		return Global.run_info.depth % 2 == 0
 
 @export_dir var items_texture_path: String
+@export_dir var parts_texture_path: String
 
 var level_state:LevelState = LevelState.CALM
 enum LevelState {

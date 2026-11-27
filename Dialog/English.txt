@@ -66,4 +66,7 @@ ITEM_DESC_RUBY=Has fiery powers.
 ITEM_RUBYWAND=Ruby Wand
 ITEM_DESC_RUBYWAND=Shoots a fast fire bolt.
 
+ITEM_EMERALDWAND=Emerald Wand
+ITEM_DESC_EMERALDWAND=Shoots a fast fire bolt.
+
 END_OF_DIALOG_FILE

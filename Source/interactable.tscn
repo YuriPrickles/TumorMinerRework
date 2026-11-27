@@ -2,7 +2,7 @@
 
 [ext_resource type="Shader" uid="uid://c0jfts5eio0ij" path="res://Source/outline.gdshader" id="1_qo6en"]
 [ext_resource type="Script" uid="uid://da4dixws2owex" path="res://Source/interactable.gd" id="1_t5488"]
-[ext_resource type="Texture2D" uid="uid://dcm6rqed667mt" path="res://Assets/Temporary/ladder_down.png" id="2_t5488"]
+[ext_resource type="Texture2D" uid="uid://dcm6rqed667mt" path="res://Assets/Graphics/Gameplay/Interactables/ladder_down.png" id="2_t5488"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_qo6en"]
 resource_local_to_scene = true

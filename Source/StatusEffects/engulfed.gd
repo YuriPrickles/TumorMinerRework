@@ -24,5 +24,5 @@ func process_enemy_effect(enemy:Enemy, delta) -> void :
 	timer += delta
 	decrease_duration(delta)
 	if timer > DMG_RATE:
-		enemy.hurt(ElementalType.ET_Fire.new(damage,enemy,true), null)
+		enemy.knockless_hurt(ElementalType.ET_Fire.new(damage,enemy,true))
 		timer = 0

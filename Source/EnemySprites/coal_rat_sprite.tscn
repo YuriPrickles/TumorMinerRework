@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://j4v7lci25bs"]
 
 [ext_resource type="PackedScene" uid="uid://c6v8kcfr3mjg7" path="res://Source/enemy_sprite.tscn" id="1_n3o4k"]
-[ext_resource type="Texture2D" uid="uid://bojtf6vy56dk2" path="res://Assets/Temporary/coal_rat.png" id="2_lop3r"]
+[ext_resource type="Texture2D" uid="uid://bojtf6vy56dk2" path="res://Assets/Graphics/Gameplay/Enemies/coal_rat.png" id="2_lop3r"]
 
 [sub_resource type="Shader" id="Shader_n3o4k"]
 resource_local_to_scene = true
@@ -282,7 +282,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.4, 0.56666666, 0.6666667, 0.73333335),
 "transitions": PackedFloat32Array(1, 1.9318728, 0.29730177, 1.7411015, 1),
 "update": 0,
-"values": [0.2530727415391778, 0.25307274, 0.7661995416255103, -0.045378560551852964, 0.24434609527920614]
+"values": [0.2530727415391778, 0.25307274, 0.7661995416255103, -0.04537856055185296, 0.24434609527920617]
 }
 tracks/1/type = "value"
 tracks/1/imported = false

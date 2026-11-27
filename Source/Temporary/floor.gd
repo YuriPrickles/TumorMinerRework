@@ -31,6 +31,9 @@ func _ready() -> void:
 	if Global.boss_room:
 		current_layout = boss_layout_pool.layout_pool.pick_random().instantiate()
 	else:
+		Global.level_state = Global.LevelState.CALM
+		var audio = Main.instance.audio
+		audio.activate_track(audio.calm_layer)
 		current_layout = layout_pool.layout_pool.pick_random().instantiate()
 	environment.add_child(current_layout)
 	tile_size = current_layout.layout_tiles.tile_set.tile_size.x

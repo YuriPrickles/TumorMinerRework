@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://c6v8kcfr3mjg7" path="res://Source/enemy_sprite.tscn" id="1_20jqf"]
 
-[sub_resource type="Shader" id="Shader_7xxar"]
+[sub_resource type="Shader" id="Shader_20jqf"]
 resource_local_to_scene = true
 code = "shader_type canvas_item;
 
@@ -20,19 +20,19 @@ void fragment() {
 	}
 }"
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_vljno"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_7xxar"]
 resource_local_to_scene = true
-shader = SubResource("Shader_7xxar")
+shader = SubResource("Shader_20jqf")
 shader_parameter/active = false
 shader_parameter/tint = Color(1, 1, 1, 1)
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_546hj"]
 load_path = "res://.godot/imported/bat.png-2119e5e3eeb973d47203d7221785c06a.ctex"
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_x8qlp"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_vljno"]
 resource_local_to_scene = true
 atlas = SubResource("CompressedTexture2D_546hj")
-region = Rect2(0, 0, 128, 128)
+region = Rect2(0, 0, 256, 128)
 
 [sub_resource type="Animation" id="Animation_7xxar"]
 resource_name = "RESET"
@@ -47,7 +47,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Rect2(0, 0, 128, 128)]
+"values": [Rect2(0, 0, 256, 128)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -101,7 +101,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.25),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Rect2(256, 0, 128, 128), Rect2(384, 0, 128, 128)]
+"values": [Rect2(768, 0, 256, 128), Rect2(1024, 0, 256, 128)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -168,7 +168,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.41666666),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Rect2(128, 0, 128, 128), Rect2(0, 0, 128, 128)]
+"values": [Rect2(512, 0, 256, 128), Rect2(0, 0, 256, 128)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -220,7 +220,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Rect2(0, 0, 128, 128)]
+"values": [Rect2(0, 0, 256, 128)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -273,7 +273,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Rect2(256, 0, 128, 128)]
+"values": [Rect2(768, 0, 256, 128)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -325,9 +325,8 @@ _data = {
 animation_player = NodePath("AnimationPlayer")
 
 [node name="Sprite" parent="." index="0" unique_id=1916043660]
-material = SubResource("ShaderMaterial_vljno")
-position = Vector2(0, 0)
-texture = SubResource("AtlasTexture_x8qlp")
+material = SubResource("ShaderMaterial_7xxar")
+texture = SubResource("AtlasTexture_vljno")
 offset = Vector2(0, -64)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." index="2" unique_id=844320095]

@@ -84,7 +84,11 @@ func on_destroy():
 func hurt(elm:ElementalType, source=null):
 	if health <= 0:
 		return
+	enemy_sprite.hit_flash_player.play("hit_flash")
 	on_hurt(elm.damage,source)
+	knockless_hurt(elm)
+
+func knockless_hurt(elm:ElementalType):
 	health -= max(0,elm.damage)
 	if elm.damage >= 0:
 		Global.popup_text(str(elm.damage),position,elm.color)
@@ -93,7 +97,6 @@ func hurt(elm:ElementalType, source=null):
 
 func on_hurt(damage:int, source):
 	Global.trigger_combat_state()
-	enemy_sprite.hit_flash_player.play("hit_flash")
 	if source: on_hurt_animation()
 	if source and kb_res < 1:
 		flinch(source)

@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://822x75d388b5"]
 
 [ext_resource type="Script" uid="uid://ufrdwcn036v6" path="res://Source/RockNodes/rock_node.gd" id="1_vkfgj"]
-[ext_resource type="Texture2D" uid="uid://dhyrep8xsm1y2" path="res://Assets/Temporary/rock.png" id="2_vfq5b"]
+[ext_resource type="Texture2D" uid="uid://dhyrep8xsm1y2" path="res://Assets/Graphics/Gameplay/RockNodes/rock.png" id="2_vfq5b"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_v3b0y"]
 size = Vector2(64, 64)

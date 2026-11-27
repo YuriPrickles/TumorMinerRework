@@ -27,15 +27,30 @@ shader = ExtResource("8_h3cwn")
 shader_parameter/active = false
 shader_parameter/tint = Color(1, 1, 1, 1)
 
-[node name="Lupus" unique_id=1878560834 node_paths=PackedStringArray("bite_range", "bite_hitbox", "enemy_sprite") instance=ExtResource("1_55ouh")]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_oouby"]
+bg_color = Color(0.47475606, 0.47475612, 0.47475612, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_55ouh"]
+bg_color = Color(1, 0.33499724, 0.3410142, 1)
+
+[node name="Lupus" unique_id=1878560834 node_paths=PackedStringArray("bite_range", "bite_hitbox", "healthbar", "armorbar", "lower_body_armor", "upper_body_armor", "right_arm_armor", "left_arm_armor", "head_armor", "enemy_sprite") instance=ExtResource("1_55ouh")]
 material = SubResource("ShaderMaterial_ayy6r")
+collision_mask = 5
 script = ExtResource("3_o7axq")
-armor = 200
+armor = 300
+max_armor = 300
 bite_range = NodePath("BiteRange")
 bite_hitbox = NodePath("BiteHitbox")
+healthbar = NodePath("CanvasLayer/MarginContainer/VBoxContainer/Health")
+armorbar = NodePath("CanvasLayer/MarginContainer/VBoxContainer/Armor")
 egg_scene = ExtResource("4_usoy4")
 clay_scene = ExtResource("5_yd0xe")
 rock_node_proj = ExtResource("6_e78e0")
+lower_body_armor = NodePath("EnemySprite/Sprite/ExtraOffset/LowerBody/LowerBodyArmor")
+upper_body_armor = NodePath("EnemySprite/Sprite/ExtraOffset/UpperBody/UpperBodyArmor")
+right_arm_armor = NodePath("EnemySprite/Sprite/ExtraOffset/UpperBody/RightArm/RightArmArmor")
+left_arm_armor = NodePath("EnemySprite/Sprite/ExtraOffset/UpperBody/LeftArm/LeftArmArmor")
+head_armor = NodePath("EnemySprite/Sprite/ExtraOffset/UpperBody/Head/HeadArmor")
 enemy_sprite = NodePath("EnemySprite")
 health = 1200
 kb_res = 1.0
@@ -69,5 +84,40 @@ position = Vector2(0, -10)
 
 [node name="CollisionShape2D" type="CollisionPolygon2D" parent="BiteHitbox" index="0" unique_id=71264315]
 polygon = PackedVector2Array(-7, 0, 7, 0, 72, 120, -72, 120)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." index="5" unique_id=93223326]
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer" index="0" unique_id=1019316942]
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -129.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/margin_left = 128
+theme_override_constants/margin_top = 40
+theme_override_constants/margin_right = 128
+theme_override_constants/margin_bottom = 24
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/MarginContainer" index="0" unique_id=407724625]
+layout_mode = 2
+
+[node name="Armor" type="ProgressBar" parent="CanvasLayer/MarginContainer/VBoxContainer" index="0" unique_id=681541402]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/fill = SubResource("StyleBoxFlat_oouby")
+step = 1.0
+value = 50.0
+show_percentage = false
+
+[node name="Health" type="ProgressBar" parent="CanvasLayer/MarginContainer/VBoxContainer" index="1" unique_id=528989098]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/fill = SubResource("StyleBoxFlat_55ouh")
+max_value = 1200.0
+step = 1.0
+value = 1200.0
+show_percentage = false
 
 [editable path="EnemySprite"]

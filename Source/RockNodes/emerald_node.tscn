@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://822x75d388b5" path="res://Source/RockNodes/rock_node.tscn" id="1_66l0f"]
 [ext_resource type="Script" uid="uid://bh1w2rh2op280" path="res://Source/RockNodes/emerald_node.gd" id="2_66l0f"]
-[ext_resource type="Texture2D" uid="uid://bn0ihs38j5n6a" path="res://Assets/Temporary/emerald_node.png" id="3_66l0f"]
+[ext_resource type="Texture2D" uid="uid://bn0ihs38j5n6a" path="res://Assets/Graphics/Gameplay/RockNodes/emerald_node.png" id="3_66l0f"]
 
 [node name="EmeraldNode" unique_id=1300855250 instance=ExtResource("1_66l0f")]
 script = ExtResource("2_66l0f")

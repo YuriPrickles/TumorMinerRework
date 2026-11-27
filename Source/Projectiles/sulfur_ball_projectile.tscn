@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://dk5vfxuia7wfi" path="res://Source/projectile.tscn" id="1_ocr58"]
 [ext_resource type="Script" uid="uid://cjylkata8cm5k" path="res://Source/Projectiles/sulfur_ball_projectile.gd" id="2_ocr58"]
-[ext_resource type="Texture2D" uid="uid://e42r24k8gr6r" path="res://Assets/Temporary/sulfur_ball_proj.png" id="3_ocr58"]
+[ext_resource type="Texture2D" uid="uid://e42r24k8gr6r" path="res://Assets/Graphics/Gameplay/Projectiles/sulfur_ball_proj.png" id="3_ocr58"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_21tc1"]
 radius = 14.0

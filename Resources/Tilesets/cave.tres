@@ -1,7 +1,7 @@
 [gd_resource type="TileSet" format=3 uid="uid://caha28elmpiwl"]
 
-[ext_resource type="Texture2D" uid="uid://bkqetk0awb6td" path="res://Assets/Temporary/cave_decor_tileset.png" id="1_48g37"]
-[ext_resource type="Texture2D" uid="uid://o6p3evj3the6" path="res://Assets/Temporary/simple_cave_tileset.png" id="1_ttkgs"]
+[ext_resource type="Texture2D" uid="uid://bkqetk0awb6td" path="res://Assets/Graphics/Gameplay/Tilesets/cave_decor_tileset.png" id="1_48g37"]
+[ext_resource type="Texture2D" uid="uid://o6p3evj3the6" path="res://Assets/Graphics/Gameplay/Tilesets/simple_cave_tileset.png" id="1_ttkgs"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_48g37"]
 texture = ExtResource("1_48g37")

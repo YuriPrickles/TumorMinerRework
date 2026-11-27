@@ -3,7 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://cr5c3wmtrsm7q" path="res://Source/interactable.tscn" id="1_jowap"]
 [ext_resource type="Script" uid="uid://i6hkb61asxwx" path="res://Source/Interactables/crock_pot_interactable.gd" id="2_jowap"]
 [ext_resource type="Shader" uid="uid://c0jfts5eio0ij" path="res://Source/outline.gdshader" id="3_e40vj"]
-[ext_resource type="Texture2D" uid="uid://bbtfkfv0slby2" path="res://Assets/Temporary/crock_pot_interactable.png" id="3_jowap"]
+[ext_resource type="Texture2D" uid="uid://bbtfkfv0slby2" path="res://Assets/Graphics/Gameplay/Interactables/crock_pot_interactable.png" id="3_jowap"]
 [ext_resource type="Texture2D" uid="uid://dtdu0p3vsisvx" path="res://Assets/Graphics/Gameplay/Items/iron_ore.png" id="4_y5nvg"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_xmeww"]

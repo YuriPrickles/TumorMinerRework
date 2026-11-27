@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://c6v8kcfr3mjg7" path="res://Source/enemy_sprite.tscn" id="1_t2lu0"]
 
-[sub_resource type="Shader" id="Shader_5gept"]
+[sub_resource type="Shader" id="Shader_t2lu0"]
 resource_local_to_scene = true
 code = "shader_type canvas_item;
 
@@ -20,9 +20,9 @@ void fragment() {
 	}
 }"
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_71bdr"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_8tfyj"]
 resource_local_to_scene = true
-shader = SubResource("Shader_5gept")
+shader = SubResource("Shader_t2lu0")
 shader_parameter/active = false
 shader_parameter/tint = Color(1, 1, 1, 1)
 
@@ -124,8 +124,7 @@ _data = {
 animation_player = NodePath("AnimationPlayer")
 
 [node name="Sprite" parent="." index="0" unique_id=1916043660]
-material = SubResource("ShaderMaterial_71bdr")
-position = Vector2(0, 0)
+material = SubResource("ShaderMaterial_8tfyj")
 texture = SubResource("AtlasTexture_efdis")
 offset = Vector2(0, -20)
 

@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://c55ffyrdrt1b7"]
 
 [ext_resource type="Script" uid="uid://v0de8os3gnok" path="res://Source/part_container.gd" id="1_6mcjb"]
-[ext_resource type="Texture2D" uid="uid://qdspkqsuyc2n" path="res://Assets/Graphics/Gameplay/Items/bat_leg.png" id="1_h85go"]
+[ext_resource type="Texture2D" uid="uid://qdspkqsuyc2n" path="res://Assets/Graphics/Gameplay/Items/Parts/bat_leg.png" id="1_h85go"]
 
 [node name="PartContainer" type="Control" unique_id=861394738 node_paths=PackedStringArray("part_name", "points_label", "icon", "button")]
 layout_mode = 3

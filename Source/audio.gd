@@ -20,7 +20,7 @@ func initialize_tracks():
 
 func activate_track(track:AudioStreamPlayer):
 	var track_arr:Array[AudioStreamPlayer] =[
-		calm_layer,battle_layer,boss_layer
+		calm_layer,battle_layer,boss_layer,boss_vocals_layer
 	]
 	var tween = create_tween().set_parallel()
 	for t in track_arr:

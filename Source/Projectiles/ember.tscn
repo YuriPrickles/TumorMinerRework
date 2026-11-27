@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://dk5vfxuia7wfi" path="res://Source/projectile.tscn" id="1_y53ox"]
 [ext_resource type="Script" uid="uid://dh5e8hd4iqm6o" path="res://Source/Projectiles/ember.gd" id="2_y53ox"]
-[ext_resource type="Texture2D" uid="uid://b8mys1htmm35j" path="res://Assets/Temporary/ember_proj.png" id="4_3oisu"]
+[ext_resource type="Texture2D" uid="uid://b8mys1htmm35j" path="res://Assets/Graphics/Gameplay/Projectiles/ember_proj.png" id="4_3oisu"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_21tc1"]
 radius = 16.0

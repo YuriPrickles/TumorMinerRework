@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://cpvy8jb7q3iy0" path="res://Source/Projectiles/generic_sword.tscn" id="1_ygaky"]
 [ext_resource type="Script" uid="uid://cyvyv6f8uwnfi" path="res://Source/Projectiles/sherd_dagger_projectile.gd" id="2_657ms"]
-[ext_resource type="Texture2D" uid="uid://wuq0vfwuh5eu" path="res://Assets/Temporary/sherd_dagger_projectile.png" id="2_oao4m"]
+[ext_resource type="Texture2D" uid="uid://wuq0vfwuh5eu" path="res://Assets/Graphics/Gameplay/Projectiles/sherd_dagger_projectile.png" id="2_oao4m"]
 
 [node name="SherdDaggerProjectile" unique_id=921495114 instance=ExtResource("1_ygaky")]
 script = ExtResource("2_657ms")

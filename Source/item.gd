@@ -51,11 +51,14 @@ var stack: int = 1:
 var fail_use:bool
 
 func _init(stk:int = 1) -> void:
-	texture = load("%s/%s.png" % [
+	texture = get_texture()
+	stack = stk
+
+func get_texture() -> Texture2D:
+	return load("%s/%s.png" % [
 		Global.items_texture_path,
 		get_item_class_name().to_snake_case()
 		])
-	stack = stk
 
 func on_switch_to(plr:Player):
 	pass

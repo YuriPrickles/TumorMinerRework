@@ -3,7 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://cr5c3wmtrsm7q" path="res://Source/interactable.tscn" id="1_q5wnq"]
 [ext_resource type="Script" uid="uid://dbca3w8noalar" path="res://Source/Interactables/mini_smelter_interactable.gd" id="2_uj41n"]
 [ext_resource type="Shader" uid="uid://c0jfts5eio0ij" path="res://Source/outline.gdshader" id="3_sehn5"]
-[ext_resource type="Texture2D" uid="uid://cwu60ietb6x7d" path="res://Assets/Temporary/mini_smelter_placeable.png" id="3_uj41n"]
+[ext_resource type="Texture2D" uid="uid://cwu60ietb6x7d" path="res://Assets/Graphics/Gameplay/Interactables/mini_smelter_placeable.png" id="3_uj41n"]
 [ext_resource type="Texture2D" uid="uid://dtdu0p3vsisvx" path="res://Assets/Graphics/Gameplay/Items/iron_ore.png" id="4_tellt"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_sehn5"]

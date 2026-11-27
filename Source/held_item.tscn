@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://cct5jp0ltelmq"]
 
-[ext_resource type="Texture2D" uid="uid://qdspkqsuyc2n" path="res://Assets/Graphics/Gameplay/Items/bat_leg.png" id="1_b5j2a"]
+[ext_resource type="Texture2D" uid="uid://qdspkqsuyc2n" path="res://Assets/Graphics/Gameplay/Items/Parts/bat_leg.png" id="1_b5j2a"]
 [ext_resource type="Script" uid="uid://c78wi8wweaxm6" path="res://Source/held_item.gd" id="2_b5j2a"]
 
 [sub_resource type="Animation" id="Animation_h6ae0"]

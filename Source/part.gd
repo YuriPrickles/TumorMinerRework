@@ -15,6 +15,12 @@ func _init(stk:int = 1) -> void:
 	consumable = true
 	stack = 1
 
+func get_texture() -> Texture2D:
+	return load("%s/%s.png" % [
+		Global.parts_texture_path,
+		get_item_class_name().to_snake_case()
+		])
+
 func part_effects(plr:Player):
 	pass
 
