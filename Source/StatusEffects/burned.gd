@@ -8,6 +8,11 @@ var timer : float = 0
 var damage : int:
 	get:
 		return 2
+func on_apply(array:Array[StatusEffect]):
+	if has_effect(array, Sulfured) and has_effect(array, Burned):
+		remove_effect(array,Sulfured)
+		remove_effect(array,Burned)
+		add_effect(array,Engulfed.new(duration))
 func process_effect(plr:Player, delta) -> void :
 	super(plr,delta)
 	timer += delta

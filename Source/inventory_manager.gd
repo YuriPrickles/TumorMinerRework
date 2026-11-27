@@ -13,7 +13,8 @@ func _init() -> void:
 	inventory[1] = RubyWand.new()
 	inventory[2] = EmeraldWand.new()
 	inventory[3] = Spear.new()
-	inventory[9] = MiniSmelter.new()
+	inventory[4] = Boomerang.new()
+	inventory[5] = Sulfurang.new()
 
 func validate_item_slot(item:Item) -> void:
 	if item.stack <= 0 and inventory.has(item):

@@ -44,7 +44,7 @@ func movement():
 
 func tick_down(delta:float):
 	lifetime -= delta
-	if lifetime <= 0:
+	if lifetime <= 0 and lifetime > -1:
 		destroy()
 
 func destroy():

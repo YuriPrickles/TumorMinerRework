@@ -1,0 +1,32 @@
+[gd_scene format=3 uid="uid://btsrkyplmjut2"]
+
+[ext_resource type="PackedScene" uid="uid://dk5vfxuia7wfi" path="res://Source/projectile.tscn" id="1_i12ds"]
+[ext_resource type="Script" uid="uid://b7jphae6783tv" path="res://Source/Projectiles/boomerang_projectile.gd" id="2_i12ds"]
+[ext_resource type="Texture2D" uid="uid://c6b0lqkk4ni3d" path="res://Assets/Graphics/Gameplay/Items/boomerang.png" id="3_i12ds"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_21tc1"]
+radius = 24.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_coxhp"]
+radius = 45.0
+
+[node name="BoomerangProj" unique_id=921495114 node_paths=PackedStringArray("sprite", "outer_area") instance=ExtResource("1_i12ds")]
+script = ExtResource("2_i12ds")
+sprite = NodePath("Sprite2D")
+outer_area = NodePath("OuterArea")
+damage = 3
+knockback = 200.0
+lifetime = -1.0
+
+[node name="Sprite2D" type="Sprite2D" parent="." index="0" unique_id=103154065]
+texture = ExtResource("3_i12ds")
+
+[node name="CollisionShape" parent="." index="1" unique_id=1151676331]
+shape = SubResource("CircleShape2D_21tc1")
+
+[node name="OuterArea" type="Area2D" parent="." index="2" unique_id=819898672]
+collision_layer = 16
+collision_mask = 11
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="OuterArea" index="0" unique_id=1006222902]
+shape = SubResource("CircleShape2D_coxhp")
