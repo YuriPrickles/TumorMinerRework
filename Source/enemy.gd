@@ -97,6 +97,7 @@ func hurt(elm:ElementalType, source=null):
 		destroy()
 
 func on_hurt(damage:int, source):
+	Global.trigger_combat_state()
 	enemy_sprite.hit_flash_player.play("hit_flash")
 	if source: on_hurt_animation()
 	if source and kb_res < 1:

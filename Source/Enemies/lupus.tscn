@@ -21,7 +21,7 @@ size = Vector2(64, 20)
 [sub_resource type="CircleShape2D" id="CircleShape2D_coxhp"]
 radius = 148.01352
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_t84ev"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_55ouh"]
 resource_local_to_scene = true
 shader = ExtResource("8_h3cwn")
 shader_parameter/active = false
@@ -59,7 +59,7 @@ shape = SubResource("CircleShape2D_coxhp")
 position = Vector2(-16, 12)
 
 [node name="Sprite" parent="EnemySprite" index="0" unique_id=1916043660]
-material = SubResource("ShaderMaterial_t84ev")
+material = SubResource("ShaderMaterial_55ouh")
 
 [node name="Line2D" parent="." index="3" unique_id=1395953506]
 z_index = 3

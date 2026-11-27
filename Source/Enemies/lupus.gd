@@ -49,8 +49,9 @@ func _physics_process(delta: float) -> void:
 			dig_sequence()
 		State.RESTING:
 			attack_timer += delta
-			
-			if attack_timer > 5:
+			if attack_timer >= 5:
+				enemy_sprite.force_animate("post_dig")
+				await enemy_sprite.animation_player.animation_finished
 				attack_timer = 0
 				c_state = State.CHASING
 	move_and_collide(velocity * delta)
@@ -81,8 +82,6 @@ func dig_sequence():
 		var proj:RockNodeProjectile = Projectile.new_projectile(rock_node_proj, position, Vector2.ZERO)
 		proj.rock_node = rock
 		#flr.rock_nodes.add_child(rock)
-	await enemy_sprite.animation_player.animation_finished
-	enemy_sprite.animate("post_dig")
 	await enemy_sprite.animation_player.animation_finished
 	enemy_sprite.animate("rest_idle")
 	c_state = State.RESTING

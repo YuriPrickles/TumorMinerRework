@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://cyisyfxsr2l1b" path="res://Source/crafting_ui.gd" id="1_dp3h8"]
 [ext_resource type="PackedScene" uid="uid://07uje68f7bo5" path="res://Source/crafting_recipe_button.tscn" id="2_xlqjp"]
 
-[node name="CraftingUI" type="Control" unique_id=338385566 node_paths=PackedStringArray("grid_container", "item_name", "item_texture", "item_description", "craft_button")]
+[node name="CraftingUI" type="Control" unique_id=338385566 node_paths=PackedStringArray("grid_container", "ingredients_container", "item_name", "item_texture", "item_description", "craft_button", "glossary_button")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -13,11 +13,13 @@ grow_vertical = 2
 mouse_filter = 1
 script = ExtResource("1_dp3h8")
 grid_container = NodePath("MarginContainer/HBoxContainer/RecipeContainer/Panel/GridContainer")
+ingredients_container = NodePath("MarginContainer/HBoxContainer/ResultContainer/Panel2/MarginContainer/VBoxContainer/IngredientsContainer")
 crafting_recipe_button = ExtResource("2_xlqjp")
 item_name = NodePath("MarginContainer/HBoxContainer/ResultContainer/Panel2/MarginContainer/VBoxContainer/Name")
 item_texture = NodePath("MarginContainer/HBoxContainer/ResultContainer/Panel2/MarginContainer/VBoxContainer/ItemTexture")
 item_description = NodePath("MarginContainer/HBoxContainer/ResultContainer/Panel2/MarginContainer/VBoxContainer/Description")
 craft_button = NodePath("MarginContainer/HBoxContainer/ResultContainer/Panel2/MarginContainer/VBoxContainer/CraftButton")
+glossary_button = NodePath("MarginContainer/HBoxContainer/RecipeContainer/Panel/GlossaryButton")
 
 [node name="MarginContainer" type="MarginContainer" parent="." unique_id=488423981]
 layout_mode = 1
@@ -55,6 +57,14 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 columns = 8
+
+[node name="GlossaryButton" type="Button" parent="MarginContainer/HBoxContainer/RecipeContainer/Panel" unique_id=1495822140]
+layout_mode = 0
+offset_left = 37.0
+offset_top = 753.0
+offset_right = 457.0
+offset_bottom = 898.0
+text = "View Recipe Glossary"
 
 [node name="ResultContainer" type="MarginContainer" parent="MarginContainer/HBoxContainer" unique_id=1692203581]
 process_mode = 3
@@ -107,6 +117,12 @@ fit_content = true
 scroll_active = false
 autowrap_mode = 1
 
+[node name="IngredientsContainer" type="GridContainer" parent="MarginContainer/HBoxContainer/ResultContainer/Panel2/MarginContainer/VBoxContainer" unique_id=563450571]
+custom_minimum_size = Vector2(0, 200)
+custom_maximum_size = Vector2(-1, 400)
+layout_mode = 2
+columns = 3
+
 [node name="CraftButton" type="Button" parent="MarginContainer/HBoxContainer/ResultContainer/Panel2/MarginContainer/VBoxContainer" unique_id=884911330]
 custom_minimum_size = Vector2(240, 0)
 layout_mode = 2
@@ -114,3 +130,5 @@ size_flags_horizontal = 4
 size_flags_vertical = 10
 theme_override_font_sizes/font_size = 64
 text = "Craft"
+
+[connection signal="pressed" from="MarginContainer/HBoxContainer/RecipeContainer/Panel/GlossaryButton" to="." method="_on_glossary_button_pressed"]

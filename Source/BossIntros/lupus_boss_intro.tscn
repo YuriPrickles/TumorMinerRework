@@ -6,7 +6,7 @@
 [ext_resource type="Shader" uid="uid://cdhg26rdlj0dq" path="res://Source/hit_flash.gdshader" id="4_5pweg"]
 [ext_resource type="Texture2D" uid="uid://c2xujkto4rrrt" path="res://Assets/Temporary/lupus_introcard.png" id="5_ebcsl"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_ww0vk"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_3o8hv"]
 resource_local_to_scene = true
 shader = ExtResource("4_5pweg")
 shader_parameter/active = false
@@ -162,7 +162,7 @@ position = Vector2(3000, 1263)
 scale = Vector2(6, 6)
 
 [node name="Sprite" parent="Node2D/EnemySprite" index="0" unique_id=1916043660]
-material = SubResource("ShaderMaterial_ww0vk")
+material = SubResource("ShaderMaterial_3o8hv")
 
 [node name="LupusIntrocard" type="Sprite2D" parent="Node2D" unique_id=386295158]
 z_index = 2
@@ -173,7 +173,7 @@ texture = ExtResource("5_ebcsl")
 libraries/ = SubResource("AnimationLibrary_rwcak")
 
 [node name="Timer" type="Timer" parent="." unique_id=326389451]
-wait_time = 3.0
+wait_time = 2.0
 one_shot = true
 
 [editable path="Node2D/EnemySprite"]

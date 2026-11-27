@@ -8,6 +8,9 @@ signal done
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	Global.level_state = Global.LevelState.BOSS
+	var audio = Main.instance.audio
+	audio.activate_track(audio.boss_layer)
 	animation_player.play("intro")
 	await animation_player.animation_finished
 	timer.start()
