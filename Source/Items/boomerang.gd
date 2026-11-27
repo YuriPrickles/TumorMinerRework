@@ -26,4 +26,5 @@ func use_item(plr:Player) -> bool:
 func add_recipes():
 	var recipe = Recipe.new()
 	recipe.add_ingredient(Wood,7)
+	recipe.set_result(Boomerang.new())
 	recipe.register()

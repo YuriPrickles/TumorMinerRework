@@ -27,4 +27,5 @@ func add_recipes():
 	var recipe = Recipe.new()
 	recipe.add_ingredient(Boomerang,1)
 	recipe.add_ingredient(Sulfur,8)
+	recipe.set_result(Sulfurang.new())
 	recipe.register()
