@@ -212,11 +212,21 @@ func _input(event: InputEvent) -> void:
 		Global.inv_manager.inventory[Global.current_item_index] = null
 		
 	var old_item = Global.get_current_item()
+	var invmgr:InventoryManager = Global.inv_manager
 	Global.current_item_index += roundi(Input.get_axis("inv_back","inv_forward"))
-	if Global.current_item_index < 0:
-		Global.current_item_index = 8
-	if Global.current_item_index > 8:
-		Global.current_item_index = 0
+	
+	#print(Global.current_item_index," ",invmgr.get_invrow_offset())
+	if Global.current_item_index < 0 + invmgr.get_invrow_offset():
+		Global.current_item_index = 8 + invmgr.get_invrow_offset() 
+	if Global.current_item_index > 8 + invmgr.get_invrow_offset():
+		Global.current_item_index = 0 + invmgr.get_invrow_offset()
+	if event.is_action_pressed("change_invrow"):
+		invmgr.current_row += 1
+		if invmgr.current_row >= invmgr.max_invrows:
+			invmgr.current_row = 0
+			Global.current_item_index -= Global.inv_manager.get_invrow_offset()
+		else:
+			Global.current_item_index += Global.inv_manager.get_invrow_offset()
 	if old_item != Global.get_current_item():
 		if old_item:
 			old_item.on_switch_away(self)

@@ -2,14 +2,18 @@ class_name InventoryManager
 extends Resource
 
 @export var inventory:Array[Item]
-
+const INVROW_SIZE = 9
+var max_invrows:int = 2
+var current_row:int = 0
+func get_invrow_offset():
+	return current_row * INVROW_SIZE
 func _init() -> void:
-	inventory.resize(9)
+	inventory.resize(18)
 	inventory[0] = IronPickaxe.new()
 	inventory[1] = RubyWand.new()
 	inventory[2] = EmeraldWand.new()
 	inventory[3] = Spear.new()
-	inventory[4] = MiniSmelter.new()
+	inventory[9] = MiniSmelter.new()
 
 func validate_item_slot(item:Item) -> void:
 	if item.stack <= 0 and inventory.has(item):
@@ -41,7 +45,9 @@ func drop_item(index) -> void:
 	inventory[index] = null
 
 func consume_item(item:Script, amount) -> void:
+	var priority_start:int = Global.inv_manager.get_invrow_offset()
 	for i in range(inventory.size()):
+		i = (priority_start + i) % inventory.size()
 		if amount <= 0: break
 		if not inventory[i]: continue
 		if inventory[i].get_item_class_name() == item.get_global_name():
@@ -56,7 +62,9 @@ func consume_item(item:Script, amount) -> void:
 				inventory[i] = null
 
 func attempt_acquire(pickup:Pickup,item:Item):
+	var priority_start:int = Global.inv_manager.get_invrow_offset()
 	for i in range(inventory.size()):
+		i = (priority_start + i) % inventory.size()
 		if inventory[i] and item.get_item_class_name() == inventory[i].get_item_class_name() and inventory[i].stack < inventory[i].max_stack:
 			if inventory[i].stack + item.stack <= inventory[i].max_stack:
 				inventory[i].stack += item.stack
@@ -88,7 +96,9 @@ func attempt_acquire(pickup:Pickup,item:Item):
 			break
 
 func check_can_acquire(item:Item) -> bool:
+	var priority_start:int = Global.inv_manager.get_invrow_offset()
 	for i in range(inventory.size()):
+		i = (priority_start + i) % inventory.size()
 		if not inventory[i]:
 			if item.stack > item.max_stack:
 				continue

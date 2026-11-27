@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://bgqk240h5mbnb" path="res://Source/inventory_ui.gd" id="1_x3b4g"]
 [ext_resource type="PackedScene" uid="uid://bkd2qlc0w3jyt" path="res://Source/inventory_item_slot.tscn" id="2_2uvxi"]
 
-[node name="InventoryUI" type="Control" unique_id=2022789841 node_paths=PackedStringArray("grid_container")]
+[node name="InventoryUI" type="Control" unique_id=2022789841 node_paths=PackedStringArray("grid_containers")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -12,7 +12,7 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("1_x3b4g")
-grid_container = NodePath("MarginContainer/VBoxContainer/GridContainer")
+grid_containers = [NodePath("MarginContainer/VBoxContainer/InventoryRow1"), NodePath("MarginContainer/VBoxContainer/InventoryRow2")]
 
 [node name="MarginContainer" type="MarginContainer" parent="." unique_id=1761190301]
 layout_mode = 1
@@ -26,38 +26,72 @@ theme_override_constants/margin_right = 1200
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer" unique_id=1708368260]
 layout_mode = 2
 
-[node name="GridContainer" type="GridContainer" parent="MarginContainer/VBoxContainer" unique_id=1545068275]
+[node name="InventoryRow1" type="GridContainer" parent="MarginContainer/VBoxContainer" unique_id=1545068275]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 theme_override_constants/h_separation = 8
 columns = 9
 
-[node name="Slot1" parent="MarginContainer/VBoxContainer/GridContainer" unique_id=1581804889 instance=ExtResource("2_2uvxi")]
+[node name="Slot1" parent="MarginContainer/VBoxContainer/InventoryRow1" unique_id=1581804889 instance=ExtResource("2_2uvxi")]
 layout_mode = 2
 
-[node name="Slot2" parent="MarginContainer/VBoxContainer/GridContainer" unique_id=2086154095 instance=ExtResource("2_2uvxi")]
+[node name="Slot2" parent="MarginContainer/VBoxContainer/InventoryRow1" unique_id=2086154095 instance=ExtResource("2_2uvxi")]
 layout_mode = 2
 
-[node name="Slot3" parent="MarginContainer/VBoxContainer/GridContainer" unique_id=1625355689 instance=ExtResource("2_2uvxi")]
+[node name="Slot3" parent="MarginContainer/VBoxContainer/InventoryRow1" unique_id=1625355689 instance=ExtResource("2_2uvxi")]
 layout_mode = 2
 
-[node name="Slot4" parent="MarginContainer/VBoxContainer/GridContainer" unique_id=1042528685 instance=ExtResource("2_2uvxi")]
+[node name="Slot4" parent="MarginContainer/VBoxContainer/InventoryRow1" unique_id=1042528685 instance=ExtResource("2_2uvxi")]
 layout_mode = 2
 
-[node name="Slot5" parent="MarginContainer/VBoxContainer/GridContainer" unique_id=307155268 instance=ExtResource("2_2uvxi")]
+[node name="Slot5" parent="MarginContainer/VBoxContainer/InventoryRow1" unique_id=307155268 instance=ExtResource("2_2uvxi")]
 layout_mode = 2
 
-[node name="Slot6" parent="MarginContainer/VBoxContainer/GridContainer" unique_id=1871312954 instance=ExtResource("2_2uvxi")]
+[node name="Slot6" parent="MarginContainer/VBoxContainer/InventoryRow1" unique_id=1871312954 instance=ExtResource("2_2uvxi")]
 layout_mode = 2
 
-[node name="Slot7" parent="MarginContainer/VBoxContainer/GridContainer" unique_id=1449797774 instance=ExtResource("2_2uvxi")]
+[node name="Slot7" parent="MarginContainer/VBoxContainer/InventoryRow1" unique_id=1449797774 instance=ExtResource("2_2uvxi")]
 layout_mode = 2
 
-[node name="Slot8" parent="MarginContainer/VBoxContainer/GridContainer" unique_id=1191890891 instance=ExtResource("2_2uvxi")]
+[node name="Slot8" parent="MarginContainer/VBoxContainer/InventoryRow1" unique_id=1191890891 instance=ExtResource("2_2uvxi")]
 layout_mode = 2
 
-[node name="Slot9" parent="MarginContainer/VBoxContainer/GridContainer" unique_id=487113686 instance=ExtResource("2_2uvxi")]
+[node name="Slot9" parent="MarginContainer/VBoxContainer/InventoryRow1" unique_id=487113686 instance=ExtResource("2_2uvxi")]
+layout_mode = 2
+
+[node name="InventoryRow2" type="GridContainer" parent="MarginContainer/VBoxContainer" unique_id=1053968448]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/h_separation = 8
+columns = 9
+
+[node name="Slot1" parent="MarginContainer/VBoxContainer/InventoryRow2" unique_id=183438467 instance=ExtResource("2_2uvxi")]
+layout_mode = 2
+
+[node name="Slot2" parent="MarginContainer/VBoxContainer/InventoryRow2" unique_id=1693010202 instance=ExtResource("2_2uvxi")]
+layout_mode = 2
+
+[node name="Slot3" parent="MarginContainer/VBoxContainer/InventoryRow2" unique_id=1350976367 instance=ExtResource("2_2uvxi")]
+layout_mode = 2
+
+[node name="Slot4" parent="MarginContainer/VBoxContainer/InventoryRow2" unique_id=825366836 instance=ExtResource("2_2uvxi")]
+layout_mode = 2
+
+[node name="Slot5" parent="MarginContainer/VBoxContainer/InventoryRow2" unique_id=106396811 instance=ExtResource("2_2uvxi")]
+layout_mode = 2
+
+[node name="Slot6" parent="MarginContainer/VBoxContainer/InventoryRow2" unique_id=1221812969 instance=ExtResource("2_2uvxi")]
+layout_mode = 2
+
+[node name="Slot7" parent="MarginContainer/VBoxContainer/InventoryRow2" unique_id=1420410842 instance=ExtResource("2_2uvxi")]
+layout_mode = 2
+
+[node name="Slot8" parent="MarginContainer/VBoxContainer/InventoryRow2" unique_id=105458624 instance=ExtResource("2_2uvxi")]
+layout_mode = 2
+
+[node name="Slot9" parent="MarginContainer/VBoxContainer/InventoryRow2" unique_id=1675251914 instance=ExtResource("2_2uvxi")]
 layout_mode = 2
 
 [node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer" unique_id=605068801]
