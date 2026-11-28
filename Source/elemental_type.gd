@@ -31,3 +31,8 @@ class ET_Poison extends ElementalType:
 	func _init(amount:int,target:Variant,is_status:bool=false) -> void:
 		super(amount,target,is_status)
 		color = Color(0.0, 0.695, 0.249, 1.0)
+
+class ET_Water extends ElementalType:
+	func _init(amount:int,target:Variant,is_status:bool=false) -> void:
+		super(amount,target,is_status)
+		color = Color(0.331, 0.642, 1.0, 1.0)

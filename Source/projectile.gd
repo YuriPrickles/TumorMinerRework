@@ -15,6 +15,7 @@ enum IFrameType{
 	STATIC,
 	LOCAL,
 }
+signal lifetime_end
 var multi_hit_timer:float = 0.0
 var velocity: Vector2
 
@@ -54,6 +55,7 @@ func movement():
 func tick_down(delta:float):
 	lifetime -= delta
 	if lifetime <= 0 and lifetime > -1:
+		lifetime_end.emit()
 		destroy()
 
 func destroy():

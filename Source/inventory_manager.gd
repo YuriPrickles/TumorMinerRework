@@ -13,7 +13,7 @@ func _init() -> void:
 	inventory[1] = RubyWand.new()
 	inventory[2] = EmeraldWand.new()
 	inventory[3] = Spear.new()
-	inventory[4] = Boomerang.new()
+	inventory[4] = BoilerBlaster.new()
 	inventory[5] = Sulfurang.new()
 	inventory[6] = SulfurDustSprayer.new()
 

@@ -15,7 +15,7 @@ const cloud = preload("res://Source/Projectiles/sulfur_cloud.tscn")
 
 func use_item(plr:Player) -> bool:
 	super(plr)
-	proj = Projectile.new_projectile(cloud,plr.position + (plr.aim_to_mouse() * 48),plr.aim_to_mouse() * 5,damage)
+	proj = Projectile.new_projectile(cloud,plr.position + (plr.aim_to_mouse() * 48),(plr.aim_to_mouse() * 5).rotated(deg_to_rad(randi_range(-35,35))),damage)
 	proj.duration = 7
 	proj.iframes = 0.12
 	proj.lifetime = 0.3

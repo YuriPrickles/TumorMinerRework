@@ -7,14 +7,39 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_coxhp"]
 radius = 203.0
 
+[sub_resource type="Shader" id="Shader_8w7xd"]
+resource_local_to_scene = true
+code = "shader_type canvas_item;
+
+uniform bool active = false;
+uniform vec4 tint : source_color = vec4(1., 1., 0., 1);
+
+void fragment() {
+	vec4 tint_copy = tint;
+	vec4 previous_color = texture(TEXTURE, UV);
+	
+	if (active == true)
+	{
+		tint_copy.a = previous_color.a;
+		COLOR = tint_copy;
+	}
+}"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_4c8tl"]
+resource_local_to_scene = true
+shader = SubResource("Shader_8w7xd")
+shader_parameter/active = false
+shader_parameter/tint = Color(1, 1, 1, 1)
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_d6ajj"]
 size = Vector2(60, 20)
 
-[node name="CoalRat" unique_id=1878560834 node_paths=PackedStringArray("detection_range", "enemy_sprite") instance=ExtResource("1_8w7xd")]
+[node name="CoalRat" unique_id=1878560834 node_paths=PackedStringArray("detection_range", "tail_fire", "enemy_sprite") instance=ExtResource("1_8w7xd")]
 z_index = 1
 collision_mask = 87
 script = ExtResource("2_8w7xd")
 detection_range = NodePath("DetectionRange")
+tail_fire = NodePath("CoalRatSprite/Sprite/Tail_A/Tail_B/Tail_Fire")
 enemy_sprite = NodePath("CoalRatSprite")
 health = 180
 kb_res = 1.0
@@ -32,6 +57,17 @@ debug_color = Color(0.9882353, 0, 0.3137255, 0.039215688)
 [node name="CoalRatSprite" parent="." index="1" unique_id=872872831 instance=ExtResource("3_4c8tl")]
 position = Vector2(-16, 0)
 
+[node name="Sprite" parent="CoalRatSprite" index="0" unique_id=1916043660]
+material = SubResource("ShaderMaterial_4c8tl")
+
+[node name="PointLight2D" parent="CoalRatSprite/Sprite/FrontEar" parent_id_path=PackedInt32Array(872872831, 1696872550) index="0" unique_id=138410909]
+visible = false
+
+[node name="PointLight2D" parent="CoalRatSprite/Sprite/BackEar" parent_id_path=PackedInt32Array(872872831, 977377719) index="0" unique_id=62960458]
+visible = false
+
 [node name="CollisionShape2D" parent="." index="2" unique_id=483514922]
 position = Vector2(0, -10)
 shape = SubResource("RectangleShape2D_d6ajj")
+
+[editable path="CoalRatSprite"]

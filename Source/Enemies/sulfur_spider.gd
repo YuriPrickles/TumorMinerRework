@@ -75,3 +75,5 @@ func react_to_element(type:ElementalType,is_status=false):
 	if type is ElementalType.ET_Poison:
 		type.damage = -999
 		heal(4)
+	if type is ElementalType.ET_Sulfur:
+		type.damage = max(1, roundi(type.damage * 0.5))
