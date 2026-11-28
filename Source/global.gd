@@ -12,7 +12,7 @@ var plrDefBase : float
 ## but before the floor is refreshed.
 var boss_room:bool:
 	get:
-		return Global.run_info.depth % 1 == 0
+		return Global.run_info.depth % 10 == 0
 
 @export_dir var items_texture_path: String
 @export_dir var parts_texture_path: String
