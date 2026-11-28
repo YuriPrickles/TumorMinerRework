@@ -10,6 +10,7 @@ var swing_time:float
 
 func _ready() -> void:
 	super()
+	body_entered.connect(check_collision)
 	var hypotenuse = sqrt(
 		pow(sword_texture.get_size().x,2) + pow(sword_texture.get_size().y,2)
 		)
@@ -19,11 +20,13 @@ func _ready() -> void:
 	(collision_shape.shape as RectangleShape2D).size.y = hypotenuse
 	collision_shape.position.y = hypotenuse / -2
 	rotation_start = velocity.angle() + deg_to_rad(90)
+	sword_tween()
 
 var rotation_sweep_angle:float = deg_to_rad(135)
 func _physics_process(delta: float) -> void:
 	super(delta)
 	rotation = velocity.angle()
+func sword_tween():
 	var tween = create_tween()
 	tween.tween_property(self, "rotation", rotation_start + rotation_sweep_angle,swing_time).set_ease(Tween.EASE_OUT)
 	tween.tween_callback(destroy)

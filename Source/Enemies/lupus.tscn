@@ -19,7 +19,7 @@ shader_parameter/add_margins = true
 size = Vector2(64, 20)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_coxhp"]
-radius = 148.01352
+radius = 214.00934
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_55ouh"]
 resource_local_to_scene = true
@@ -54,7 +54,7 @@ head_armor = NodePath("EnemySprite/Sprite/ExtraOffset/UpperBody/Head/HeadArmor")
 enemy_sprite = NodePath("EnemySprite")
 health = 1200
 kb_res = 1.0
-movement_speed = 90.0
+movement_speed = 70.0
 acceleration = 300.0
 allow_mining = true
 tribes = 1
@@ -83,7 +83,7 @@ z_index = 3
 position = Vector2(0, -10)
 
 [node name="CollisionShape2D" type="CollisionPolygon2D" parent="BiteHitbox" index="0" unique_id=71264315]
-polygon = PackedVector2Array(-7, 0, 7, 0, 72, 120, -72, 120)
+polygon = PackedVector2Array(-7, 0, 7, 0, 90, 150, -90, 150)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." index="5" unique_id=93223326]
 

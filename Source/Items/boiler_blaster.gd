@@ -4,19 +4,19 @@ extends Item
 func _init(stk:int=1) -> void:
 	max_stack = 20
 	type = Type.WEAPON
-	anim_type = AnimationType.RAISE
-	use_delay = 1.1
+	anim_type = AnimationType.PICKAXE
+	use_delay = 0.8
 	damage = 26
 	auto_use = true
 	super(stk)
 
 const beam = preload("res://Source/Projectiles/boiling_blast_projectile.tscn")
 func use_item(plr:Player) -> bool:
+	super(plr)
 	var flr : Floor = Main.instance.current_floor
 	var vel: Vector2 = plr.aim_to_mouse()
 	var proj : Projectile = Projectile.new_projectile(beam,plr.position,vel,damage + plr.get_plr_Atk())
 	proj.hostile = false
-	await super(plr)
 	return true
 
 

@@ -3,6 +3,7 @@ extends Node
 
 static var instance:Main
 var current_floor: Floor
+@export var game_over_scene: PackedScene
 @export var floor_scene: PackedScene
 @export var fader: Fader
 @export var crafting_ui: CraftingUI
@@ -26,11 +27,16 @@ func _init() -> void:
 		temp_item.add_recipes()
 	#endregion
 func _ready() -> void:
-	refresh_floor()
+	pass
 func get_player() -> Player:
 	return current_floor.get_node("Player")
-var boss_intro_scene: PackedScene = preload("res://Source/BossIntros/lupus_boss_intro.tscn")
+@export var boss_intro_scene: PackedScene = preload("res://Source/BossIntros/lupus_boss_intro.tscn")
+func game_over():
+	get_tree().paused = true
+	ui.add_child(game_over_scene.instantiate())
+
 func refresh_floor():
+	Global.pause_health_drain = true
 	fader.fade_in()
 	await fader.faded_in
 	if Global.boss_room:
@@ -42,8 +48,12 @@ func refresh_floor():
 	add_child(current_floor)
 	fader.fade_out()
 	await fader.faded_out
+	Global.pause_health_drain = false
 
 func _input(event: InputEvent) -> void:
+	if not current_floor: return
+	var plr = Main.instance.get_player()
+	if plr and plr.c_state == Player.State.DYING: return
 	if event.is_action_pressed("crafting") and not fader.animation_player.is_playing():
 		if not crafting_ui.visible:
 			crafting_ui.open_crafting()

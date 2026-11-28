@@ -70,9 +70,9 @@ func _physics_process(delta: float) -> void:
 			if bite_range.get_overlapping_bodies().has(plr) and bite_cooldown_timer <= 0:
 				c_state = State.START_BITING
 		State.START_BITING:
-			start_bite()
 			c_state = State.BITING
 			velocity = Vector2.ZERO
+			start_bite()
 		State.START_DIGGING:
 			dig_sequence()
 		State.RESTING:
@@ -97,14 +97,14 @@ func dig_sequence():
 	c_state = State.DIGGING
 	var flr = Main.instance.current_floor
 	var tile_arr: Array[Vector2i]
-	for i in 4:
+	for i in 7:
 		tile_arr.append(flr.current_layout.get_random_free_tile())
 	enemy_sprite.force_animate("pre_dig")
 	await enemy_sprite.animation_player.animation_finished
 	enemy_sprite.animate("dig")
 	for tile in tile_arr:
 		await enemy_sprite.hit
-		var rock:RockNode = egg_scene.instantiate() if randf_range(0,1) < 0.3 else clay_scene.instantiate()
+		var rock:RockNode = egg_scene.instantiate() if randf_range(0,1) < 0.2 else clay_scene.instantiate()
 		if rock is LuepusEgg:
 			rock.TIME_TO_SPAWN = 8
 		grid.set_point_solid(tile)
@@ -118,19 +118,21 @@ func dig_sequence():
 
 func start_bite():
 	var plr : Player = Main.instance.get_player()
-	enemy_sprite.force_animate("bite")
-	bite_hitbox.rotation = deg_to_rad(90) + plr.position.direction_to(position).angle()
+	for i in 3:
+		enemy_sprite.force_animate("bite")
+		bite_hitbox.rotation = deg_to_rad(90) + plr.position.direction_to(position).angle()
 
-	var temp_vel:Vector2 = position.direction_to(plr.position) * (12 * movement_speed)
-	await enemy_sprite.hit
-	velocity = temp_vel
-	await enemy_sprite.hit
-	velocity = Vector2.ZERO
-	plr_in_bite_range = bite_hitbox.get_overlapping_bodies().has(plr)
-	if plr_in_bite_range:
-		var bite_dmg = 10 if head_armor.visible else 6
-		plr.hurt(ElementalType.ET_Neutral.new(bite_dmg,plr), position)
-	await enemy_sprite.animation_player.animation_finished
+		var temp_vel:Vector2 = position.direction_to(plr.position) * (12 * movement_speed)
+		await enemy_sprite.hit
+		velocity = temp_vel
+		enemy_sprite.sprite.scale.x = -1 if position.x <= plr.position.x else 1
+		await enemy_sprite.hit
+		velocity = Vector2.ZERO
+		plr_in_bite_range = bite_hitbox.get_overlapping_bodies().has(plr)
+		if plr_in_bite_range:
+			var bite_dmg = 18 if head_armor.visible else 9
+			plr.hurt(ElementalType.ET_Neutral.new(bite_dmg,plr), position)
+		await enemy_sprite.animation_player.animation_finished
 	bite_cooldown_timer = BITE_COOLDOWN
 	c_state = State.CHASING
 

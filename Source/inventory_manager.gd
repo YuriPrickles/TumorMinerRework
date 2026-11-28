@@ -9,13 +9,15 @@ func get_invrow_offset():
 	return current_row * INVROW_SIZE
 func _init() -> void:
 	inventory.resize(18)
-	inventory[0] = IronPickaxe.new()
-	inventory[1] = RubyWand.new()
-	inventory[2] = EmeraldWand.new()
-	inventory[3] = Spear.new()
-	inventory[4] = BoilerBlaster.new()
-	inventory[5] = Sulfurang.new()
-	inventory[6] = SulfurDustSprayer.new()
+	inventory[0] = Pickaxe.new()
+	inventory[1] = Bonesaber.new()
+	#inventory[0] = IronPickaxe.new()
+	#inventory[1] = RubyWand.new()
+	#inventory[2] = EmeraldWand.new()
+	#inventory[3] = Spear.new()
+	#inventory[4] = BoilerBlaster.new()
+	#inventory[5] = Sulfurang.new()
+	#inventory[6] = SulfurDustSprayer.new()
 
 func validate_item_slot(item:Item) -> void:
 	if item.stack <= 0 and inventory.has(item):

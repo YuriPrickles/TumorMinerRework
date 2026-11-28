@@ -39,6 +39,13 @@ var speed_mult = 1
 var small_position_offset: Vector2 = Vector2(0,1)
 var snapped_facing_dir:Vector2
 
+var c_state = State.NORMAL
+enum State {
+	NORMAL,
+	DYING
+}
+@export var player_anim: AnimationPlayer
+
 #LIMBS
 @export_group("Limbs")
 
@@ -73,6 +80,11 @@ func _ready() -> void:
 	retrieve_effects() #Re-applies effects accrued on a previous floor IF APPLICABLE
 
 func _physics_process(delta: float) -> void:
+	if c_state == State.DYING:
+		
+		velocity = Vector2.ZERO
+		move_and_slide()
+		return
 	var mouse_vector:Vector2 = position.direction_to(get_global_mouse_position()).normalized()
 	snapped_facing_dir = mouse_vector.snapped(Vector2.ONE)
 	#print(snapped_facing_dir)
@@ -91,21 +103,8 @@ func _physics_process(delta: float) -> void:
 		if get_targeted_interactable():
 			get_targeted_interactable().interact(self)
 	if not held_item.animating:
-		#player_sprite.flip_h = aim_to_mouse().x < 0
-		"""
-		Note: Hi it's Adam!
-		I'm commenting out the above code because
-		I would like to replace the sprite flipping
-		with just switching hands.
-		Let me know what you think!
-		It would also be better for when adding
-		visuals of equipped body parts,
-		so that they aren't constantly swapping.
-		"""
-		#hand_spot.position.x = 31 * (-1 if aim_to_mouse().x < 0 else 1)
 		hand_spot.scale.x = (-1 if aim_to_mouse().x < 0 else 1)
-	
-	#Limb Logic
+	#region Limb Logic
 	
 	#Arms
 	var arms = [ArmLeft, ArmRight]
@@ -143,7 +142,7 @@ func _physics_process(delta: float) -> void:
 			var angle = PI / (addt.get_child_count() - child.get_index() + 1)
 			angle *= sign(i * 2 - 1)
 			child.apex_destination = legs[i].apex_destination.rotated(angle)
-	
+	#endregion
 	if stagger_timer > 0:
 		stagger_timer -= delta
 	#else:
@@ -155,16 +154,18 @@ func _physics_process(delta: float) -> void:
 		rotation = clamp(rotation, -PI / 12, PI / 12)
 		if direction:
 			velocity = direction * SPEED * speed_mult
-			$PlayerAnim.play("walk")
+			player_anim.play("walk")
 		else:
 			velocity = velocity.move_toward(Vector2.ZERO, SPEED / 3)
-			$PlayerAnim.play("idle")
+			player_anim.play("idle")
 	else:
 		velocity = knockback_velocity
 	move_and_slide()
 
 var tickDuration : float
 func _process(delta: float) -> void:
+	if c_state == State.DYING:
+		return
 	tickDuration += delta
 	if (fmod(tickDuration, 100) > 1) :
 		tickDuration = 0
@@ -205,6 +206,8 @@ func get_targeted_interactable() -> Interactable:
 	return null
 
 func _input(event: InputEvent) -> void:
+	if c_state == State.DYING:
+		return
 	#region Inventory Control
 	if event.is_action_pressed("drop_item") and Global.get_current_item():
 		var pickup = Pickup.new_pickup(Global.get_current_item(),position)
@@ -242,7 +245,7 @@ func aim_to_mouse() -> Vector2:
 
 
 func hurt(elm:ElementalType, source_position:Vector2, kb_force = 500):
-	if stagger: return
+	if stagger or c_state == State.DYING: return
 	Global.trigger_combat_state()
 	stagger_timer = stagger_delay
 	#Test using player position for separting status vs. enemy damage
@@ -252,10 +255,20 @@ func hurt(elm:ElementalType, source_position:Vector2, kb_force = 500):
 	knockless_hurt(elm)
 
 func knockless_hurt(elm:ElementalType):
+	if c_state == State.DYING:
+		return
 	Global.run_info.health -= (elm.damage - (self.get_plr_Def()))
 	Global.popup_text(str(elm.damage),position,elm.color)
+	if Global.run_info.health <= 0:
+		c_state = State.DYING
+		player_anim.stop()
+		player_anim.play("death")
+		await player_anim.animation_finished
+		Main.instance.game_over()
 
 func heal(value):
+	if c_state == State.DYING:
+		return
 	Global.run_info.health += value
 
 #Call this function from your enemy to give the player a status!

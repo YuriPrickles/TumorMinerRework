@@ -1,0 +1,49 @@
+[gd_scene format=3 uid="uid://co78l3rcm8net"]
+
+[ext_resource type="Script" uid="uid://cllivo5p8hnw8" path="res://Source/game_over.gd" id="1_y26ei"]
+
+[node name="GameOver" type="Control" unique_id=386961286 node_paths=PackedStringArray("button")]
+process_mode = 3
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_y26ei")
+button = NodePath("VBoxContainer/Button")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=2027478233]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.044799995, 0.06591997, 0.16, 0.6784314)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=44472950]
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -44.0
+offset_bottom = 44.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="VBoxContainer" unique_id=530801302]
+clip_contents = false
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 64
+bbcode_enabled = true
+text = "[pulse freq=1.0 color=#ffff00 ease=2.0]The Tumor has been vanquished."
+fit_content = true
+horizontal_alignment = 1
+
+[node name="Button" type="Button" parent="VBoxContainer" unique_id=1277804121]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 64
+text = "Respawn"

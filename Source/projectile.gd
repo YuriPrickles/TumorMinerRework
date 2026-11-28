@@ -91,7 +91,6 @@ func on_collide_player(plr:Player) -> bool:
 	return true
 func on_collide_enemy(enemy:Enemy) -> bool:
 	if hostile: return false
-	on_pierce()
 	if pierce != 1:
 		match iframe_type:
 			IFrameType.GLOBAL:
@@ -117,7 +116,7 @@ func on_collide_enemy(enemy:Enemy) -> bool:
 					return false
 	else:
 		enemy.hurt(get_damage(damage,enemy),self if not knockless else null)
-	
+	on_pierce()
 	return true
 func on_collide_wall():
 	pass

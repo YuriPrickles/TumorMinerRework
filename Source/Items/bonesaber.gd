@@ -17,7 +17,6 @@ func use_item(plr:Player) -> bool:
 
 func add_recipes():
 	var recipe = Recipe.new()
-	recipe.add_ingredient(Rock, 2)
-	recipe.add_ingredient(CopperOre, 2)
+	recipe.add_health_sacrifice(3)
 	recipe.set_result(Bonesaber.new())
 	recipe.register()

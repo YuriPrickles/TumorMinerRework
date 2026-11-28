@@ -60,6 +60,70 @@ tracks/2/keys = {
 "update": 0,
 "values": [Vector2(40, 0)]
 }
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("PlayerSprite:rotation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("PlayerSprite:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_2dja2"]
+resource_name = "death"
+length = 1.6
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PlayerSprite:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.06666667, 0.33333334, 0.53333336),
+"transitions": PackedFloat32Array(1, 1, 1.9999999, 1),
+"update": 0,
+"values": [0.0, -0.12217304763960307, -0.12217305, 1.5707963267948966]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("PlayerSprite:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.033333335, 0.06666667, 0.1, 0.13333336, 0.16666667, 0.33333334, 0.43333334, 0.53333336),
+"transitions": PackedFloat32Array(1, 0, 0, 0, 0, 0, 0.51763237, 1.624505, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(5, 0), Vector2(-5, 0), Vector2(3, 0), Vector2(-3, 0), Vector2(0, 0), Vector2(0, 0), Vector2(0, -32), Vector2(0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("PlayerSprite:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.06666667, 0.13333334, 0.26666668, 0.33333334, 0.43333334, 0.53333336, 0.6, 0.6666667),
+"transitions": PackedFloat32Array(1, 1.464086, 1, 0.46651652, 0.55478466, 1.6245049, 0.53588665, 0.55478466, 0),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1.2, 0.9), Vector2(1, 1), Vector2(1, 1), Vector2(1.1, 0.9), Vector2(0.8, 1.2), Vector2(1, 1), Vector2(0.8, 1.25), Vector2(1, 1)]
+}
 
 [sub_resource type="Animation" id="Animation_h6ae0"]
 resource_name = "idle"
@@ -147,17 +211,19 @@ tracks/2/keys = {
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_afm8r"]
 _data = {
 &"RESET": SubResource("Animation_afm8r"),
+&"death": SubResource("Animation_2dja2"),
 &"idle": SubResource("Animation_h6ae0"),
 &"walk": SubResource("Animation_dx03v")
 }
 
-[node name="Player" type="CharacterBody2D" unique_id=1289355168 node_paths=PackedStringArray("interact_range", "held_item", "hand_spot", "player_sprite", "ArmLeft", "AdditionalArmsLeft", "ArmRight", "AdditionalArmsRight", "LegLeft", "AdditionalLegsLeft", "StepMarkerLeft", "LegRight", "AdditionalLegsRight", "StepMarkerRight")]
+[node name="Player" type="CharacterBody2D" unique_id=1289355168 node_paths=PackedStringArray("interact_range", "held_item", "hand_spot", "player_sprite", "player_anim", "ArmLeft", "AdditionalArmsLeft", "ArmRight", "AdditionalArmsRight", "LegLeft", "AdditionalLegsLeft", "StepMarkerLeft", "LegRight", "AdditionalLegsRight", "StepMarkerRight")]
 collision_mask = 126
 script = ExtResource("1_tfb11")
 interact_range = NodePath("InteractRange")
 held_item = NodePath("HandSpot/HeldItem")
 hand_spot = NodePath("HandSpot")
 player_sprite = NodePath("PlayerSprite")
+player_anim = NodePath("PlayerAnim")
 ArmLeft = NodePath("ModularLimbs/ModularArmLeft")
 AdditionalArmsLeft = NodePath("ModularLimbs/ModularArmLeft/AdditionalArmsLeft")
 ArmRight = NodePath("ModularLimbs/ModularArmRight")

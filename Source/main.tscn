@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://b2utyhahhssvf" path="res://Source/main.gd" id="1_kvypo"]
 [ext_resource type="PackedScene" uid="uid://dc0xl5lw86f5c" path="res://Source/Temporary/floor.tscn" id="1_wkcc7"]
+[ext_resource type="PackedScene" uid="uid://co78l3rcm8net" path="res://game_over.tscn" id="2_b67gl"]
 [ext_resource type="PackedScene" uid="uid://b7q8apajncdte" path="res://Source/inventory_ui.tscn" id="3_p7x2e"]
 [ext_resource type="PackedScene" uid="uid://b2gw4rdorx81b" path="res://Source/info_hud.tscn" id="4_fqc6k"]
 [ext_resource type="PackedScene" uid="uid://xrvwyhie6pxy" path="res://Source/fader.tscn" id="4_uglvk"]
@@ -12,6 +13,7 @@
 [node name="Main" type="Node" unique_id=1688167972 node_paths=PackedStringArray("fader", "crafting_ui", "parts_menu_ui", "ui", "audio")]
 process_mode = 3
 script = ExtResource("1_kvypo")
+game_over_scene = ExtResource("2_b67gl")
 floor_scene = ExtResource("1_wkcc7")
 fader = NodePath("UI/Fader")
 crafting_ui = NodePath("UI/CraftingUI")
