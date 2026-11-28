@@ -14,7 +14,7 @@ const bomb = preload("res://Source/Projectiles/generic_bomb.tscn")
 func use_item(plr:Player) -> bool:
 	var flr : Floor = Main.instance.current_floor
 	var vel: Vector2 = Vector2.ZERO
-	Projectile.new_projectile(bomb,flr.to_local_position(plr.get_current_tile()),vel,damage)
+	Projectile.new_projectile(bomb,flr.to_local_position(plr.get_targeted_tile()),vel,damage)
 	await super(plr)
 	return true
 

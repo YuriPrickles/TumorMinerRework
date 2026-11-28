@@ -4,9 +4,17 @@ extends Area2D
 @export var hostile: bool
 @export var damage: int
 @export var knockback: float = 500
+@export var max_pierce:int = 1
 @export var lifetime: float = 3
 @export var knockless: bool = false
-
+@export var iframes:float = 0.1
+@export var iframe_type:IFrameType = IFrameType.LOCAL
+var pierce:int = 1
+enum IFrameType{
+	GLOBAL,
+	STATIC,
+	LOCAL,
+}
 var multi_hit_timer:float = 0.0
 var velocity: Vector2
 
@@ -21,15 +29,16 @@ static func new_projectile(proj:PackedScene, pos, vel, dmg=-1, h=null) -> Projec
 	projectile.velocity = vel
 	projectile.damage = dmg if dmg >= 0 else projectile.damage
 	projectile.hostile = h if h else projectile.hostile
+	projectile.pierce = projectile.max_pierce
 	assert(projectile is Projectile,"not a projectile!")
-	Main.instance.current_floor.projectiles.add_child(projectile)
+	Main.instance.current_floor.projectiles.add_child.call_deferred(projectile)
 	return projectile
 func _ready() -> void:
-	body_entered.connect(
-			on_body_enter
-		)
+	pass
 
 func _physics_process(delta: float) -> void:
+	for body in get_overlapping_bodies():
+		check_collision(body)
 	#if multi_hit_delay > -1:
 		#multi_hit_timer += delta
 		#if multi_hit_timer > multi_hit_delay:
@@ -54,7 +63,7 @@ func destroy():
 func on_destroy():
 	pass
 
-func on_body_enter(body:Node2D):
+func check_collision(body:Node2D):
 	if body is Player:
 		on_collide_player(body as Player)
 	if body is Enemy:
@@ -63,7 +72,6 @@ func on_body_enter(body:Node2D):
 		on_collide_wall()
 	if body is RockNode:
 		on_collide_rock(body as RockNode)
-	
 
 func get_damage(dmg, target):
 	return ElementalType.ET_Neutral.new(dmg,target)
@@ -81,11 +89,33 @@ func on_collide_player(plr:Player) -> bool:
 	return true
 func on_collide_enemy(enemy:Enemy) -> bool:
 	if hostile: return false
-	if not hit_enemies_array.has(enemy):
-		hit_enemies_array.append(enemy)
-		enemy.hurt(get_damage(damage,enemy),self if not knockless else null)
+	on_pierce()
+	if pierce != 1:
+		match iframe_type:
+			IFrameType.GLOBAL:
+				if enemy.global_iframes > 0:
+					return false
+				else:
+					enemy.global_iframes = iframes
+					enemy.hurt(get_damage(damage,enemy),self if not knockless else null)
+			IFrameType.STATIC:
+				if enemy.check_static_immunity(get_script()):
+					return false
+				else:
+					enemy.static_immunities.append(
+						Enemy.StaticIFrameInfo.new(get_script(), iframes)
+					)
+					enemy.hurt(get_damage(damage,enemy),self if not knockless else null)
+			
+			IFrameType.LOCAL:
+				if not hit_enemies_array.has(enemy):
+					hit_enemies_array.append(enemy)
+					enemy.hurt(get_damage(damage,enemy),self if not knockless else null)
+				else:
+					return false
 	else:
-		return false
+		enemy.hurt(get_damage(damage,enemy),self if not knockless else null)
+	
 	return true
 func on_collide_wall():
 	pass
@@ -96,3 +126,7 @@ func on_collide_rock(rock:RockNode) -> bool:
 	else:
 		return false
 	return true
+func on_pierce():
+	pierce -= 1
+	if pierce == 0:
+		destroy()

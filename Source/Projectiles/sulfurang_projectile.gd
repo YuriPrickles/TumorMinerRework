@@ -49,7 +49,6 @@ func on_collide_enemy(enemy:Enemy) -> bool:
 	if super(enemy):
 		var proj = Projectile.new_projectile(sulfur_cloud,position,Vector2.ZERO,damage/3)
 		proj.hostile = false
-		returning = true
 		enemy.suffer_effect(Sulfured.new(5))
 		set_collision_mask_value(3, false)
 		return true

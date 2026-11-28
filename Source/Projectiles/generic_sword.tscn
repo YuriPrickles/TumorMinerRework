@@ -12,6 +12,7 @@ script = ExtResource("2_3qpe0")
 sword_texture = ExtResource("3_ydk33")
 sprite = NodePath("Sprite")
 knockback = 200.0
+max_pierce = -1
 
 [node name="CollisionShape" parent="." index="0" unique_id=1151676331]
 position = Vector2(0, -45)

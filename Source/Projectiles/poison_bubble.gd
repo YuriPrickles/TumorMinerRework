@@ -9,13 +9,11 @@ func on_collide_wall():
 func on_collide_player(plr:Player) -> bool:
 	if super(plr):
 		plr.suffer_effect(Poisoned.new(3))
-		destroy()
 		return true
 	return false
 func on_collide_enemy(enemy:Enemy) -> bool:
 	if super(enemy):
 		enemy.suffer_effect(Poisoned.new(3))
-		destroy()
 		return true
 	return false
 func get_damage(dmg, target):

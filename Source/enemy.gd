@@ -18,8 +18,9 @@ var move_points:PackedVector2Array
 var current_point:int
 var current_cell:Vector2i
 var target_cell:Vector2i
-
+var global_iframes:float
 var enemy_statuses : Array[StatusEffect]
+var static_immunities:Array[StaticIFrameInfo]
 #Add atk, add def, understand how to affect health using status effects
 #Def modifier is additive
 
@@ -35,6 +36,13 @@ func _ready() -> void:
 
 func _physics_process(delta: float) -> void: pass
 func _process(delta: float) -> void:
+	if global_iframes > 0:
+		global_iframes -= delta
+	for imm in static_immunities:
+		if not imm: continue
+		imm.time -= delta
+		if imm.time <= 0:
+			static_immunities.erase(imm)
 	for eff in enemy_statuses:
 		eff.process_enemy_effect(self, delta)
 	pass
@@ -82,11 +90,17 @@ func on_destroy():
 	pass
 	
 func hurt(elm:ElementalType, source=null):
-	if health <= 0:
+	if health <= 0 or global_iframes > 0 and source is Projectile and check_static_immunity(source.get_script()):
 		return
 	enemy_sprite.hit_flash_player.play("hit_flash")
 	on_hurt(elm.damage,source)
 	knockless_hurt(elm)
+
+func check_static_immunity(projtype:Script):
+	for imm in static_immunities:
+		if imm.projectile_type == projtype:
+			return true
+	return false
 
 func knockless_hurt(elm:ElementalType):
 	health -= max(0,elm.damage)
@@ -151,3 +165,10 @@ func is_mineable(target_tile:Vector2i):
 ## Override to do something when this is mined.
 func on_mine(strength:int):
 	pass
+
+class StaticIFrameInfo:
+	var projectile_type:Script
+	var time:float
+	func _init(projtype:Script,t:float):
+		time = t
+		projectile_type = projtype

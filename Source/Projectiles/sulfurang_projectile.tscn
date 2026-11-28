@@ -16,9 +16,11 @@ script = ExtResource("2_lkwta")
 sprite = NodePath("Sprite2D")
 outer_area = NodePath("OuterArea")
 sulfur_cloud = ExtResource("3_lv6ae")
-damage = 3
 knockback = 200.0
+max_pierce = -1
 lifetime = -1.0
+iframes = 0.4
+iframe_type = 1
 
 [node name="Sprite2D" type="Sprite2D" parent="." index="0" unique_id=103154065]
 texture = ExtResource("3_hs7ns")

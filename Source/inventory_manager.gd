@@ -15,7 +15,7 @@ func _init() -> void:
 	inventory[3] = Spear.new()
 	inventory[4] = Boomerang.new()
 	inventory[5] = Sulfurang.new()
-	inventory[5] = DynamiteDecent.new(8)
+	inventory[6] = SulfurDustSprayer.new()
 
 func validate_item_slot(item:Item) -> void:
 	if item.stack <= 0 and inventory.has(item):

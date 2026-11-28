@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://4n0awijdmbc8"]
+
+[ext_resource type="PackedScene" uid="uid://cpvy8jb7q3iy0" path="res://Source/Projectiles/generic_sword.tscn" id="1_5ti1w"]
+[ext_resource type="Script" uid="uid://cyvyv6f8uwnfi" path="res://Source/Projectiles/sherd_dagger_projectile.gd" id="2_c54y4"]
+[ext_resource type="Texture2D" uid="uid://wuq0vfwuh5eu" path="res://Assets/Graphics/Gameplay/Projectiles/sherd_dagger_projectile.png" id="3_3trao"]
+
+[node name="SherdDaggerProjectile" unique_id=921495114 instance=ExtResource("1_5ti1w")]
+script = ExtResource("2_c54y4")
+sword_texture = ExtResource("3_3trao")
+knockback = 10.0
+
+[node name="Sprite" parent="." index="1" unique_id=1636887573]
+texture = ExtResource("3_3trao")
+offset = Vector2(19, -19)

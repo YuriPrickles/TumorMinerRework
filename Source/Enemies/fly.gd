@@ -19,6 +19,7 @@ func _ready() -> void:
 	)
 
 func _physics_process(delta: float) -> void:
+	super(delta)
 	enemy_sprite.sprite.flip_h = sign(velocity.x) > 0
 	if chasing:
 		basic_movement(delta)

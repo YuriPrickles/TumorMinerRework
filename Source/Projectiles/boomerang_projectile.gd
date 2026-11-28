@@ -40,7 +40,6 @@ func on_collide_wall():
 	velocity *= -1
 func on_collide_enemy(enemy:Enemy) -> bool:
 	if super(enemy):
-		returning = true
 		set_collision_mask_value(3, false)
 		return true
 	return false

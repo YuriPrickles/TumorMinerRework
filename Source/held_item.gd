@@ -36,4 +36,7 @@ func do_animation(item:Item):
 			await get_tree().create_timer(item.use_delay).timeout
 			animation_hit.emit()
 			show()
+		Item.AnimationType.RAISE:
+			await get_tree().create_timer(item.use_delay).timeout
+			animation_hit.emit()
 	animating = false

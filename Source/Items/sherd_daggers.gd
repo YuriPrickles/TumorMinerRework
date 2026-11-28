@@ -8,7 +8,7 @@ func _init(stk:int=1) -> void:
 	damage = 8
 	super(stk)
 
-const sword = preload("res://Source/Projectiles/sherd_dagger.tscn")
+const sword = preload("res://Source/Projectiles/sherd_dagger_projectile.tscn")
 func use_item(plr:Player) -> bool:
 	var proj:GenericSwordProjectile = Projectile.new_projectile(sword,plr.position,plr.aim_to_mouse(),damage + plr.get_plr_Atk())
 	proj.swing_time = use_delay

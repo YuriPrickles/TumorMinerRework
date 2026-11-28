@@ -35,7 +35,10 @@ blend_mode = 1
 [node name="PoisonBubbleProjectile" unique_id=921495114 instance=ExtResource("1_m1mue")]
 script = ExtResource("2_m1mue")
 knockback = 0.0
+max_pierce = -1
 lifetime = 8.0
+iframes = 0.4
+iframe_type = 1
 
 [node name="CollisionShape" parent="." index="0" unique_id=1151676331]
 shape = SubResource("CircleShape2D_21tc1")

@@ -31,12 +31,16 @@ damping_min = 24.000002
 damping_max = 24.000002
 scale_curve = SubResource("CurveTexture_ccf5k")
 
-[node name="SulfurCloudProj" unique_id=921495114 instance=ExtResource("1_u4xh5")]
+[node name="SulfurCloudProj" unique_id=921495114 node_paths=PackedStringArray("gpu_particles_2d") instance=ExtResource("1_u4xh5")]
 script = ExtResource("2_lqeti")
+gpu_particles_2d = NodePath("GPUParticles2D")
 hostile = true
 knockback = 0.0
-lifetime = 0.5
+max_pierce = -1
+lifetime = 2.0
 knockless = true
+iframes = 0.4
+iframe_type = 1
 
 [node name="CollisionShape" parent="." index="0" unique_id=1151676331]
 shape = SubResource("CircleShape2D_21tc1")
@@ -49,8 +53,7 @@ texture = ExtResource("3_4n623")
 [node name="GPUParticles2D" type="GPUParticles2D" parent="." index="2" unique_id=2032021911]
 modulate = Color(1, 1, 1, 0.1254902)
 material = SubResource("CanvasItemMaterial_v3b0y")
-amount = 64
+amount = 128
 texture = ExtResource("4_lqeti")
 lifetime = 0.3
-preprocess = 1.43
 process_material = SubResource("ParticleProcessMaterial_coxhp")

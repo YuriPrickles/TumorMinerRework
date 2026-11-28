@@ -15,8 +15,11 @@ script = ExtResource("2_i12ds")
 sprite = NodePath("Sprite2D")
 outer_area = NodePath("OuterArea")
 damage = 3
-knockback = 200.0
+knockback = 100.0
+max_pierce = -1
 lifetime = -1.0
+iframes = 0.4
+iframe_type = 1
 
 [node name="Sprite2D" type="Sprite2D" parent="." index="0" unique_id=103154065]
 texture = ExtResource("3_i12ds")
